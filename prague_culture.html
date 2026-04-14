@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プラハ 歴史・文化・生活ガイド</title>
+  <style>
+    :root {
+      --green: #1a6e4a;
+      --green-light: #e8f5ee;
+      --gold: #b8860b;
+      --gold-light: #fdf8e8;
+      --red: #8b1a1a;
+      --red-light: #fdf0f0;
+      --blue: #1a3a5c;
+      --blue-light: #eef3fa;
+      --bg: #f7f5f0;
+      --card: #ffffff;
+      --text: #2c2c2c;
+      --muted: #666;
+      --border: #e0ddd8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ─── Header ─────────────────────────────── */
+    header {
+      background: linear-gradient(160deg, #0f3d26 0%, #1a6e4a 60%, #2d9e6b 100%);
+      color: white;
+      padding: 52px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '🏰';
+      position: absolute;
+      font-size: 14rem;
+      opacity: 0.05;
+      top: -20px; right: -20px;
+      line-height: 1;
+    }
+    header .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.04em; }
+    header p  { margin-top: 10px; font-size: 0.9rem; opacity: 0.8; }
+
+    /* ─── Nav ────────────────────────────────── */
+    nav {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      display: inline-block;
+      padding: 12px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    nav a:hover { color: var(--green); border-bottom-color: var(--green); }
+
+    /* ─── Container ───────────────────────────── */
+    .container { max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+
+    /* ─── Section ─────────────────────────────── */
+    .section { margin-bottom: 56px; scroll-margin-top: 52px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--green);
+    }
+    .section-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .section-title h2 { font-size: 1.15rem; font-weight: 700; }
+    .section-title p  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Timeline ───────────────────────────── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--green), #c8e6d4);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--green);
+    }
+    .tl-era {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: var(--green);
+      color: white;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+    }
+    .tl-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .tl-body  { font-size: 0.83rem; color: #444; }
+
+    /* ─── Cards grid ─────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .info-card .ic-icon { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+    .info-card .ic-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
+    .info-card .ic-body  { font-size: 0.81rem; color: #444; line-height: 1.7; }
+
+    /* ─── Highlight Box ──────────────────────── */
+    .highlight {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      font-size: 0.84rem;
+      line-height: 1.75;
+    }
+    .highlight.green  { background: var(--green-light); border-left: 4px solid var(--green); }
+    .highlight.gold   { background: var(--gold-light);  border-left: 4px solid var(--gold); }
+    .highlight.red    { background: var(--red-light);   border-left: 4px solid var(--red); }
+    .highlight.blue   { background: var(--blue-light);  border-left: 4px solid var(--blue); }
+    .highlight strong { color: #1a1a1a; }
+    .hl-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 6px; opacity: 0.65; }
+
+    /* ─── Two columns ────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ─── Fact list ──────────────────────────── */
+    .fact-list { list-style: none; }
+    .fact-list li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.83rem;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .fact-list li:last-child { border-bottom: none; }
+    .fact-list .fl-key {
+      width: 100px; flex-shrink: 0;
+      font-weight: 600;
+      font-size: 0.77rem;
+      color: var(--muted);
+    }
+
+    /* ─── Do/Don't ────────────────────────────── */
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .do-dont { grid-template-columns: 1fr; } }
+
+    .do-card, .dont-card {
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 0.82rem;
+    }
+    .do-card { background: #eefaf4; border: 1px solid #a3d9b8; }
+    .dont-card { background: #fff0f0; border: 1px solid #f5b8b8; }
+    .do-card h3   { color: #1a6e4a; font-size: 0.85rem; margin-bottom: 10px; }
+    .dont-card h3 { color: #8b1a1a; font-size: 0.85rem; margin-bottom: 10px; }
+    .do-card ul, .dont-card ul { list-style: none; }
+    .do-card li, .dont-card li { padding: 4px 0; display: flex; gap: 7px; align-items: flex-start; }
+    .do-card .d-icon   { color: #1a6e4a; flex-shrink: 0; }
+    .dont-card .d-icon { color: #8b1a1a; flex-shrink: 0; }
+
+    /* ─── Person card ────────────────────────── */
+    .person-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .person-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .person-card .p-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .person-card .p-name { font-size: 0.88rem; font-weight: 700; }
+    .person-card .p-year { font-size: 0.72rem; color: var(--muted); margin: 2px 0 8px; }
+    .person-card .p-desc { font-size: 0.76rem; color: #555; line-height: 1.65; }
+
+    /* ─── Food table ─────────────────────────── */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .food-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .food-card .f-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+    .food-card .f-kana { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
+    .food-card .f-desc { font-size: 0.78rem; color: #444; line-height: 1.65; }
+    .food-card .f-tag  {
+      display: inline-block; margin-top: 8px;
+      font-size: 0.65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+      background: var(--green-light); color: var(--green);
+    }
+
+    /* ─── Beer special ───────────────────────── */
+    .beer-box {
+      background: linear-gradient(135deg, #fdf8e8, #fff3c0);
+      border: 1px solid #e0c84a;
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-top: 16px;
+    }
+    .beer-box h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 10px; color: #7a6000; }
+    .beer-box p  { font-size: 0.82rem; color: #555; line-height: 1.75; margin-bottom: 8px; }
+    .beer-box p:last-child { margin-bottom: 0; }
+
+    /* ─── Tip pills ──────────────────────────── */
+    .tip-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item {
+      display: flex;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      align-items: flex-start;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .tip-item .t-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .tip-item .t-body strong { display: block; font-size: 0.85rem; margin-bottom: 3px; }
+    .tip-item .t-body { color: #444; line-height: 1.65; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.75rem;
+      color: #aaa;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: #888; text-decoration: none; }
+    footer a:hover { color: var(--green); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">Prague — History &amp; Culture</div>
+  <h1>🏰 プラハ 歴史・文化・生活ガイド</h1>
+  <p>旅をより深く楽しむための背景知識</p>
+</header>
+
+<nav>
+  <a href="#history">歴史</a>
+  <a href="#architecture">建築</a>
+  <a href="#culture">文化</a>
+  <a href="#people">著名人</a>
+  <a href="#food">食・ビール</a>
+  <a href="#life">生活・習慣</a>
+  <a href="#tips">旅のヒント</a>
+</nav>
+
+<div class="container">
+
+  <!-- ① 歴史 -->
+  <div class="section" id="history">
+    <div class="section-header">
+      <div class="section-icon">📜</div>
+      <div class="section-title">
+        <h2>プラハの歴史</h2>
+        <p>1000年以上の歴史が凝縮された「黄金の街」</p>
+      </div>
+    </div>
+
+    <div class="highlight green" style="margin-bottom:24px;">
+      プラハは第二次世界大戦で大きな爆撃を受けなかった数少ないヨーロッパの主要都市のひとつ。
+      そのため<strong>中世・バロック・ゴシックの建築がそのまま残っており</strong>、旧市街全体がユネスコ世界遺産に登録されています。
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-era">9世紀頃</span>
+        <div class="tl-title">プラハ城の建設と王朝の始まり</div>
+        <div class="tl-body">ヴルタヴァ川を見下ろす丘の上にプラハ城（Hradčany）が建設される。ボヘミア公国の中心地となり、後のチェコ国家のシンボルへ。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">14世紀</span>
+        <div class="tl-title">カレル4世の黄金時代</div>
+        <div class="tl-body">神聖ローマ帝国皇帝カレル4世がプラハを帝国の首都に。カレル橋・聖ヴィート大聖堂・カレル大学（中欧最古の大学）を建設。人口10万を超えヨーロッパ最大級の都市となる。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">15世紀</span>
+        <div class="tl-title">フス戦争と宗教改革の発火点</div>
+        <div class="tl-body">神学者ヤン・フスが教会の腐敗を批判し火刑に処される。これを発端にフス戦争が勃発。プラハから始まった宗教改革の波はやがてルターのドイツ宗教改革にも影響を与えた。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">17世紀</span>
+        <div class="tl-title">プラハ窓外放出事件（1618年）</div>
+        <div class="tl-body">プロテスタント貴族がカトリック側の役人3名を窓から投げ落とした事件。30年戦争の引き金となり、ヨーロッパ全土を巻き込む宗教戦争へ発展した歴史的瞬間。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">19世紀</span>
+        <div class="tl-title">チェコ民族復興運動</div>
+        <div class="tl-body">ハプスブルク帝国の支配下でチェコ語と文化を守る「民族復興運動」が活発化。スメタナ・ドヴォルザークらが音楽で民族精神を表現し、チェコ国民音楽の礎を築いた。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1918年</span>
+        <div class="tl-title">チェコスロバキア共和国の建国</div>
+        <div class="tl-body">第一次世界大戦後、トマーシュ・マサリクを初代大統領としてチェコスロバキア共和国が成立。プラハが首都となり、戦間期には中欧有数の民主主義国家として繁栄した。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1968年</span>
+        <div class="tl-title">プラハの春と弾圧</div>
+        <div class="tl-body">アレクサンデル・ドゥプチェク指導のもと「人間の顔をした社会主義」改革を推進。しかしソ連率いるワルシャワ条約機構軍が軍事介入し改革は潰される。翌年、抗議の焼身自殺をしたヤン・パラフの名は今もヴァーツラフ広場近くに刻まれている。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1989年</span>
+        <div class="tl-title">ビロード革命</div>
+        <div class="tl-body">一滴の血も流さず（"ビロードのように滑らかに"）共産主義体制が崩壊。劇作家ヴァーツラフ・ハヴェルが大統領に就任。ヴァーツラフ広場には今も革命を記念するメモリアルがある。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1993年〜</span>
+        <div class="tl-title">チェコ・スロバキア平和分離と EU加盟</div>
+        <div class="tl-body">チェコとスロバキアが平和的に分離し「チェコ共和国」誕生。2004年にEU加盟。現在は独自通貨コルナ（CZK）を維持しユーロは未導入のまま。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 建築 -->
+  <div class="section" id="architecture">
+    <div class="section-header">
+      <div class="section-icon">🏛</div>
+      <div class="section-title">
+        <h2>建築様式を知ると街が変わる</h2>
+        <p>プラハは「建築の博物館」と呼ばれる</p>
+      </div>
+    </div>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <span class="ic-icon">⛪</span>
+        <div class="ic-title">ゴシック（14〜15世紀）</div>
+        <div class="ic-body">尖塔・高い天井・ステンドグラスが特徴。<br>
+        📍 聖ヴィート大聖堂、火薬塔、旧市庁舎の天文時計塔</div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🏰</span>
+        <div class="ic-title">ルネサンス（16世紀）</div>
+        <div class="ic-body">ハプスブルク家がイタリア様式を導入。<br>
+        📍 王宮夏の離宮（ベルヴェデーレ）、シュヴァルツェンベルク宮殿</div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">✨</span>
+        <div class="ic-title">バロック（17〜18世紀）</div>
+        <div class="ic-body">フス戦争後のカトリック再建で急増。曲線・装飾・劇的表現が特徴。<br>
+        📍 聖ニコラス教会（マラー・ストラナ）、カレル橋の聖人像群</div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🌿</span>
+        <div class="ic-title">アール・ヌーヴォー（19世紀末〜）</div>
+        <div class="ic-body">植物・曲線・女性像をモチーフにした装飾様式。ミュシャはプラハ出身。<br>
+        📍 市民会館（Obecní dům）、ヴィラ・ムハ</div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🔲</span>
+        <div class="ic-title">キュビズム建築（20世紀初頭）</div>
+        <div class="ic-body">世界唯一と言われるチェコ独自の建築様式。三角形・プリズム状の装飾が特徴。<br>
+        📍 黒い聖母の家（現・キュビズム博物館）</div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🏗</span>
+        <div class="ic-title">共産主義建築（20世紀後半）</div>
+        <div class="ic-body">ソ連時代の「パネラーク」と呼ばれる集合住宅群がプラハ郊外に現存。歴史との対比が面白い。<br>
+        📍 ジジコフTVタワー（赤ちゃんの像が這う奇抜な塔）</div>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-top:20px;">
+      <div class="hl-title">旅のコツ</div>
+      旧市街広場に立って建物を一周見渡すだけで、ゴシック・バロック・ルネサンスが混在しているのに気づく。
+      <strong>意識して様式を見比べると、街歩きがぐっと面白くなる。</strong>
+    </div>
+  </div>
+
+  <!-- ③ 文化 -->
+  <div class="section" id="culture">
+    <div class="section-header">
+      <div class="section-icon">🎭</div>
+      <div class="section-title">
+        <h2>音楽・文学・芸術</h2>
+        <p>中欧文化の十字路が生んだ豊かな表現</p>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom:20px;">
+      <div class="info-card">
+        <span class="ic-icon">🎼</span>
+        <div class="ic-title">クラシック音楽の聖地</div>
+        <div class="ic-body">
+          スメタナの交響詩「我が祖国」（モルダウ）はチェコの象徴的な曲。毎年5月の「プラハの春国際音楽祭」はその没日（5/12）から始まる。<br><br>
+          街中に小さなホールが多く、夜に気軽にコンサートへ行ける文化が根付いている。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🖼</span>
+        <div class="ic-title">アルフォンス・ミュシャ</div>
+        <div class="ic-body">
+          プラハ出身のアール・ヌーヴォー画家。パリでサラ・ベルナールのポスターで一躍有名に。<br><br>
+          晩年は祖国への愛を「スラヴ叙事詩」20枚の大作に込めた。<strong>ミュシャ美術館</strong>は旧市街の中心部にあり必見。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight blue">
+      <div class="hl-title">カフカとプラハ</div>
+      フランツ・カフカは生涯のほぼすべてをプラハで過ごした。「変身」「審判」「城」など不条理文学の傑作を生んだが、
+      <strong>生前に出版を許可したのはごく一部</strong>で、友人マックス・ブロートが死後に遺稿を公刊した。
+      旧ユダヤ人街（ヨゼフォフ）はカフカゆかりの地。カフカ博物館もある。
+    </div>
+
+    <div class="highlight green" style="margin-top:14px;">
+      <div class="hl-title">ビロード革命とロック</div>
+      共産主義時代、ロックバンド「The Plastic People of the Universe」が体制に弾圧された事件は
+      ヴァーツラフ・ハヴェルらの人権運動「77年憲章」に影響を与えた。
+      <strong>音楽が政治変革に直結したプラハならではの文化史。</strong>
+    </div>
+
+    <div class="highlight gold" style="margin-top:14px;">
+      <div class="hl-title">人形劇（マリオネット）文化</div>
+      チェコの人形劇は長い伝統を持ち、ユネスコ無形文化遺産に登録されている。
+      ハプスブルク支配下でチェコ語を禁じられた時代、人形劇師たちが各地を旅してチェコ語の物語を伝えたのが起源。
+      今もプラハには専用劇場がいくつかある。
+    </div>
+  </div>
+
+  <!-- ④ 著名人 -->
+  <div class="section" id="people">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div class="section-title">
+        <h2>プラハゆかりの著名人</h2>
+        <p>この街で生まれ・生きた人々</p>
+      </div>
+    </div>
+
+    <div class="person-grid">
+      <div class="person-card">
+        <div class="p-icon">🎵</div>
+        <div class="p-name">ベドジフ・スメタナ</div>
+        <div class="p-year">1824–1884</div>
+        <div class="p-desc">チェコ国民音楽の父。「我が祖国（モルダウ）」を作曲。晩年に聴力を完全に失いながらも作曲を続けた。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🎻</div>
+        <div class="p-name">アントニン・ドヴォルザーク</div>
+        <div class="p-year">1841–1904</div>
+        <div class="p-desc">「新世界より」が有名。アメリカ滞在中もボヘミアの民族音楽を融合させた。チェコ最大の作曲家。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">✒️</div>
+        <div class="p-name">フランツ・カフカ</div>
+        <div class="p-year">1883–1924</div>
+        <div class="p-desc">プラハ生まれのユダヤ系ドイツ語作家。不条理文学の巨人。生前は無名に近く、遺稿の公刊で世界的評価を受けた。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🖼</div>
+        <div class="p-name">アルフォンス・ミュシャ</div>
+        <div class="p-year">1860–1939</div>
+        <div class="p-desc">アール・ヌーヴォーを代表する画家・装飾デザイナー。パリで活躍し晩年に帰国。聖ヴィート大聖堂のステンドグラスも彼の作品。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🎭</div>
+        <div class="p-name">ヴァーツラフ・ハヴェル</div>
+        <div class="p-year">1936–2011</div>
+        <div class="p-desc">劇作家・反体制活動家。ビロード革命を主導し、チェコスロバキア最後・チェコ共和国初代大統領に就任。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">📚</div>
+        <div class="p-name">ミラン・クンデラ</div>
+        <div class="p-year">1929–2023</div>
+        <div class="p-desc">「存在の耐えられない軽さ」の著者。プラハの春後にフランスへ亡命。長くチェコ国籍を失ったが晩年に回復された。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 食・ビール -->
+  <div class="section" id="food">
+    <div class="section-header">
+      <div class="section-icon">🍺</div>
+      <div class="section-title">
+        <h2>食文化とビール</h2>
+        <p>世界一ビールを飲む国・チェコの食を楽しむ</p>
+      </div>
+    </div>
+
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="f-name">スヴィーチコヴァー</div>
+        <div class="f-kana">Svíčková na smetaně</div>
+        <div class="f-desc">牛ロース肉をクリームソースで煮込んだチェコの国民食。クネドリーキ（パン団子）と一緒に食べる。甘めでまろやかな味わい。</div>
+        <span class="f-tag">定番料理</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">ヴェプジョ・クネドロ・ゼロ</div>
+        <div class="f-kana">Vepřo knedlo zelo</div>
+        <div class="f-desc">豚の蒸し煮＋クネドリーキ＋ザワークラウトの3点セット。頭文字をとってVKZと呼ばれるチェコの定食の王様。</div>
+        <span class="f-tag">定番料理</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">グラーシュ</div>
+        <div class="f-kana">Guláš</div>
+        <div class="f-desc">ハンガリー発祥だがチェコでも日常食。パプリカで煮込んだ牛肉シチューをクネドリーキに乗せて食べる。パブの定番メニュー。</div>
+        <span class="f-tag">パブ定番</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">トゥルデルニーク</div>
+        <div class="f-kana">Trdelník</div>
+        <div class="f-desc">棒に巻いた生地を炭火で焼いたスイーツ。旧市街の至る所で売っている。シナモン・ナッツ・アイスクリーム入りも人気。</div>
+        <span class="f-tag">ストリートフード</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">クネドリーキ</div>
+        <div class="f-kana">Knedlíky</div>
+        <div class="f-desc">チェコの主食とも言えるパン団子。小麦粉・卵・牛乳で作り蒸し上げる。ほぼすべての肉料理の付け合わせとして登場する。</div>
+        <span class="f-tag">主食</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">チェコチーズフライ</div>
+        <div class="f-kana">Smažený sýr</div>
+        <div class="f-desc">エダムチーズを衣で包んで揚げたもの。ファストフードからレストランまであらゆる場所で食べられるチェコのソウルフード。</div>
+        <span class="f-tag">国民食</span>
+      </div>
+    </div>
+
+    <div class="beer-box">
+      <h3>🍺 世界一のビール消費国・チェコを知る</h3>
+      <p>チェコは一人あたりのビール消費量で<strong>世界第1位</strong>を何十年も維持している国。ピルスナービールはボヘミア地方の都市「プルゼニュ（Plzeň）」で生まれた。世界中で飲まれているピルスナータイプはここが発祥。</p>
+      <p><strong>プラハのパブでは「コゼル（Kozel）」「ピルスナー・ウルケル」「バドヴァル」</strong>などが定番。生ビール（Pivo）は泡が命で、チェコのバーテンダーは泡の比率にこだわる職人技を持つ。</p>
+      <p>パブ（ホスポダ）は地元のコミュニティ空間。<strong>席に着くと自動的にビールが出てくる店もある</strong>ので要注意。「もういらない」時はコースターをビールの上に置くのがサイン。</p>
+    </div>
+  </div>
+
+  <!-- ⑥ 生活・習慣 -->
+  <div class="section" id="life">
+    <div class="section-header">
+      <div class="section-icon">🏘</div>
+      <div class="section-title">
+        <h2>生活・習慣・マナー</h2>
+        <p>地元の人と打ち解けるために知っておくこと</p>
+      </div>
+    </div>
+
+    <ul class="fact-list" style="background:white;border-radius:12px;padding:4px 16px;border:1px solid var(--border);margin-bottom:20px;">
+      <li>
+        <span class="fl-key">言語</span>
+        <span>公用語はチェコ語。観光地・ホテル・レストランでは<strong>英語がほぼ通じる</strong>。ドイツ語も高齢層に通じることあり。「Děkuji（ジェクイ）= ありがとう」だけでも喜ばれる。</span>
+      </li>
+      <li>
+        <span class="fl-key">挨拶</span>
+        <span>店に入る時は「Dobrý den（ドブリー・デン）= こんにちは」、退店時は「Na shledanou（ナ・スフレダノウ）= さようなら」。小さな店では無言で入らないのがマナー。</span>
+      </li>
+      <li>
+        <span class="fl-key">チップ</span>
+        <span>義務ではないが<strong>10%程度が一般的</strong>。「お釣りをください」と言わずそのまま立ち去るか、金額を指定して渡す。テーブル会計では合計額を告げるときに「160（コルナ）で」とチップ込みの金額を言う。</span>
+      </li>
+      <li>
+        <span class="fl-key">営業時間</span>
+        <span>スーパーは日曜も営業が多い。レストランは通し営業が多いが、ランチ（12:00〜14:00）とディナー（18:00〜）に分かれる店も。パブは深夜0時〜2時まで開いていることが多い。</span>
+      </li>
+      <li>
+        <span class="fl-key">物価感覚</span>
+        <span>西欧に比べ<strong>物価は2〜3割安い</strong>。生ビール0.5Lが60〜80 CZK（約350〜500円）。レストランのランチメニュー（スープ＋メイン）が150〜200 CZK（約900〜1,200円）程度。</span>
+      </li>
+      <li>
+        <span class="fl-key">治安</span>
+        <span>全体的に安全だが<strong>スリ・ぼったくりに注意</strong>。特にカレル橋・旧市街広場周辺・トラム内が狙われやすい。バックパックは前に。観光地のぼったくりタクシーはアプリのBoltで回避。</span>
+      </li>
+      <li>
+        <span class="fl-key">日曜日</span>
+        <span>チェコ人にとって日曜は家族の日。大型店舗や銀行は閉まることが多い。観光地・レストランは営業。教会ではミサが行われており見学は時間に注意。</span>
+      </li>
+      <li>
+        <span class="fl-key">喫煙</span>
+        <span>2017年から室内公共場所での喫煙は全面禁止。ただし<strong>屋外テラス席は喫煙可</strong>の店が多い。</span>
+      </li>
+    </ul>
+
+    <div class="do-dont">
+      <div class="do-card">
+        <h3>✅ やっておくと良いこと</h3>
+        <ul>
+          <li><span class="d-icon">✓</span>入店時に必ず挨拶する</li>
+          <li><span class="d-icon">✓</span>チップを10%渡す</li>
+          <li><span class="d-icon">✓</span>パブでは「Jedno pivo（ビール1杯）」と言ってみる</li>
+          <li><span class="d-icon">✓</span>旧市街は朝早く（8時前）が空いていて美しい</li>
+          <li><span class="d-icon">✓</span>トラムに乗って地元の雰囲気を感じる</li>
+          <li><span class="d-icon">✓</span>地元民が行くパブ（観光地から1本外れた路地）を探す</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <h3>⛔ 避けるべきこと</h3>
+        <ul>
+          <li><span class="d-icon">✗</span>カレル橋周辺でのぼったくりタクシー乗車</li>
+          <li><span class="d-icon">✗</span>旧市街広場周辺での両替所（レートが悪い）</li>
+          <li><span class="d-icon">✗</span>混雑する観光地でのバックパック後ろ掛け</li>
+          <li><span class="d-icon">✗</span>チェコをポーランドやスロバキアと混同して話す</li>
+          <li><span class="d-icon">✗</span>「チェコスロバキア」という名称の使用（1993年以降は別国）</li>
+          <li><span class="d-icon">✗</span>教会でのフラッシュ撮影・騒ぐ行為</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ 旅のヒント -->
+  <div class="section" id="tips">
+    <div class="section-header">
+      <div class="section-icon">💡</div>
+      <div class="section-title">
+        <h2>旅をより深く楽しむヒント</h2>
+        <p>知っていると一段と面白くなる視点</p>
+      </div>
+    </div>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="t-icon">🕰</div>
+        <div class="t-body">
+          <strong>天文時計（オルロイ）は毎正時に仕掛けが動く</strong>
+          旧市庁舎の天文時計は毎正時（9:00〜21:00）に小窓が開いて12使徒の人形が回る。14世紀に作られたが、伝説では「同じものを2度と作れないよう」職人の目が抉られたという。真偽は不明だが語り継がれる話。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🌄</div>
+        <div class="t-body">
+          <strong>ヴルタヴァ川の夕暮れを橋の上から</strong>
+          カレル橋は日の出・日の入りの光が最も美しい。観光客が少ない早朝（6〜7時）か夕暮れ時に渡ると、橋上の聖人像と川の反射が幻想的。橋の上では17世紀に処刑されたヤン・ネポムクの像を触ると願いが叶うという伝説がある。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🎵</div>
+        <div class="t-body">
+          <strong>夜のコンサートに気軽に行ける街</strong>
+          旧市街には小規模なクラシックコンサートホールが多数あり、当日券で入れることも。教会コンサート（20〜30ユーロ程度）はアコースティックが素晴らしく旅の思い出になる。モーツァルトは生前にプラハをとりわけ愛し「プラハの人々は私を理解してくれる」と語ったとされる。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🏘</div>
+        <div class="t-body">
+          <strong>ヴィシェフラドからプラハを俯瞰する</strong>
+          プラハ城ほど有名ではないが、ヴルタヴァ川南側の岩山「ヴィシェフラド」はチェコ建国神話の舞台。スメタナやドヴォルザークが眠る墓地があり、プラハ城とは異なる角度から旧市街を一望できる穴場スポット。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🗝</div>
+        <div class="t-body">
+          <strong>路地裏の「プロフォード（通り抜け通路）」を歩く</strong>
+          プラハの旧市街には建物と建物の間を抜けるパッサージュ（通り抜け通路）が多数ある。観光客が気づかず素通りするが、地元民が日常使いする商店や隠れたカフェが潜んでいる。カフカも歩いた裏路地探索は最高の時間つぶし。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🍺</div>
+        <div class="t-body">
+          <strong>「ホスポダ（hospoda）」= 地元のパブに入ってみる</strong>
+          観光地化されたビアホールではなく、住宅街に溶け込んだ地元のパブに入ると生活感のあるプラハに出会える。メニューがチェコ語だけの店も多いが、「Pivo（ビール）」と「Guláš（グラーシュ）」の2語だけで何とかなる。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">📖</div>
+        <div class="t-body">
+          <strong>旅の前に読むと深まる作品</strong>
+          カフカ「変身」（短編・すぐ読める）/ ミラン・クンデラ「存在の耐えられない軽さ」（プラハの春が舞台）/ 映画「アマデウス」（プラハ・ロケ多数使用）
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <a href="index.html">← ガイド一覧に戻る</a>　|　2026年8月 東欧旅行 個人用ガイド
+</footer>
+
+</body>
+</html>

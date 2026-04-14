@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>東欧3都市 交通手段ガイド 2026年8月</title>
+  <style>
+    :root {
+      --prague: #1a6e4a;
+      --vienna: #8b1a1a;
+      --budapest: #1a4a8b;
+      --accent: #f5a623;
+      --bg: #f7f5f0;
+      --card: #ffffff;
+      --text: #2c2c2c;
+      --muted: #666;
+      --border: #e0ddd8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ─── Header ─────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 100%);
+      color: white;
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.03em; }
+    header p  { margin-top: 8px; font-size: 0.95rem; opacity: 0.85; }
+
+    /* ─── Journey Timeline ────────────────────── */
+    .timeline {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0;
+      padding: 28px 16px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-city {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 100px;
+    }
+    .city-dot {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    .city-dot.prague  { background: var(--prague); color: white; }
+    .city-dot.vienna  { background: var(--vienna); color: white; }
+    .city-dot.budapest{ background: var(--budapest); color: white; }
+    .city-label { font-size: 0.8rem; font-weight: 600; margin-top: 6px; color: var(--muted); }
+    .city-date  { font-size: 0.72rem; color: var(--muted); }
+
+    .timeline-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 8px;
+      margin-bottom: 24px;
+    }
+    .arrow-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, #ccc, #999);
+      position: relative;
+    }
+    .arrow-line::after {
+      content: '▶';
+      position: absolute;
+      right: -6px; top: -8px;
+      font-size: 0.7rem; color: #999;
+    }
+    .arrow-label { font-size: 0.7rem; color: var(--muted); white-space: nowrap; margin-top: 4px; }
+
+    /* ─── Container ───────────────────────────── */
+    .container { max-width: 900px; margin: 0 auto; padding: 32px 16px 64px; }
+
+    /* ─── Section ─────────────────────────────── */
+    .section { margin-bottom: 48px; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid;
+    }
+    .section-header.prague  { border-color: var(--prague); }
+    .section-header.vienna  { border-color: var(--vienna); }
+    .section-header.budapest{ border-color: var(--budapest); }
+    .section-header.multi   { border-color: var(--accent); }
+
+    .section-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .section-icon.prague  { background: var(--prague); color: white; }
+    .section-icon.vienna  { background: var(--vienna); color: white; }
+    .section-icon.budapest{ background: var(--budapest); color: white; }
+    .section-icon.multi   { background: var(--accent); color: white; }
+
+    .section-title h2 { font-size: 1.1rem; font-weight: 700; }
+    .section-title p  { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Route Cards ─────────────────────────── */
+    .route-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .route-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      position: relative;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .route-card.recommended { border-color: var(--accent); box-shadow: 0 2px 12px rgba(245,166,35,0.2); }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    .badge.rec   { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+    .badge.cheap { background: #d4edda; color: #155724; border: 1px solid #28a745; }
+    .badge.easy  { background: #d1ecf1; color: #0c5460; border: 1px solid #17a2b8; }
+
+    .route-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; }
+
+    .route-info { list-style: none; }
+    .route-info li {
+      display: flex;
+      font-size: 0.82rem;
+      padding: 4px 0;
+      border-bottom: 1px solid #f0ede8;
+    }
+    .route-info li:last-child { border-bottom: none; }
+    .route-info .label {
+      width: 72px; flex-shrink: 0;
+      color: var(--muted); font-size: 0.75rem;
+    }
+    .route-info .value { font-weight: 500; }
+    .route-info .value strong { color: #c0392b; }
+
+    /* ─── Recommend Box ───────────────────────── */
+    .recommend-box {
+      background: linear-gradient(135deg, #fffdf5, #fff8e1);
+      border: 1px solid #ffc107;
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 16px 18px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+    }
+    .recommend-box .rec-title {
+      font-size: 0.8rem; font-weight: 700;
+      color: #856404; margin-bottom: 6px;
+    }
+
+    /* ─── Warning Box ─────────────────────────── */
+    .warn-box {
+      background: #fff5f5;
+      border: 1px solid #f5c6cb;
+      border-left: 4px solid #dc3545;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.82rem;
+      margin-top: 12px;
+      color: #721c24;
+    }
+
+    /* ─── Timetable ────────────────────────────── */
+    .timetable-title {
+      font-size: 0.85rem; font-weight: 700;
+      margin: 20px 0 8px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Table ───────────────────────────────── */
+    .styled-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.83rem;
+      background: var(--card);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+    .styled-table th {
+      background: #3a3a3a;
+      color: white;
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .styled-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .styled-table tr:last-child td { border-bottom: none; }
+    .styled-table tr:nth-child(even) td { background: #fafafa; }
+
+    /* ─── Compare Table ───────────────────────── */
+    .compare-table th.obb  { background: #c0392b; }
+    .compare-table th.rgj  { background: #27ae60; }
+    .compare-table td { text-align: center; }
+    .compare-table td:first-child { text-align: left; font-weight: 600; color: var(--muted); font-size: 0.78rem; }
+
+    /* ─── Checklist ───────────────────────────── */
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 600px) { .checklist-grid { grid-template-columns: 1fr; } }
+
+    .checklist-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .checklist-card h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 10px; }
+    .checklist-card ul { list-style: none; }
+    .checklist-card li {
+      font-size: 0.82rem;
+      padding: 5px 0;
+      border-bottom: 1px solid #f0ede8;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .checklist-card li:last-child { border-bottom: none; }
+    .check-icon { flex-shrink: 0; margin-top: 1px; color: #28a745; font-size: 0.9rem; }
+
+    /* ─── Overview Flow ───────────────────────── */
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .flow-item {
+      display: flex;
+      align-items: stretch;
+      border-bottom: 1px solid var(--border);
+    }
+    .flow-item:last-child { border-bottom: none; }
+    .flow-date {
+      width: 90px; flex-shrink: 0;
+      background: #f5f3ef;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 12px 8px;
+      font-size: 0.8rem; font-weight: 700; text-align: center;
+      color: var(--muted); gap: 2px;
+    }
+    .flow-date span { font-size: 1rem; color: var(--text); }
+    .flow-body { flex: 1; padding: 12px 16px; }
+    .flow-transport {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.88rem; font-weight: 600; margin-bottom: 4px;
+    }
+    .flow-transport .t-icon { font-size: 1.1rem; }
+    .flow-detail { font-size: 0.78rem; color: var(--muted); }
+    .flow-arrow-row {
+      display: flex; align-items: center;
+      padding: 6px 0 6px 90px;
+      border-bottom: 1px solid var(--border);
+    }
+    .flow-arrow-row .a-line {
+      width: 3px; height: 28px;
+      background: linear-gradient(180deg, #ccc, #888);
+      margin-left: 44px;
+    }
+
+    /* ─── Footer ──────────────────────────────── */
+    .note-box {
+      background: #f0f4ff;
+      border: 1px solid #b8c8ff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      font-size: 0.8rem;
+      color: #2c3e70;
+      margin-top: 32px;
+    }
+
+    /* ─── Responsive ──────────────────────────── */
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.3rem; }
+      .route-grid { grid-template-columns: 1fr; }
+      .timeline-arrow .arrow-line { width: 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== HEADER ============================= -->
+<header>
+  <h1>🚃 東欧3都市 交通手段ガイド</h1>
+  <p>2026年8月 プラハ → ウィーン → ブダペスト</p>
+</header>
+
+<!-- ===== TIMELINE ========================== -->
+<div class="timeline">
+  <div class="timeline-city">
+    <div class="city-dot prague">✈</div>
+    <div class="city-label">プラハ</div>
+    <div class="city-date">8/23 着</div>
+  </div>
+  <div class="timeline-arrow">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">列車 4h</div>
+  </div>
+  <div class="timeline-city">
+    <div class="city-dot vienna">🏛</div>
+    <div class="city-label">ウィーン</div>
+    <div class="city-date">8/25 着</div>
+  </div>
+  <div class="timeline-arrow">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">列車 2.5h</div>
+  </div>
+  <div class="timeline-city">
+    <div class="city-dot budapest">🌊</div>
+    <div class="city-label">ブダペスト</div>
+    <div class="city-date">8/26 着</div>
+  </div>
+  <div class="timeline-arrow">
+    <div class="arrow-line"></div>
+    <div class="arrow-label">バス/タクシー</div>
+  </div>
+  <div class="timeline-city">
+    <div class="city-dot prague">✈</div>
+    <div class="city-label">空港</div>
+    <div class="city-date">8/28 発</div>
+  </div>
+</div>
+
+<!-- ===== MAIN =============================== -->
+<div class="container">
+
+  <!-- ① プラハ空港→市内 -->
+  <div class="section">
+    <div class="section-header prague">
+      <div class="section-icon prague">①</div>
+      <div class="section-title">
+        <h2>プラハ空港 → 市内</h2>
+        <p>8/23（日）16:00 ヴァーツラフ・ハヴェル空港着</p>
+      </div>
+    </div>
+
+    <div class="route-grid">
+      <!-- Route A -->
+      <div class="route-card recommended">
+        <span class="badge rec">★ 推奨</span>
+        <div class="route-name">🚌 エアポートエクスプレス（AE）</div>
+        <ul class="route-info">
+          <li><span class="label">区間</span><span class="value">空港 → プラハ中央駅</span></li>
+          <li><span class="label">所要時間</span><span class="value">約 35〜40分</span></li>
+          <li><span class="label">運行</span><span class="value">30分に1本（6:30〜22:00）</span></li>
+          <li><span class="label">料金</span><span class="value"><strong>100 CZK</strong>（約600円）</span></li>
+          <li><span class="label">支払い</span><span class="value">バス運転手／空港カウンター（現金）</span></li>
+        </ul>
+      </div>
+
+      <!-- Route B -->
+      <div class="route-card">
+        <span class="badge cheap">格安</span>
+        <div class="route-name">🚇 市営バス＋地下鉄A線</div>
+        <ul class="route-info">
+          <li><span class="label">ルート</span><span class="value">バス59番 → Veleslavín → 地下鉄A</span></li>
+          <li><span class="label">所要時間</span><span class="value">約 45分</span></li>
+          <li><span class="label">料金</span><span class="value"><strong>40 CZK</strong>（90分券）</span></li>
+          <li><span class="label">支払い</span><span class="value">自動券売機・カード可</span></li>
+          <li><span class="label">注意</span><span class="value">荷物1個 +20 CZK</span></li>
+        </ul>
+      </div>
+
+      <!-- Route C -->
+      <div class="route-card">
+        <span class="badge easy">快適</span>
+        <div class="route-name">🚕 タクシー / Bolt / Uber</div>
+        <ul class="route-info">
+          <li><span class="label">所要時間</span><span class="value">約 30分（渋滞次第）</span></li>
+          <li><span class="label">料金</span><span class="value"><strong>650〜900 CZK</strong>（約4,000〜5,500円）</span></li>
+          <li><span class="label">支払い</span><span class="value">アプリ経由カード払い推奨</span></li>
+          <li><span class="label">注意</span><span class="value">駅周辺タクシーはぼったくり多発。必ずアプリ利用</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="recommend-box">
+      <div class="rec-title">✅ 8/23（16:00着）の推奨プラン</div>
+      AEバス（100 CZK）で中央駅へ → 地下鉄で宿泊先へ。到着後すぐ動ける22時まで運行のため問題なし。
+      <strong>24時間券（120 CZK）を別途購入すれば翌日の市内移動もそのまま使える。</strong>
+    </div>
+  </div>
+
+  <!-- ② プラハ→ウィーン -->
+  <div class="section">
+    <div class="section-header vienna">
+      <div class="section-icon vienna">②</div>
+      <div class="section-title">
+        <h2>プラハ → ウィーン（都市間移動）</h2>
+        <p>8/25（火）午前 プラハ中央駅 → ウィーン中央駅</p>
+      </div>
+    </div>
+
+    <div class="route-card recommended" style="margin-bottom:16px;">
+      <span class="badge rec">★ 推奨</span>
+      <div class="route-name">🚄 Railjet（ÖBB）/ RegioJet 直通列車</div>
+      <ul class="route-info">
+        <li><span class="label">所要時間</span><span class="value">約 <strong>4時間</strong>（直通・乗り換えなし）</span></li>
+        <li><span class="label">運行本数</span><span class="value">1日 10〜14本（2時間ごとに主要便）</span></li>
+        <li><span class="label">料金</span><span class="value"><strong>€13〜45</strong>（早期予約で€13〜20台）</span></li>
+        <li><span class="label">支払い</span><span class="value">クレジットカード（オンライン予約推奨）</span></li>
+        <li><span class="label">予約</span><span class="value">ÖBB公式 / RegioJet公式 / Omio（日本語）</span></li>
+      </ul>
+    </div>
+
+    <div class="timetable-title">⏰ 午前出発 おすすめ時刻帯</div>
+    <table class="styled-table">
+      <thead>
+        <tr><th>出発（プラハ）</th><th>到着（ウィーン）</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>7:57 / 8:52</td><td>12:51 / 13:05</td><td>早着でウィーン観光に余裕あり</td></tr>
+        <tr><td>9:52 / 10:52</td><td>13:51 / 14:51</td><td>午前中の余裕を活かせる</td></tr>
+      </tbody>
+    </table>
+
+    <div class="timetable-title">🔍 Railjet vs RegioJet 比較</div>
+    <table class="styled-table compare-table">
+      <thead>
+        <tr><th></th><th class="obb">Railjet (ÖBB)</th><th class="rgj">RegioJet</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>料金</td><td>やや高め</td><td>安め（€13〜）</td></tr>
+        <tr><td>Wi-Fi</td><td>あり</td><td>あり</td></tr>
+        <tr><td>定時性</td><td>高い</td><td>概ね良好（遅延あり）</td></tr>
+        <tr><td>設備</td><td>1等・2等・ビジネス</td><td>Relax・2等</td></tr>
+        <tr><td>推奨度</td><td>⭐⭐⭐⭐⭐</td><td>⭐⭐⭐⭐☆</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+      ⚠️ <strong>8月はハイシーズン。人気便は早期完売あり。</strong>旅程確定後すぐに予約を。<br>
+      プラハ中央駅に改札口はなく車内検札あり。出発直前までホームが変わることが多いため電光掲示板を都度確認すること。
+    </div>
+  </div>
+
+  <!-- ③ ウィーン→ブダペスト -->
+  <div class="section">
+    <div class="section-header budapest">
+      <div class="section-icon budapest">③</div>
+      <div class="section-title">
+        <h2>ウィーン → ブダペスト（都市間移動）</h2>
+        <p>8/26（水）夕方 ウィーン中央駅 → ブダペスト東駅</p>
+      </div>
+    </div>
+
+    <div class="route-card recommended" style="margin-bottom:16px;">
+      <span class="badge rec">★ 推奨</span>
+      <div class="route-name">🚄 Railjet / EuroCity（EC）直通列車</div>
+      <ul class="route-info">
+        <li><span class="label">所要時間</span><span class="value">約 <strong>2時間30〜40分</strong>（直通）</span></li>
+        <li><span class="label">運行本数</span><span class="value">ほぼ 1時間に1本</span></li>
+        <li><span class="label">料金</span><span class="value"><strong>€14〜30</strong>（早期予約で€14〜20台）</span></li>
+        <li><span class="label">支払い</span><span class="value">クレジットカード（オンライン予約推奨）</span></li>
+      </ul>
+    </div>
+
+    <div class="timetable-title">⏰ 夕方出発 おすすめ時刻帯</div>
+    <table class="styled-table">
+      <thead>
+        <tr><th>出発（ウィーン）</th><th>到着（ブダペスト東）</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>15:40 / 16:40</td><td>18:04 / 19:04</td><td>到着後に夕食・ルインバーへ</td></tr>
+        <tr><td>17:40</td><td>20:04</td><td>ウィーン観光を夕方まで楽しめる</td></tr>
+      </tbody>
+    </table>
+
+    <div class="warn-box">
+      ⚠️ 夜の行動も考え、遅くとも <strong>18:00発まで</strong>を目安に。<br>
+      ウィーン中央駅は大きく近代的。出発30分前到着推奨。1等利用者は ÖBB Lounge（6:00〜23:30）を無料利用可。
+    </div>
+  </div>
+
+  <!-- ④ ブダペスト→空港 -->
+  <div class="section">
+    <div class="section-header budapest">
+      <div class="section-icon budapest">④</div>
+      <div class="section-title">
+        <h2>ブダペスト市内 → 空港</h2>
+        <p>8/28（金）20:00 リスト・フェレンツ国際空港 発</p>
+      </div>
+    </div>
+
+    <div class="warn-box" style="margin-bottom:16px;">
+      ⏰ 20:00発のフライト → <strong>遅くとも18:00（理想は17:30）</strong>には市内を出発すること
+    </div>
+
+    <div class="route-grid">
+      <!-- Route A -->
+      <div class="route-card recommended">
+        <span class="badge rec">★ 推奨</span>
+        <div class="route-name">🚌 空港直通バス 100E</div>
+        <ul class="route-info">
+          <li><span class="label">区間</span><span class="value">デアーク広場 → 空港（BUD）</span></li>
+          <li><span class="label">所要時間</span><span class="value">約 30〜35分</span></li>
+          <li><span class="label">運行</span><span class="value">10〜30分おき（24時間）</span></li>
+          <li><span class="label">料金</span><span class="value"><strong>2,200 HUF</strong>（約850円）</span></li>
+          <li><span class="label">支払い</span><span class="value">運転手現金 or アプリ事前購入</span></li>
+        </ul>
+      </div>
+
+      <!-- Route B -->
+      <div class="route-card">
+        <span class="badge cheap">格安</span>
+        <div class="route-name">🚇 地下鉄M3 + バス200E</div>
+        <ul class="route-info">
+          <li><span class="label">ルート</span><span class="value">デアーク → M3 → Kőbánya-Kispest → 200E</span></li>
+          <li><span class="label">所要時間</span><span class="value">約 50〜60分</span></li>
+          <li><span class="label">料金</span><span class="value"><strong>24h券 2,500 HUF</strong> / 72h券 5,500 HUF</span></li>
+          <li><span class="label">注意</span><span class="value">地下鉄終電に注意。深夜はタクシー推奨</span></li>
+        </ul>
+      </div>
+
+      <!-- Route C -->
+      <div class="route-card">
+        <span class="badge easy">確実</span>
+        <div class="route-name">🚕 Bolt / Főtaxi</div>
+        <ul class="route-info">
+          <li><span class="label">所要時間</span><span class="value">約 20〜30分</span></li>
+          <li><span class="label">料金</span><span class="value"><strong>6,500〜8,000 HUF</strong>（約2,500〜3,100円）</span></li>
+          <li><span class="label">支払い</span><span class="value">Boltアプリ・カード払い推奨</span></li>
+          <li><span class="label">注意</span><span class="value">荷物多い最終日に最適。Boltアプリ事前DL必須</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="recommend-box">
+      <div class="rec-title">✅ 8/28（20:00出発）の推奨プラン</div>
+      <strong>17:30頃に Bolt または 100Eバスで出発</strong> → 18:00〜18:30に空港着 → チェックイン・セキュリティに余裕あり。<br>
+      荷物が多い最終日は <strong>Bolt が最も楽でトラブルが少ない。</strong>
+    </div>
+  </div>
+
+  <!-- 全体フロー -->
+  <div class="section">
+    <div class="section-header multi">
+      <div class="section-icon multi">🗺</div>
+      <div class="section-title">
+        <h2>全行程 移動フロー</h2>
+        <p>旅程全体の交通イメージ</p>
+      </div>
+    </div>
+
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-date"><span>8/23</span>日</div>
+        <div class="flow-body">
+          <div class="flow-transport"><span class="t-icon">✈</span> プラハ到着（16:00）</div>
+          <div class="flow-detail">ヴァーツラフ・ハヴェル空港</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-date"><span></span></div>
+        <div class="flow-body">
+          <div class="flow-transport"><span class="t-icon">🚌</span> AEバス → プラハ中央駅 → 地下鉄</div>
+          <div class="flow-detail">100 CZK / 約35分 → 宿泊先へ</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-date"><span>8/24</span>月</div>
+        <div class="flow-body">
+          <div class="flow-transport"><span class="t-icon">🇨🇿</span> プラハ観光</div>
+          <div class="flow-detail">市内交通：90分券40 CZK / 24時間券120 CZK</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-date"><span>8/25</span>火</div>
+        <div class="flow-body">
+          <div class="flow-transport"><span class="t-icon">🚄</span> Railjet/RegioJet → ウィーン</div>
+          <div class="flow-detail">€13〜45 / 約4時間（午前出発推奨）</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-date"><span>8/26</span>水</div>
+        <div class="flow-body">
+          <div class="flow-transport"><span class="t-icon">🚄</span> Railjet/EC → ブダペスト</div>
+          <div class="flow-detail">€14〜30 / 約2時間30分（夕方出発。18:00発までを目安に）</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-date"><span>8/27</span>木</div>
+        <div class="flow-body">
+          <div class="flow-transport"><span class="t-icon">🇭🇺</span> ブダペスト観光</div>
+          <div class="flow-detail">市内交通：24時間券2,500 HUF / 72時間券5,500 HUF</div>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-date"><span>8/28</span>金</div>
+        <div class="flow-body">
+          <div class="flow-transport"><span class="t-icon">🚕</span> Bolt or 100Eバス → 空港（17:30出発）</div>
+          <div class="flow-detail">Bolt: 6,500〜8,000 HUF / 100E: 2,200 HUF → 20:00フライト</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 支払い・通貨 -->
+  <div class="section">
+    <div class="section-header multi">
+      <div class="section-icon multi">💳</div>
+      <div class="section-title">
+        <h2>支払い・通貨まとめ</h2>
+        <p>各都市の通貨と決済手段</p>
+      </div>
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr><th>都市・国</th><th>通貨</th><th>鉄道チケット</th><th>タクシー</th><th>公共交通</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🇨🇿 プラハ</td>
+          <td><strong>CZK</strong>（コルナ）</td>
+          <td>カード・現金</td>
+          <td>Bolt（カード）</td>
+          <td>カード・現金可</td>
+        </tr>
+        <tr>
+          <td>🇦🇹 ウィーン</td>
+          <td><strong>EUR</strong>（ユーロ）</td>
+          <td>カード・現金</td>
+          <td>Uber・Bolt（カード）</td>
+          <td>カード・現金可</td>
+        </tr>
+        <tr>
+          <td>🇭🇺 ブダペスト</td>
+          <td><strong>HUF</strong>（フォリント）</td>
+          <td>カード・現金</td>
+          <td>Bolt（カード）</td>
+          <td>カード・現金可</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="recommend-box">
+      ✅ どの都市でも <strong>クレジットカード（Visa/Mastercard）がほぼ使える</strong><br>
+      ✅ CZK・HUFは日本での両替レートが悪いため、<strong>現地ATMでの少額引き出しを保険として推奨</strong>
+    </div>
+  </div>
+
+  <!-- 事前準備チェックリスト -->
+  <div class="section">
+    <div class="section-header multi">
+      <div class="section-icon multi">📱</div>
+      <div class="section-title">
+        <h2>出発前チェックリスト</h2>
+        <p>事前に済ませておくこと</p>
+      </div>
+    </div>
+
+    <div class="checklist-grid">
+      <div class="checklist-card">
+        <h3>🎫 予約・購入</h3>
+        <ul>
+          <li><span class="check-icon">□</span>プラハ→ウィーン 鉄道チケット（ÖBB公式 or Omio）早期予約</li>
+          <li><span class="check-icon">□</span>ウィーン→ブダペスト 鉄道チケット 早期予約</li>
+          <li><span class="check-icon">□</span>8月はハイシーズン。旅程確定後すぐに購入推奨</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <h3>📲 アプリ</h3>
+        <ul>
+          <li><span class="check-icon">□</span><strong>Bolt</strong>（タクシー配車）インストール・登録</li>
+          <li><span class="check-icon">□</span><strong>ÖBB</strong> または <strong>RegioJet</strong> アプリ（モバイルチケット）</li>
+          <li><span class="check-icon">□</span><strong>Omio</strong>（日本語対応・複数社比較）</li>
+          <li><span class="check-icon">□</span>Googleマップ オフラインマップ事前DL</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <h3>💰 お金</h3>
+        <ul>
+          <li><span class="check-icon">□</span>タッチ決済対応クレジットカード（Visa/Mastercard）</li>
+          <li><span class="check-icon">□</span>バス乗車用の小銭確保（お釣りが出ない場合あり）</li>
+          <li><span class="check-icon">□</span>現地ATMでCZK・HUFを少額引き出し</li>
+        </ul>
+      </div>
+      <div class="checklist-card">
+        <h3>📡 通信</h3>
+        <ul>
+          <li><span class="check-icon">□</span>eSIM またはヨーロッパ対応SIMを準備</li>
+          <li><span class="check-icon">□</span>到着直後からネット接続できると移動がスムーズ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 注意書き -->
+  <div class="note-box">
+    📝 <strong>注意事項：</strong>
+    料金・時刻は2026年8月時点では変動の可能性があります。出発前に各公式サイトで最新情報を必ず確認してください。
+    都市間鉄道チケットは旅程確定後なるべく早く（8月は特に）購入することを強く推奨します。
+  </div>
+
+</div><!-- /container -->
+</body>
+</html>

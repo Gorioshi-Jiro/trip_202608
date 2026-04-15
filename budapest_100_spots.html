@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script>fetch('nav-menu.html').then(r=>r.text()).then(h=>{var d=document.createElement('div');d.innerHTML=h;document.body.prepend(d);});</script>
 <header>
   <h1>🏰 ブダペスト 100スポット完全ガイド</h1>
   <p>観光地・グルメ・カフェ・温泉・ルインバー・絶景・マーケット・お土産・雑貨・穴場 まで全網羅</p>
@@ -228,5 +229,6 @@ function show(id, el) {
   el.classList.add('active');
 }
 </script>
+<script src="nav-menu.js"></script>
 </body>
 </html>

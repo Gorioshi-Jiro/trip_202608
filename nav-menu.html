@@ -1,0 +1,290 @@
+<!-- =====================================================
+     東欧旅行2026 共通ハンバーガーナビゲーション
+     使い方: 各HTMLファイルの <body> 直後にこのファイルを
+             fetch + insertAdjacentHTML で読み込む
+     ===================================================== -->
+
+<style>
+/* ---- Hamburger Nav ---- */
+.ham-btn {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 9999;
+  width: 44px;
+  height: 44px;
+  background: rgba(26,26,24,0.92);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 0;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+  transition: background 0.2s;
+}
+.ham-btn:hover { background: rgba(50,50,48,0.98); }
+.ham-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #f8f7f4;
+  border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+  transform-origin: center;
+}
+.ham-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ham-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.ham-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.ham-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 9990;
+  cursor: pointer;
+}
+.ham-overlay.open { display: block; }
+
+.ham-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  max-width: 90vw;
+  height: 100%;
+  background: #1a1a18;
+  color: #f8f7f4;
+  z-index: 9995;
+  transition: right 0.28s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+}
+.ham-drawer.open { right: 0; }
+
+.ham-drawer-header {
+  padding: 20px 20px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+.ham-drawer-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 4px;
+}
+.ham-drawer-sub {
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.ham-nav {
+  list-style: none;
+  padding: 12px 0;
+  flex: 1;
+}
+.ham-nav li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 20px;
+  color: #f8f7f4;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: background 0.15s;
+  line-height: 1.35;
+  border-left: 3px solid transparent;
+}
+.ham-nav li a:hover {
+  background: rgba(255,255,255,0.07);
+  border-left-color: rgba(255,255,255,0.4);
+}
+.ham-nav li a.active-page {
+  background: rgba(255,255,255,0.12);
+  border-left-color: #f8f7f4;
+  font-weight: 600;
+}
+.ham-nav .nav-icon { font-size: 18px; flex-shrink: 0; width: 24px; text-align: center; }
+.ham-nav .nav-label { flex: 1; }
+.ham-nav .nav-tag {
+  font-size: 10px;
+  opacity: 0.45;
+  background: rgba(255,255,255,0.1);
+  padding: 2px 7px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.ham-section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  padding: 14px 20px 4px;
+}
+
+.ham-drawer-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+.ham-home-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.15s;
+}
+.ham-home-link:hover { background: rgba(255,255,255,0.07); color: #fff; }
+</style>
+
+<!-- ハンバーガーボタン -->
+<button class="ham-btn" id="hamBtn" aria-label="メニューを開く" aria-expanded="false">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<!-- オーバーレイ -->
+<div class="ham-overlay" id="hamOverlay"></div>
+
+<!-- ドロワー -->
+<nav class="ham-drawer" id="hamDrawer" aria-label="サイトナビゲーション">
+  <div class="ham-drawer-header">
+    <div class="ham-drawer-title">Travel Guide 2026</div>
+    <div class="ham-drawer-sub">🇪🇺 東欧3都市 旅行ガイド</div>
+  </div>
+
+  <a class="ham-home-link" href="index.html">🏠 トップページへ戻る</a>
+
+  <ul class="ham-nav">
+    <li class="ham-section-label">共通ガイド</li>
+    <li>
+      <a href="transportation_guide.html" data-page="transportation_guide">
+        <span class="nav-icon">🚃</span>
+        <span class="nav-label">交通手段ガイド</span>
+        <span class="nav-tag">全都市</span>
+      </a>
+    </li>
+    <li>
+      <a href="hotel_guide.html" data-page="hotel_guide">
+        <span class="nav-icon">🏨</span>
+        <span class="nav-label">ホテルガイド</span>
+        <span class="nav-tag">全都市</span>
+      </a>
+    </li>
+    <li>
+      <a href="habsburg.html" data-page="habsburg">
+        <span class="nav-icon">👑</span>
+        <span class="nav-label">ハプスブルク家ガイド</span>
+        <span class="nav-tag">歴史</span>
+      </a>
+    </li>
+
+    <li class="ham-section-label">🇨🇿 プラハ</li>
+    <li>
+      <a href="prague_100_spots.html" data-page="prague_100_spots">
+        <span class="nav-icon">📍</span>
+        <span class="nav-label">プラハ スポット</span>
+        <span class="nav-tag">100選</span>
+      </a>
+    </li>
+    <li>
+      <a href="prague_culture.html" data-page="prague_culture">
+        <span class="nav-icon">🏰</span>
+        <span class="nav-label">プラハ 歴史・文化・生活</span>
+        <span class="nav-tag">文化</span>
+      </a>
+    </li>
+
+    <li class="ham-section-label">🇦🇹 ウィーン</li>
+    <li>
+      <a href="vienna_100_spots.html" data-page="vienna_100_spots">
+        <span class="nav-icon">📍</span>
+        <span class="nav-label">ウィーン スポット</span>
+        <span class="nav-tag">100選</span>
+      </a>
+    </li>
+    <li>
+      <a href="vienna_culture.html" data-page="vienna_culture">
+        <span class="nav-icon">🏛</span>
+        <span class="nav-label">ウィーン 歴史・文化・生活</span>
+        <span class="nav-tag">文化</span>
+      </a>
+    </li>
+
+    <li class="ham-section-label">🇭🇺 ブダペスト</li>
+    <li>
+      <a href="budapest_100_spots.html" data-page="budapest_100_spots">
+        <span class="nav-icon">📍</span>
+        <span class="nav-label">ブダペスト スポット</span>
+        <span class="nav-tag">100選</span>
+      </a>
+    </li>
+    <li>
+      <a href="budapest_culture.html" data-page="budapest_culture">
+        <span class="nav-icon">🌊</span>
+        <span class="nav-label">ブダペスト 歴史・文化・生活</span>
+        <span class="nav-tag">文化</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="ham-drawer-footer">2026年8月 東欧旅行 個人用ガイド</div>
+</nav>
+
+<script>
+(function() {
+  const btn     = document.getElementById('hamBtn');
+  const drawer  = document.getElementById('hamDrawer');
+  const overlay = document.getElementById('hamOverlay');
+
+  function open() {
+    btn.classList.add('open');
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    btn.classList.remove('open');
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  btn.addEventListener('click', function() {
+    drawer.classList.contains('open') ? close() : open();
+  });
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') close();
+  });
+
+  // 現在のページをハイライト
+  var page = location.pathname.split('/').pop().replace('.html','');
+  var links = drawer.querySelectorAll('[data-page]');
+  links.forEach(function(a) {
+    if (a.dataset.page === page) a.classList.add('active-page');
+  });
+})();
+</script>

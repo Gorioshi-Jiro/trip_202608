@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<script>fetch('nav-menu.html').then(r=>r.text()).then(h=>{var d=document.createElement('div');d.innerHTML=h;document.body.prepend(d);});</script>
 
 <header>
   <h1>🏰 プラハ 100スポット完全ガイド</h1>
@@ -249,5 +250,6 @@ function show(id, el) {
 }
 </script>
 
+<script src="nav-menu.js"></script>
 </body>
 </html>

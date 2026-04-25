@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ウィーン 歴史・文化・生活ガイド</title>
+  <style>
+    :root {
+      --red:        #8b1a1a;
+      --red-light:  #fdf0f0;
+      --gold:       #b8860b;
+      --gold-light: #fdf8e8;
+      --green:      #1a5c3a;
+      --green-light:#e8f5ee;
+      --blue:       #1a3a5c;
+      --blue-light: #eef3fa;
+      --bg:   #f7f5f0;
+      --card: #ffffff;
+      --text: #2c2c2c;
+      --muted:#666;
+      --border:#e0ddd8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ─── Header ─────────────────────────────── */
+    header {
+      background: linear-gradient(160deg, #4a0a0a 0%, #8b1a1a 55%, #c0392b 100%);
+      color: white;
+      padding: 52px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '🏛';
+      position: absolute;
+      font-size: 14rem;
+      opacity: 0.05;
+      top: -20px; right: -20px;
+      line-height: 1;
+    }
+    header .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.04em; }
+    header p  { margin-top: 10px; font-size: 0.9rem; opacity: 0.8; }
+
+    /* ─── Nav ────────────────────────────────── */
+    nav {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      display: inline-block;
+      padding: 12px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    nav a:hover { color: var(--red); border-bottom-color: var(--red); }
+
+    /* ─── Container ───────────────────────────── */
+    .container { max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+
+    /* ─── Section ─────────────────────────────── */
+    .section { margin-bottom: 56px; scroll-margin-top: 52px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--red);
+    }
+    .section-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--red);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .section-title h2 { font-size: 1.15rem; font-weight: 700; }
+    .section-title p  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Timeline ───────────────────────────── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--red), #f5c6cb);
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--red);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--red);
+    }
+    .tl-era {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      background: var(--red);
+      color: white;
+      padding: 2px 10px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+    }
+    .tl-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .tl-body  { font-size: 0.83rem; color: #444; }
+
+    /* ─── Cards grid ─────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .info-card .ic-icon  { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+    .info-card .ic-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
+    .info-card .ic-body  { font-size: 0.81rem; color: #444; line-height: 1.7; }
+
+    /* ─── Highlight Box ──────────────────────── */
+    .highlight {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      font-size: 0.84rem;
+      line-height: 1.75;
+    }
+    .highlight.red    { background: var(--red-light);   border-left: 4px solid var(--red); }
+    .highlight.gold   { background: var(--gold-light);  border-left: 4px solid var(--gold); }
+    .highlight.green  { background: var(--green-light); border-left: 4px solid var(--green); }
+    .highlight.blue   { background: var(--blue-light);  border-left: 4px solid var(--blue); }
+    .highlight strong { color: #1a1a1a; }
+    .hl-title {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 6px; opacity: 0.65;
+    }
+
+    /* ─── Two columns ────────────────────────── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ─── Fact list ──────────────────────────── */
+    .fact-list { list-style: none; }
+    .fact-list li {
+      display: flex;
+      gap: 10px;
+      font-size: 0.83rem;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .fact-list li:last-child { border-bottom: none; }
+    .fact-list .fl-key {
+      width: 100px; flex-shrink: 0;
+      font-weight: 600; font-size: 0.77rem;
+      color: var(--muted);
+    }
+
+    /* ─── Do / Don't ─────────────────────────── */
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .do-dont { grid-template-columns: 1fr; } }
+    .do-card, .dont-card {
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-size: 0.82rem;
+    }
+    .do-card   { background: #eefaf4; border: 1px solid #a3d9b8; }
+    .dont-card { background: #fff0f0; border: 1px solid #f5b8b8; }
+    .do-card h3   { color: #1a5c3a; font-size: 0.85rem; margin-bottom: 10px; }
+    .dont-card h3 { color: var(--red); font-size: 0.85rem; margin-bottom: 10px; }
+    .do-card ul, .dont-card ul { list-style: none; }
+    .do-card li, .dont-card li { padding: 4px 0; display: flex; gap: 7px; align-items: flex-start; }
+    .do-card .d-icon   { color: #1a5c3a; flex-shrink: 0; }
+    .dont-card .d-icon { color: var(--red); flex-shrink: 0; }
+
+    /* ─── Person card ────────────────────────── */
+    .person-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .person-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .person-card .p-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .person-card .p-name { font-size: 0.88rem; font-weight: 700; }
+    .person-card .p-year { font-size: 0.72rem; color: var(--muted); margin: 2px 0 8px; }
+    .person-card .p-desc { font-size: 0.76rem; color: #555; line-height: 1.65; }
+
+    /* ─── Food cards ─────────────────────────── */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .food-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .food-card .f-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+    .food-card .f-kana { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
+    .food-card .f-desc { font-size: 0.78rem; color: #444; line-height: 1.65; }
+    .food-card .f-tag  {
+      display: inline-block; margin-top: 8px;
+      font-size: 0.65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+      background: var(--red-light); color: var(--red);
+    }
+
+    /* ─── Kaffeehaus box ─────────────────────── */
+    .kaffee-box {
+      background: linear-gradient(135deg, #fdf8e8, #faf0d0);
+      border: 1px solid #d4a840;
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-top: 16px;
+    }
+    .kaffee-box h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 10px; color: #7a5800; }
+    .kaffee-box p  { font-size: 0.82rem; color: #555; line-height: 1.75; margin-bottom: 8px; }
+    .kaffee-box p:last-child { margin-bottom: 0; }
+
+    /* ─── Coffee menu table ──────────────────── */
+    .coffee-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.82rem;
+      background: var(--card);
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      margin-top: 12px;
+    }
+    .coffee-table th {
+      background: #4a2800; color: white;
+      padding: 9px 12px; text-align: left;
+      font-size: 0.77rem; font-weight: 600;
+    }
+    .coffee-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .coffee-table tr:last-child td { border-bottom: none; }
+    .coffee-table tr:nth-child(even) td { background: #fafaf8; }
+
+    /* ─── Tip list ───────────────────────────── */
+    .tip-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item {
+      display: flex; gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      align-items: flex-start;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .tip-item .t-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .tip-item .t-body strong { display: block; font-size: 0.85rem; margin-bottom: 3px; }
+    .tip-item .t-body { color: #444; line-height: 1.65; }
+
+    /* ─── Ring road visual ───────────────────── */
+    .ring-list { display: flex; flex-direction: column; gap: 8px; }
+    .ring-item {
+      display: flex; gap: 12px; align-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.82rem;
+    }
+    .ring-item .r-icon { font-size: 1.2rem; flex-shrink: 0; width: 28px; text-align: center; }
+    .ring-item .r-name { font-weight: 700; min-width: 160px; }
+    .ring-item .r-desc { color: var(--muted); font-size: 0.78rem; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.75rem;
+      color: #aaa;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: #888; text-decoration: none; }
+    footer a:hover { color: var(--red); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">Vienna — History &amp; Culture</div>
+  <h1>🏛 ウィーン 歴史・文化・生活ガイド</h1>
+  <p>旅をより深く楽しむための背景知識</p>
+</header>
+
+<nav>
+  <a href="#history">歴史</a>
+  <a href="#ringstrasse">リングシュトラーセ</a>
+  <a href="#culture">音楽・芸術</a>
+  <a href="#people">著名人</a>
+  <a href="#food">食・カフェ</a>
+  <a href="#life">生活・習慣</a>
+  <a href="#tips">旅のヒント</a>
+</nav>
+
+<div class="container">
+
+  <!-- ① 歴史 -->
+  <div class="section" id="history">
+    <div class="section-header">
+      <div class="section-icon">📜</div>
+      <div class="section-title">
+        <h2>ウィーンの歴史</h2>
+        <p>ローマ軍の砦から欧州帝国の心臓部へ</p>
+      </div>
+    </div>
+
+    <div class="highlight red" style="margin-bottom:24px;">
+      ウィーンは約640年間、<strong>ハプスブルク家の帝国首都</strong>として欧州の政治・文化の中心に君臨した。
+      その遺産が街のいたるところに刻まれており、歩くだけで帝国の栄華を体感できる。
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <a href="habsburg.html" style="
+        display: inline-flex; align-items: center; gap: 10px;
+        background: linear-gradient(135deg, #3a2808, #6a4a10);
+        color: #f0d070;
+        text-decoration: none;
+        border-radius: 10px;
+        padding: 14px 22px;
+        font-size: 0.85rem; font-weight: 700;
+        box-shadow: 0 2px 10px rgba(58,40,8,0.35);
+        transition: opacity 0.15s;
+      " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        <span style="font-size:1.4rem;">🦅</span>
+        <span>
+          ハプスブルク家を深掘り →<br>
+          <span style="font-size:0.75rem; font-weight:400; opacity:0.8;">婚姻外交・顎・スペイン継承戦争・ウィーン会議など完全ガイド</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-era">1〜4世紀</span>
+        <div class="tl-title">ローマ軍の砦「ヴィンドボナ」</div>
+        <div class="tl-body">ドナウ川沿いにローマ帝国の軍事拠点「Vindobona（ヴィンドボナ）」が置かれたのがウィーンの起源。現在の旧市街（インネレシュタット）がほぼその位置に重なる。ローマ皇帝マルクス・アウレリウスはこの地で没したとされる。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">13世紀〜</span>
+        <div class="tl-title">ハプスブルク家の台頭</div>
+        <div class="tl-body">1273年にルドルフ1世が神聖ローマ帝国皇帝に選出され、ハプスブルク家による支配が始まる。以後1918年の帝国崩壊まで約640年、ウィーンはその首都として欧州外交の中心に立ち続けた。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1529・1683年</span>
+        <div class="tl-title">オスマン帝国の包囲を2度退ける</div>
+        <div class="tl-body">「ウィーン包囲」と呼ばれるオスマン軍の2度の大攻撃をウィーンは守り切った。1683年の第2次包囲では、ポーランド王ヤン3世率いる援軍が最終的に包囲を打ち破った。この戦いで分捕ったコーヒー豆がウィーンのカフェ文化の起源とも言われる。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">18世紀</span>
+        <div class="tl-title">マリア・テレジアと啓蒙の時代</div>
+        <div class="tl-body">女帝マリア・テレジア（在位1740〜1780）が行政・軍事・教育を大改革。シェーンブルン宮殿を現在の姿に整備し、ウィーンの文化的絶頂期を築いた。彼女が招聘した6歳のモーツァルトが宮殿で演奏した逸話は有名。息子ヨーゼフ2世は農奴解放・宗教寛容令など急進的な啓蒙改革を断行。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1814〜15年</span>
+        <div class="tl-title">ウィーン会議「会議は踊る」</div>
+        <div class="tl-body">ナポレオン戦争後の欧州秩序を再編するためウィーンに各国代表が集結。「会議は踊る、されど進まず」という言葉が生まれるほど舞踏会や社交に彩られた。この会議でメッテルニヒが主導した保守的欧州秩序は以後30年続く。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1857〜1900年代</span>
+        <div class="tl-title">リングシュトラーセの建設と世紀末ウィーン</div>
+        <div class="tl-body">皇帝フランツ・ヨーゼフ1世が旧市壁を撤去し、壮大な環状道路「リングシュトラーセ」を整備。オペラ座・国会議事堂・美術史博物館・ウィーン大学が次々と建設された。世紀末にはクリムト・シーレら分離派芸術家、フロイト、マーラーが活躍し、近代思想の爆発的な革新が起きた。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1914〜18年</span>
+        <div class="tl-title">第一次世界大戦と帝国の崩壊</div>
+        <div class="tl-body">サラエボでの皇太子暗殺（1914年）が第一次世界大戦の引き金となった。敗戦後にハプスブルク帝国は解体し、人口200万を超えていたウィーンが突然、小国オーストリアの首都となる。「大きすぎる頭を持つ小国」とも揶揄された。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1938年</span>
+        <div class="tl-title">アンシュルス（ドイツへの併合）</div>
+        <div class="tl-body">ナチスドイツがオーストリアを併合（Anschluss）。ウィーンのユダヤ人コミュニティは壊滅的な打撃を受けた。フロイトはじめ多くの知識人が亡命。戦後オーストリアは「ナチスの最初の犠牲者」と主張したが、近年は加担の側面も問い直されている。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1955年〜</span>
+        <div class="tl-title">永世中立国と国際都市ウィーン</div>
+        <div class="tl-body">1955年の国家条約で連合国の占領が終わり、オーストリアは永世中立を宣言して独立回復。ウィーンは国連・OPEC・IAEA本部が置かれる国際都市として発展。現在も「世界で最も住みやすい都市」ランキングの上位常連。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② リングシュトラーセ -->
+  <div class="section" id="ringstrasse">
+    <div class="section-header">
+      <div class="section-icon">🛤</div>
+      <div class="section-title">
+        <h2>リングシュトラーセを歩く</h2>
+        <p>帝国が誇示した「石でできた政治宣言」</p>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-bottom:20px;">
+      リングシュトラーセは1857年に皇帝フランツ・ヨーゼフ1世が整備を命じた全長約5kmの環状大通り。
+      <strong>トラム路線（路面電車）が走っており、1周すれば主要建築を車窓から一望できる。</strong>
+      各建物はそれぞれ異なる様式で建てられており、意図的な「様式の百科事典」になっている。
+    </div>
+
+    <div class="ring-list">
+      <div class="ring-item">
+        <div class="r-icon">🎭</div>
+        <div class="r-name">ウィーン国立歌劇場</div>
+        <div class="r-desc">ネオ・ルネサンス様式（1869年）。世界最高峰のオペラハウス。こけら落とし公演はモーツァルト「ドン・ジョヴァンニ」。</div>
+      </div>
+      <div class="ring-item">
+        <div class="r-icon">🏛</div>
+        <div class="r-name">美術史博物館</div>
+        <div class="r-desc">ネオ・バロック様式（1891年）。ハプスブルク家の膨大なコレクション。ブリューゲル・フェルメール・ラファエロ等を収蔵。</div>
+      </div>
+      <div class="ring-item">
+        <div class="r-icon">🏛</div>
+        <div class="r-name">自然史博物館</div>
+        <div class="r-desc">美術史博物館と左右対称に建つネオ・バロック様式。ヴィレンドルフのヴィーナス（旧石器時代の像）が目玉展示。</div>
+      </div>
+      <div class="ring-item">
+        <div class="r-icon">🏛</div>
+        <div class="r-name">国会議事堂</div>
+        <div class="r-desc">古代ギリシャ様式（1883年）。「民主主義はギリシャ生まれ」という意図で設計された。正面のアテナ女神像が象徴的。</div>
+      </div>
+      <div class="ring-item">
+        <div class="r-icon">🏰</div>
+        <div class="r-name">市庁舎（ラートハウス）</div>
+        <div class="r-desc">ネオ・ゴシック様式（1883年）。夏には前庭で映画祭や音楽イベントが開催。冬はクリスマスマーケットの会場。</div>
+      </div>
+      <div class="ring-item">
+        <div class="r-icon">🎓</div>
+        <div class="r-name">ウィーン大学</div>
+        <div class="r-desc">ネオ・ルネサンス様式（1884年）。1365年創設の中欧最古の大学のひとつ。フロイト・マッハ・ボルツマンら多数の偉人を輩出。</div>
+      </div>
+      <div class="ring-item">
+        <div class="r-icon">🎪</div>
+        <div class="r-name">ブルク劇場</div>
+        <div class="r-desc">ネオ・バロック様式（1888年）。ドイツ語圏最高峰の演劇の殿堂。かつては宮廷劇場として皇帝の特別劇場だった。</div>
+      </div>
+    </div>
+
+    <div class="highlight red" style="margin-top:16px;">
+      <div class="hl-title">トラムで一周する方法</div>
+      <strong>路面電車（Straßenbahn）の1番・2番</strong>がリングシュトラーセに沿って走っている。
+      24時間チケット（8 EUR）があれば乗り降り自由。座席に座りながら車窓観光するだけでも十分楽しめる。
+    </div>
+  </div>
+
+  <!-- ③ 音楽・芸術 -->
+  <div class="section" id="culture">
+    <div class="section-header">
+      <div class="section-icon">🎼</div>
+      <div class="section-title">
+        <h2>音楽・芸術・思想</h2>
+        <p>「音楽の都」と「世紀末の爆発」を知る</p>
+      </div>
+    </div>
+
+    <div class="highlight red" style="margin-bottom: 20px;">
+      ウィーンは18〜19世紀に<strong>西洋クラシック音楽の事実上の中心地</strong>だった。
+      ハイドン・モーツァルト・ベートーヴェン・シューベルト・ブラームス・マーラーがここで活躍。
+      ヨハン・シュトラウス2世は「ウィーンのワルツ」を世界に広めた。
+    </div>
+
+    <div class="two-col" style="margin-bottom:20px;">
+      <div class="info-card">
+        <span class="ic-icon">🎹</span>
+        <div class="ic-title">ウィーン古典派とは</div>
+        <div class="ic-body">
+          18世紀後半〜19世紀初頭、ハイドン・モーツァルト・ベートーヴェンが確立した音楽様式。
+          交響曲・弦楽四重奏・ピアノソナタの形式が整い、<strong>今日のクラシック音楽の骨格となった。</strong><br><br>
+          3人はウィーンでほぼ同時期に活動しており、モーツァルトとハイドンは友人だった。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">💃</span>
+        <div class="ic-title">ウィンナ・ワルツ</div>
+        <div class="ic-body">
+          ヨハン・シュトラウス2世（「美しく青きドナウ」）が完成させた3拍子の舞曲。
+          毎年元旦にウィーン・フィルが演奏する<strong>「ニューイヤーコンサート」</strong>は世界90ヶ国以上で生中継される。<br><br>
+          ウィーンの舞踏会文化は今も現役で、毎年約400回の公式舞踏会が開催される。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight gold">
+      <div class="hl-title">世紀末ウィーン（1890〜1910年代）</div>
+      帝国の終わりを予感する時代に、前例のない文化的爆発が起きた。
+      美術では<strong>クリムト・シーレ・ココシュカ</strong>が伝統を打ち破り、
+      建築では<strong>オットー・ワーグナー</strong>がモダニズムの先駆となり、
+      音楽では<strong>マーラー・シェーンベルク</strong>が調性音楽の限界を超えた。
+      哲学では<strong>フロイト</strong>が精神分析を創始し、
+      <strong>ウィトゲンシュタイン</strong>が言語哲学を革新した。
+      この10〜20年間に現代の思想・芸術の根幹が同時多発的に生まれた都市は世界でもウィーンだけ。
+    </div>
+
+    <div class="highlight blue" style="margin-top:14px;">
+      <div class="hl-title">ウィーン分離派（ゼツェッション）</div>
+      1897年、クリムトらが保守的な芸術界に反発して結成した前衛グループ。
+      モットーは<strong>「時代にはその芸術を、芸術には自由を」</strong>。
+      本拠地のゼツェッション館（1898年建造）は今も現代アートの展示空間として機能しており、
+      地下にはクリムトの「ベートーヴェン・フリーズ」（全長34m）が常設展示されている。
+    </div>
+  </div>
+
+  <!-- ④ 著名人 -->
+  <div class="section" id="people">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div class="section-title">
+        <h2>ウィーンゆかりの著名人</h2>
+        <p>この街で生まれ・活躍した人々</p>
+      </div>
+    </div>
+
+    <div class="person-grid">
+      <div class="person-card">
+        <div class="p-icon">🎵</div>
+        <div class="p-name">ヴォルフガング・アマデウス・モーツァルト</div>
+        <div class="p-year">1756–1791（ザルツブルク生）</div>
+        <div class="p-desc">6歳でウィーン宮廷に招かれ、晩年はウィーンに定住。「フィガロの結婚」「魔笛」などオペラの傑作を生んだ。35歳で急逝し集団墓地に葬られた。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🎹</div>
+        <div class="p-name">ルートヴィヒ・ヴァン・ベートーヴェン</div>
+        <div class="p-year">1770–1827（ボン生）</div>
+        <div class="p-desc">22歳でウィーンに移り生涯を過ごした。晩年に完全に聴力を失いながら「第九」を作曲。ウィーン市内で70回以上転居した記録が残る。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🎼</div>
+        <div class="p-name">フランツ・シューベルト</div>
+        <div class="p-year">1797–1828（ウィーン生）</div>
+        <div class="p-desc">唯一のウィーン生まれの大作曲家。31歳で夭折しながら600曲以上の歌曲を残した。「冬の旅」「魔王」など。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">💃</div>
+        <div class="p-name">ヨハン・シュトラウス2世</div>
+        <div class="p-year">1825–1899（ウィーン生）</div>
+        <div class="p-desc">「ワルツ王」。「美しく青きドナウ」「皇帝円舞曲」「こうもり」を作曲。ウィーン社交界の顔として君臨した。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🖼</div>
+        <div class="p-name">グスタフ・クリムト</div>
+        <div class="p-year">1862–1918（ウィーン生）</div>
+        <div class="p-desc">分離派の創始者。金箔を用いた「接吻」「ユーディット」が有名。ベルヴェデーレ宮殿に「接吻」の原画が常設展示。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🎨</div>
+        <div class="p-name">エゴン・シーレ</div>
+        <div class="p-year">1890–1918（ウィーン近郊生）</div>
+        <div class="p-desc">クリムトの弟子でありながら独自の激烈な表現主義を確立。スペイン風邪で28歳で没。ウィーン・レオポルト美術館に最大コレクション。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🧠</div>
+        <div class="p-name">ジークムント・フロイト</div>
+        <div class="p-year">1856–1939（モラヴィア生）</div>
+        <div class="p-desc">精神分析の創始者。ウィーンで長年診察を行い、夢分析・無意識理論を構築。ナチス台頭後ロンドンへ亡命。ウィーン9区に記念館がある。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🏗</div>
+        <div class="p-name">オットー・ワーグナー</div>
+        <div class="p-year">1841–1918（ウィーン近郊生）</div>
+        <div class="p-desc">「目的なき機能はない」と説いたモダニズム建築の先駆者。ウィーンの地下鉄駅舎・マジョリカハウスなど街中に作品が点在。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 食・カフェ -->
+  <div class="section" id="food">
+    <div class="section-header">
+      <div class="section-icon">☕</div>
+      <div class="section-title">
+        <h2>食文化とカフェハウス</h2>
+        <p>世界遺産にもなったコーヒーハウス文化</p>
+      </div>
+    </div>
+
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="f-name">ウィーナー・シュニッツェル</div>
+        <div class="f-kana">Wiener Schnitzel</div>
+        <div class="f-desc">仔牛肉を薄く叩いてパン粉で揚げたウィーンの国民食。レモンを絞って食べる。本物はパン粉が浮き上がるほど薄く揚げるのが正統。</div>
+        <span class="f-tag">国民食</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">ザッハートルテ</div>
+        <div class="f-kana">Sachertorte</div>
+        <div class="f-desc">チョコレートケーキにアプリコットジャムを挟んだウィーン銘菓。ホテル・ザッハーとカフェ・デーメルがレシピ論争を繰り広げた歴史あり。</div>
+        <span class="f-tag">定番スイーツ</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">ターフェルシュピッツ</div>
+        <div class="f-kana">Tafelspitz</div>
+        <div class="f-desc">牛肉を野菜と一緒にじっくり茹でた料理。皇帝フランツ・ヨーゼフ1世が毎日食べたとされる宮廷料理の定番。上品でやさしい味。</div>
+        <span class="f-tag">宮廷料理</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">グラーシュ</div>
+        <div class="f-kana">Gulasch</div>
+        <div class="f-desc">ハンガリーの影響を受けたパプリカ風味の牛肉シチュー。ウィーンのパブやカフェハウスの定番メニュー。深夜営業のカフェでも食べられる。</div>
+        <span class="f-tag">定番料理</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">アプフェルシュトゥルーデル</div>
+        <div class="f-kana">Apfelstrudel</div>
+        <div class="f-desc">薄い生地にりんごとシナモンを巻いた焼き菓子。カフェハウスで温かいバニラソースをかけて出てくるものが最高。</div>
+        <span class="f-tag">スイーツ</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">カイザーシュマーレン</div>
+        <div class="f-kana">Kaiserschmarrn</div>
+        <div class="f-desc">ふわふわのパンケーキをちぎって粉砂糖をまぶしたデザート。「皇帝のへたくそ料理」という意味の名前。プラム、コンポートと合わせる。</div>
+        <span class="f-tag">皇室スイーツ</span>
+      </div>
+    </div>
+
+    <div class="kaffee-box">
+      <h3>☕ ウィーンのカフェハウス文化（UNESCO無形文化遺産）</h3>
+      <p>ウィーンのカフェハウス（Kaffeehaus）は2011年にユネスコ無形文化遺産に登録された、単なる喫茶店ではなく<strong>「第二の居間」</strong>として機能する文化的空間。19世紀には新聞・チェス・ビリヤードを置き、作家・哲学者・政治家たちが議論を交わした。フロイトもカフェの常連だった。</p>
+      <p><strong>注文のルールと礼儀：</strong>席に着くとウェイターが来るまで待つ。コーヒーは必ず小さなグラスの水と一緒に出てくる。帰る気がなければ何時間座っていても良く、追加注文を急かされることはない。チェックを頼むまで席を立つ合図にはならない。</p>
+      <p><strong>定番のコーヒーメニュー：</strong></p>
+      <table class="coffee-table">
+        <thead><tr><th>名前</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td><strong>メランジェ</strong>（Melange）</td><td>エスプレッソ＋温めたミルク＋ミルクフォーム。ウィーン人の日常コーヒー</td></tr>
+          <tr><td><strong>クライネル・ブラウナー</strong></td><td>エスプレッソ＋少量のクリーム。小さめで濃い</td></tr>
+          <tr><td><strong>アインシュペナー</strong></td><td>エスプレッソの上にホイップクリームをたっぷり乗せたもの</td></tr>
+          <tr><td><strong>ヴィーナー・アイスカフェ</strong></td><td>冷たいコーヒー＋アイスクリーム。夏の定番</td></tr>
+          <tr><td><strong>フェルタンガー</strong></td><td>薄いコーヒー。「引き延ばした」という意味。観光客向けとみられがち</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ⑥ 生活・習慣 -->
+  <div class="section" id="life">
+    <div class="section-header">
+      <div class="section-icon">🏘</div>
+      <div class="section-title">
+        <h2>生活・習慣・マナー</h2>
+        <p>ウィーンの人々と上手に付き合うために</p>
+      </div>
+    </div>
+
+    <ul class="fact-list" style="background:white;border-radius:12px;padding:4px 16px;border:1px solid var(--border);margin-bottom:20px;">
+      <li>
+        <span class="fl-key">言語</span>
+        <span>公用語はドイツ語。ただしウィーン方言（ウィーナーリッシュ）は独特で、標準ドイツ語話者でも聞き取りにくい場合がある。観光地・ホテル・レストランでは<strong>英語が通じる。</strong>「Danke（ダンケ）= ありがとう」「Bitte（ビッテ）= どうぞ／お願いします」は必携。</span>
+      </li>
+      <li>
+        <span class="fl-key">挨拶</span>
+        <span>標準的なドイツ語の「Guten Tag」よりウィーン流の<strong>「Grüß Gott（グリュス・ゴット）= 神のご加護を」</strong>が好まれる。カジュアルには「Servus（セルヴス）」。退店時は「Auf Wiedersehen」または「Tschüss」。</span>
+      </li>
+      <li>
+        <span class="fl-key">チップ</span>
+        <span>カフェ・レストランとも<strong>5〜10%程度が一般的</strong>。会計時に「ご一緒に（zusammen）？」と聞かれたら合計額を言うタイミング。例：「18ユーロです」→「20で」と言えば2ユーロがチップになる。</span>
+      </li>
+      <li>
+        <span class="fl-key">日曜日</span>
+        <span>ほぼすべての商店・スーパーが閉まる。<strong>観光地・博物館・レストランは営業。</strong>地元民は日曜を家族や自然で過ごす文化が根強い。買い物は土曜までに済ませておくこと。</span>
+      </li>
+      <li>
+        <span class="fl-key">時間感覚</span>
+        <span>ウィーン人は<strong>時間厳守を重んじる</strong>。コンサートや劇場は開演時刻に扉が閉まり、遅刻者は第1幕終了まで入場不可のことも。公共交通も高精度で、遅延は珍しい。</span>
+      </li>
+      <li>
+        <span class="fl-key">静粛文化</span>
+        <span>公共の場での大声・騒音には敏感。特にトラム・地下鉄内での通話や大きな音楽は不快がられる。コンサートや博物館での写真撮影ルールは厳格に守ること。</span>
+      </li>
+      <li>
+        <span class="fl-key">物価感覚</span>
+        <span>西欧の主要都市と同等〜やや高め。カフェのメランジェが4〜5 EUR、シュニッツェルのランチが15〜20 EUR程度。観光地のレストランはそれ以上になることも。</span>
+      </li>
+      <li>
+        <span class="fl-key">治安</span>
+        <span>世界トップクラスの安全な都市。ただし観光客密集エリア（シュテファン広場・ナッシュマルクト）ではスリに注意。夜間も比較的安全だが、一人行動の際は最低限の注意を。</span>
+      </li>
+    </ul>
+
+    <div class="do-dont">
+      <div class="do-card">
+        <h3>✅ やっておくと良いこと</h3>
+        <ul>
+          <li><span class="d-icon">✓</span>カフェハウスで2〜3時間ゆっくり過ごす</li>
+          <li><span class="d-icon">✓</span>朝のナッシュマルクトで地元の食材を見る</li>
+          <li><span class="d-icon">✓</span>夜のオペラ・コンサートを体験する（立見席が格安）</li>
+          <li><span class="d-icon">✓</span>「Grüß Gott」と挨拶してみる</li>
+          <li><span class="d-icon">✓</span>トラムに乗ってリングシュトラーセを一周する</li>
+          <li><span class="d-icon">✓</span>ベルヴェデーレ宮殿でクリムトの「接吻」原画を見る</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <h3>⛔ 避けるべきこと</h3>
+        <ul>
+          <li><span class="d-icon">✗</span>日曜日に買い物予定を入れる</li>
+          <li><span class="d-icon">✗</span>コンサート・オペラへの遅刻</li>
+          <li><span class="d-icon">✗</span>カフェで追加注文せずに長時間居座る（最低限のオーダーを）</li>
+          <li><span class="d-icon">✗</span>「オーストリア＝オーストラリア」と混同した話題</li>
+          <li><span class="d-icon">✗</span>「ウィーンはドイツみたいなもの」という発言（強く不快に思われる）</li>
+          <li><span class="d-icon">✗</span>公共交通内での大声・通話</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ 旅のヒント -->
+  <div class="section" id="tips">
+    <div class="section-header">
+      <div class="section-icon">💡</div>
+      <div class="section-title">
+        <h2>旅をより深く楽しむヒント</h2>
+        <p>知っていると一段と面白くなる視点</p>
+      </div>
+    </div>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="t-icon">🎭</div>
+        <div class="t-body">
+          <strong>オペラ立見席（Stehplatz）は3〜4 EURで入れる</strong>
+          ウィーン国立歌劇場の立見席は、当日開演80分前から販売開始。3〜4 EURという破格の値段で世界最高峰のオペラを体験できる。並ぶことになるが、ドレスコードも比較的緩く気軽に挑戦できる。人気演目は早めに並ぶこと。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🖼</div>
+        <div class="t-body">
+          <strong>クリムト「接吻」はベルヴェデーレで</strong>
+          世界で最も有名な絵画のひとつ、クリムトの「接吻」はウィーンのベルヴェデーレ宮殿に常設展示されている。美術の教科書で見た原画を実際に見られる数少ない機会。同宮殿にはシーレ・ムンクなど世紀末芸術が充実しており、ウィーン観光で最も外せない美術館のひとつ。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">☕</div>
+        <div class="t-body">
+          <strong>地元民が通う老舗カフェハウスへ</strong>
+          「カフェ・ツェントラール」（フロイト・トロツキーが常連だった）や「カフェ・ランドマン」（フロイトお気に入り）など、歴史的カフェが現役で営業している。観光客向けに高額メニューを押し付ける店には注意。コーヒーとケーキだけで1時間座っていても全く問題ない。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🏰</div>
+        <div class="t-body">
+          <strong>シェーンブルン宮殿は朝一番が空いている</strong>
+          ハプスブルク家の夏の離宮・シェーンブルン宮殿は開館直後（8:30〜9:00）が最も空いている。皇帝の執務室・マリア・テレジアの寝室など約40室が公開。丘の上の「グロリエッテ」からウィーン市内のパノラマが広がる。庭園は入場無料。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🗝</div>
+        <div class="t-body">
+          <strong>カイザーグルフト（皇帝の納骨堂）に眠る歴史</strong>
+          カプツィーナー教会の地下に設けられた「カイザーグルフト（皇帝の墓地）」には、マリア・テレジア・ヨーゼフ2世・フランツ・ヨーゼフ1世・エリザベート（シシィ）など149体のハプスブルク家の遺体が眠る。観光客が少なく静かで、帝国の終焉をしみじみ感じられる場所。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🎪</div>
+        <div class="t-body">
+          <strong>8月はウィーン映画祭（FilmFest Wien）の季節</strong>
+          毎年夏、市庁舎前広場で「ウィーン映画祭（Filmfestival am Rathausplatz）」が開催される。オペラ・コンサート・バレエの映像が大スクリーンで無料上映される屋外イベントで、地元民も多く訪れる。2026年8月も開催予定（要事前確認）。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🌊</div>
+        <div class="t-body">
+          <strong>「美しく青きドナウ」は実際には青くない</strong>
+          ウィーンを流れるドナウ川は、実際には灰色がかった緑色をしており「青い」ことはほぼない。ヨハン・シュトラウス2世がワルツのタイトルにしたのは詩的表現で、現地でその事実を知るのも旅の面白さのひとつ。実際のドナウ川沿いのプロムナードは夕暮れの散歩に最高。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">📖</div>
+        <div class="t-body">
+          <strong>旅の前に触れておくと深まる作品</strong>
+          映画「第三の男」（1949年、戦後ウィーンを舞台にした名作） / 映画「アマデウス」（モーツァルトの生涯）/ シュテファン・ツヴァイク「昨日の世界」（帝国崩壊を生きた文学者の回想録）
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <a href="index.html">← ガイド一覧に戻る</a>　|　2026年8月 東欧旅行 個人用ガイド
+</footer>
+
+<script src="nav-menu.js"></script>
+</body>
+</html>

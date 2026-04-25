@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ハプスブルク家 完全ガイド</title>
+  <style>
+    :root {
+      --gold:        #b8860b;
+      --gold-light:  #fdf8e8;
+      --gold-mid:    #d4a820;
+      --red:         #8b1a1a;
+      --red-light:   #fdf0f0;
+      --dark:        #1a1408;
+      --blue:        #1a3a5c;
+      --blue-light:  #eef3fa;
+      --green:       #1a5c3a;
+      --green-light: #e8f5ee;
+      --bg:    #f7f5f0;
+      --card:  #ffffff;
+      --text:  #2c2c2c;
+      --muted: #666;
+      --border:#e0ddd8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ─── Header ─────────────────────────────── */
+    header {
+      background: linear-gradient(160deg, #1a1408 0%, #3a2808 45%, #6a4a10 100%);
+      color: white;
+      padding: 52px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '🦅';
+      position: absolute;
+      font-size: 16rem;
+      opacity: 0.06;
+      top: -30px; right: -30px;
+      line-height: 1;
+    }
+    header .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.65;
+      margin-bottom: 10px;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.04em; }
+    header .subtitle {
+      margin-top: 10px; font-size: 0.9rem; opacity: 0.75;
+    }
+    header .period-badge {
+      display: inline-block;
+      margin-top: 16px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 5px 18px;
+      font-size: 0.8rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── AEIOU banner ───────────────────────── */
+    .aeiou-banner {
+      background: linear-gradient(90deg, #3a2808, #6a4a10, #3a2808);
+      color: #f0d070;
+      text-align: center;
+      padding: 14px 20px;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+    }
+    .aeiou-banner strong { font-size: 1.4rem; letter-spacing: 0.15em; margin-right: 12px; }
+
+    /* ─── Nav ────────────────────────────────── */
+    nav {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      display: inline-block;
+      padding: 12px 13px;
+      font-size: 0.77rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    nav a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ─── Container ───────────────────────────── */
+    .container { max-width: 880px; margin: 0 auto; padding: 40px 20px 72px; }
+
+    /* ─── Section ─────────────────────────────── */
+    .section { margin-bottom: 56px; scroll-margin-top: 52px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--gold);
+    }
+    .section-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #a07010);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(184,134,11,0.35);
+    }
+    .section-title h2 { font-size: 1.15rem; font-weight: 700; }
+    .section-title p  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Timeline ───────────────────────────── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--gold), #e8d090);
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--gold);
+    }
+    .tl-era {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.06em;
+      background: var(--gold); color: white;
+      padding: 2px 10px; border-radius: 12px;
+      margin-bottom: 6px;
+    }
+    .tl-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .tl-body  { font-size: 0.83rem; color: #444; }
+
+    /* ─── Highlight Box ──────────────────────── */
+    .highlight {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      font-size: 0.84rem;
+      line-height: 1.75;
+    }
+    .highlight.gold  { background: var(--gold-light); border-left: 4px solid var(--gold); }
+    .highlight.red   { background: var(--red-light);  border-left: 4px solid var(--red); }
+    .highlight.blue  { background: var(--blue-light); border-left: 4px solid var(--blue); }
+    .highlight.green { background: var(--green-light);border-left: 4px solid var(--green); }
+    .highlight.dark  { background: #2a2010; color: #f0e0a0; border-left: 4px solid var(--gold-mid); }
+    .highlight strong { color: #1a1a1a; }
+    .highlight.dark strong { color: #ffe090; }
+    .hl-title {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 6px; opacity: 0.65;
+    }
+
+    /* ─── Cards grid ─────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .info-card .ic-icon  { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+    .info-card .ic-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
+    .info-card .ic-body  { font-size: 0.81rem; color: #444; line-height: 1.7; }
+
+    /* ─── Emperor cards ──────────────────────── */
+    .emperor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .emperor-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .emperor-top {
+      background: linear-gradient(135deg, #2a1808, #5a3810);
+      color: white;
+      padding: 16px;
+      text-align: center;
+    }
+    .emperor-icon { font-size: 2rem; margin-bottom: 6px; }
+    .emperor-name { font-size: 0.9rem; font-weight: 700; }
+    .emperor-reign { font-size: 0.72rem; opacity: 0.7; margin-top: 2px; }
+    .emperor-body  { padding: 14px 16px; font-size: 0.79rem; color: #444; line-height: 1.65; }
+
+    /* ─── Territory table ────────────────────── */
+    .styled-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.82rem; background: var(--card);
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+    .styled-table th {
+      background: linear-gradient(90deg, #3a2808, #5a4010);
+      color: #f0d070;
+      padding: 10px 12px; text-align: left;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.03em;
+    }
+    .styled-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+    .styled-table tr:last-child td { border-bottom: none; }
+    .styled-table tr:nth-child(even) td { background: #fafaf8; }
+
+    /* ─── Two columns ────────────────────────── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ─── Chin visual ────────────────────────── */
+    .chin-box {
+      background: linear-gradient(135deg, #fdf0f0, #fce8e8);
+      border: 1px solid #e0a0a0;
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+    .chin-box h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 10px; color: var(--red); }
+    .chin-box p  { font-size: 0.82rem; color: #444; line-height: 1.75; margin-bottom: 8px; }
+    .chin-box p:last-child { margin-bottom: 0; }
+
+    /* ─── Marriage tree ──────────────────────── */
+    .marriage-visual {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 0.82rem;
+    }
+    .marriage-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 0;
+      border-bottom: 1px solid #f0ede8;
+      flex-wrap: wrap;
+    }
+    .marriage-row:last-child { border-bottom: none; }
+    .m-family {
+      background: var(--gold-light);
+      border: 1px solid #d4b840;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.78rem; font-weight: 600;
+      color: #7a5800; white-space: nowrap;
+    }
+    .m-arrow { color: var(--muted); font-size: 0.9rem; flex-shrink: 0; }
+    .m-result { font-size: 0.79rem; color: #444; }
+    .m-gain {
+      margin-left: auto;
+      font-size: 0.72rem; font-weight: 700;
+      background: #e8f5ee;
+      border: 1px solid #a0d0b0;
+      border-radius: 12px;
+      padding: 2px 9px;
+      color: var(--green); white-space: nowrap;
+    }
+
+    /* ─── Branch split ───────────────────────── */
+    .branch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .branch-grid { grid-template-columns: 1fr; } }
+    .branch-card {
+      border-radius: 12px; padding: 18px;
+      border: 1px solid var(--border);
+    }
+    .branch-card.austria { background: #fff8f0; border-color: #e8c080; }
+    .branch-card.spain   { background: #fff0f4; border-color: #e8a0b0; }
+    .branch-card h3 { font-size: 0.88rem; font-weight: 700; margin-bottom: 10px; }
+    .branch-card.austria h3 { color: #7a4800; }
+    .branch-card.spain h3   { color: var(--red); }
+    .branch-card ul { list-style: none; font-size: 0.8rem; color: #444; }
+    .branch-card li { padding: 4px 0; display: flex; gap: 7px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .branch-card li:last-child { border-bottom: none; }
+
+    /* ─── Tip list ───────────────────────────── */
+    .tip-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item {
+      display: flex; gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      align-items: flex-start;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .tip-item .t-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .tip-item .t-body strong { display: block; font-size: 0.85rem; margin-bottom: 3px; }
+    .tip-item .t-body { color: #444; line-height: 1.65; }
+
+    /* ─── Eagle box ──────────────────────────── */
+    .eagle-box {
+      background: linear-gradient(135deg, #1a1408, #2a2010);
+      border-radius: 14px;
+      padding: 28px 24px;
+      text-align: center;
+      color: #f0d070;
+      margin-bottom: 20px;
+    }
+    .eagle-icon { font-size: 4rem; margin-bottom: 12px; }
+    .eagle-title { font-size: 1.1rem; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .eagle-body  { font-size: 0.82rem; color: #d0c090; line-height: 1.75; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.75rem;
+      color: #aaa;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: #888; text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">Habsburg Dynasty — Complete Guide</div>
+  <h1>🦅 ハプスブルク家 完全ガイド</h1>
+  <p class="subtitle">欧州を600年支配した王朝の栄光と終焉</p>
+  <span class="period-badge">1273年〜1918年　約645年間</span>
+</header>
+
+<div class="aeiou-banner">
+  <strong>A.E.I.O.U.</strong>「オーストリアは世界を支配するだろう」― ハプスブルク家の家訓
+</div>
+
+<nav>
+  <a href="#overview">概要</a>
+  <a href="#rise">興隆</a>
+  <a href="#marriage">婚姻外交</a>
+  <a href="#territory">領土拡大</a>
+  <a href="#emperors">名君列伝</a>
+  <a href="#genetics">近親婚と顎</a>
+  <a href="#branch">分裂</a>
+  <a href="#congress">ウィーン会議</a>
+  <a href="#collapse">崩壊</a>
+  <a href="#legacy">遺産</a>
+</nav>
+
+<div class="container">
+
+  <!-- ① 概要 -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <div class="section-icon">👑</div>
+      <div class="section-title">
+        <h2>ハプスブルク家とは何か</h2>
+        <p>欧州史上最強の王朝、その本質</p>
+      </div>
+    </div>
+
+    <div class="eagle-box">
+      <div class="eagle-icon">🦅</div>
+      <div class="eagle-title">双頭の鷲（Doppeladler）</div>
+      <div class="eagle-body">
+        ハプスブルク家の紋章に描かれた「双頭の鷲」は、東ローマ帝国の権威を継承した神聖ローマ帝国の象徴。<br>
+        左の頭は西（世俗権力）、右の頭は東（宗教権力）を向き、<br>
+        「天と地の双方を支配する」という帝国の普遍的支配を表している。<br>
+        現在もオーストリア・ドイツなど多くの国の紋章にその系譜が残る。
+      </div>
+    </div>
+
+    <div class="highlight gold">
+      ハプスブルク家は1273年から1918年まで<strong>約645年間</strong>、神聖ローマ帝国・オーストリア帝国・スペイン帝国などを支配した欧州史上最大の王朝。
+      最盛期には<strong>中南米・スペイン・ネーデルラント（現ベルギー・オランダ）・イタリア・ドイツ・オーストリア・ハンガリー・ボヘミア（チェコ）</strong>を同時に支配し、
+      「ハプスブルク家の領土に日は沈まず」と言われた。
+    </div>
+
+    <div class="two-col">
+      <div class="info-card">
+        <span class="ic-icon">⚔️</span>
+        <div class="ic-title">他の王朝との決定的な違い</div>
+        <div class="ic-body">
+          多くの王朝が<strong>戦争で領土を奪った</strong>のに対し、ハプスブルク家は<strong>婚姻外交で領土を獲得</strong>した。
+          「幸いなるオーストリアよ、汝は結婚せよ。他の国が戦争でなすことを汝は結婚でなす」という言葉が端的に表している。戦わずして大国となった唯一無二の王朝。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🌍</span>
+        <div class="ic-title">多民族国家の先駆者</div>
+        <div class="ic-body">
+          ハプスブルク帝国の最終形であるオーストリア＝ハンガリー二重帝国には、<strong>11の主要民族・12の公用語</strong>が存在した。
+          ドイツ人・ハンガリー人・チェコ人・ポーランド人・スロバキア人・クロアチア人・スロベニア人・ルーマニア人など、現在の東中欧諸国の原型がここにある。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight dark">
+      <div class="hl-title">家訓 A.E.I.O.U. の意味</div>
+      フリードリヒ3世（在位1452〜1493）が定めたとされるハプスブルク家の家訓。
+      ラテン語で <strong>「Austriae Est Imperare Orbi Universo」</strong>
+      ＝「オーストリアは全世界を支配するだろう」、あるいはドイツ語で
+      <strong>「Alles Erdreich ist Österreich untertan」</strong>
+      ＝「全ての大地はオーストリアに従う」と解釈される。
+      フリードリヒ3世は所有する書物・建物・日用品すべてにこの5文字を刻ませた。
+    </div>
+  </div>
+
+  <!-- ② 興隆 -->
+  <div class="section" id="rise">
+    <div class="section-header">
+      <div class="section-icon">📜</div>
+      <div class="section-title">
+        <h2>王朝の興隆</h2>
+        <p>無名の地方貴族から神聖ローマ帝国へ</p>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-bottom:24px;">
+      ハプスブルク（Habsburg）の名は、現在のスイス北部にあった「鷹の城（Habichtsburg）」に由来する。
+      もともとは<strong>スイス・アルザス地方の一地方貴族</strong>に過ぎなかったが、
+      13世紀に神聖ローマ帝国皇帝の座を獲得したことで欧州支配への扉が開いた。
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-era">1020年頃</span>
+        <div class="tl-title">ハプスブルク城の建設</div>
+        <div class="tl-body">現在のスイス・アールガウ州にハプスブルク（鷹の城）が建設される。この地の伯爵家として勢力を蓄え始める。当時はまだ欧州の主要勢力とは程遠い地方の一貴族。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1273年</span>
+        <div class="tl-title">ルドルフ1世、神聖ローマ皇帝に選出</div>
+        <div class="tl-body">諸侯の合議でルドルフ1世が神聖ローマ帝国皇帝に選出。選帝侯たちが「強くなりすぎない扱いやすい皇帝」として選んだが、これが大誤算。ルドルフはボヘミア王を破ってオーストリアを獲得し、ハプスブルク家の中核領土を確立した。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1438年〜</span>
+        <div class="tl-title">帝位の事実上の世襲化</div>
+        <div class="tl-body">神聖ローマ帝国の皇帝位は本来「選挙」で決まる制度だったが、1438年以降1806年の帝国解体まで、一時期（1742〜45年）を除いてほぼすべてハプスブルク家が皇帝位を独占。名目上は選挙制でも、実質的な世襲帝国を作り上げた。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1477年</span>
+        <div class="tl-title">マクシミリアン1世、ブルゴーニュを獲得</div>
+        <div class="tl-body">マクシミリアン1世がブルゴーニュ公の一人娘マリーと結婚し、現在のベルギー・オランダ・フランス東部に相当するブルゴーニュ公国を獲得。まさに「結婚による征服」の最初の大成功例。このときから「婚姻外交」がハプスブルクの国是となった。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1516〜19年</span>
+        <div class="tl-title">カール5世、史上最大版図を実現</div>
+        <div class="tl-body">マクシミリアン1世の孫カール5世は、スペイン王（カルロス1世）・神聖ローマ皇帝・ナポリ王・新大陸植民地の支配者を兼ねる前代未聞の「世界皇帝」となった。彼の帝国は文字通り「日の沈まない帝国」だった。しかしその広大さゆえに統治が困難となり、後に弟と息子に分割統治させることになる。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 婚姻外交 -->
+  <div class="section" id="marriage">
+    <div class="section-header">
+      <div class="section-icon">💍</div>
+      <div class="section-title">
+        <h2>婚姻外交という国家戦略</h2>
+        <p>「戦わずして勝つ」ハプスブルク流の帝国建設</p>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-bottom: 20px;">
+      <div class="hl-title">ラテン語の格言より</div>
+      <strong>「Bella gerant alii, tu felix Austria nube.」</strong><br>
+      「戦争は他の者に任せよ、幸いなるオーストリアよ、汝は結婚せよ。」<br>
+      ― マクシミリアン1世の時代に広まった格言。ハプスブルク家の本質を一文で表している。
+    </div>
+
+    <p style="font-size:0.85rem;color:#444;margin-bottom:14px;">婚姻によって獲得した主要な領土・同盟：</p>
+
+    <div class="marriage-visual">
+      <div class="marriage-row">
+        <span class="m-family">🏰 ブルゴーニュ公国</span>
+        <span class="m-arrow">＋ 結婚</span>
+        <span class="m-result">マクシミリアン1世 × マリー・ド・ブルゴーニュ（1477年）</span>
+        <span class="m-gain">現ベルギー・オランダ獲得</span>
+      </div>
+      <div class="marriage-row">
+        <span class="m-family">🇪🇸 スペイン王国</span>
+        <span class="m-arrow">＋ 結婚</span>
+        <span class="m-result">フィリップ美公 × フアナ（スペイン王女）（1496年）</span>
+        <span class="m-gain">スペイン・新大陸植民地</span>
+      </div>
+      <div class="marriage-row">
+        <span class="m-family">🇭🇺 ハンガリー王国</span>
+        <span class="m-arrow">＋ 結婚</span>
+        <span class="m-result">フェルディナント1世 × アンナ・ヤギェウォ（1521年）</span>
+        <span class="m-gain">ハンガリー・ボヘミア獲得</span>
+      </div>
+      <div class="marriage-row">
+        <span class="m-family">🏔 ティロル地方</span>
+        <span class="m-arrow">＋ 相続</span>
+        <span class="m-result">マクシミリアン1世の相続（1490年）</span>
+        <span class="m-gain">アルプス山岳地帯確保</span>
+      </div>
+      <div class="marriage-row">
+        <span class="m-family">🇵🇹 ポルトガル王国</span>
+        <span class="m-arrow">＋ 結婚</span>
+        <span class="m-result">カール5世の息子フィリップ2世 × マリア（1543年）</span>
+        <span class="m-gain">一時的なポルトガル連合</span>
+      </div>
+      <div class="marriage-row">
+        <span class="m-family">🏛 メディチ家（フィレンツェ）</span>
+        <span class="m-arrow">＋ 結婚</span>
+        <span class="m-result">フェルディナント3世 × エレオノーラ・デ・メディチ（1628年）</span>
+        <span class="m-gain">イタリア南部への影響力</span>
+      </div>
+    </div>
+
+    <div class="highlight blue" style="margin-top:16px;">
+      <div class="hl-title">政略結婚の光と影</div>
+      婚姻外交は血を流さずに版図を広げる天才的戦略だったが、<strong>近親婚という深刻な副作用</strong>を生んだ。
+      「青い血（sangre azul）」という言葉はスペインのハプスブルク家が自らの純血を誇る際に使い始めたとされ、
+      貴族の肌が青白いため青い静脈が透けて見えることを「庶民と混血していない証拠」として誇示した慣習に由来する。
+      しかし純血を守ろうとするほど近親婚が進み、後述の健康問題を引き起こした。
+    </div>
+  </div>
+
+  <!-- ④ 領土拡大 -->
+  <div class="section" id="territory">
+    <div class="section-header">
+      <div class="section-icon">🌍</div>
+      <div class="section-title">
+        <h2>領土拡大とカトリック守護</h2>
+        <p>「日の沈まない帝国」の実態</p>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-bottom:20px;">
+      カール5世の治世（1519〜1556年）に、ハプスブルク家の支配領域は<strong>ヨーロッパ全土＋新大陸＋フィリピン諸島</strong>に及んだ。
+      スペイン領アメリカから運ばれる銀と金が帝国財政を支え、
+      「太陽の沈まない帝国（El Imperio en que nunca se pone el sol）」という表現が生まれた。
+    </div>
+
+    <table class="styled-table">
+      <thead>
+        <tr><th>地域</th><th>支配期間</th><th>取得経緯</th><th>現在の国</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>オーストリア</strong></td><td>1282〜1918</td><td>ルドルフ1世が武力で奪取</td><td>オーストリア</td></tr>
+        <tr><td><strong>スペイン本土</strong></td><td>1516〜1700</td><td>婚姻（フィリップ美公 × フアナ）</td><td>スペイン</td></tr>
+        <tr><td><strong>スペイン領アメリカ</strong></td><td>1492〜1810年代</td><td>コロンブス以降の征服</td><td>メキシコ・ペルー等</td></tr>
+        <tr><td><strong>ネーデルラント</strong></td><td>1477〜1714</td><td>婚姻（マクシミリアン × マリー）</td><td>ベルギー・オランダ</td></tr>
+        <tr><td><strong>ハンガリー・ボヘミア</strong></td><td>1526〜1918</td><td>婚姻（フェルディナント × アンナ）</td><td>ハンガリー・チェコ</td></tr>
+        <tr><td><strong>ナポリ・シチリア</strong></td><td>1504〜1713</td><td>武力征服（スペイン系）</td><td>イタリア南部</td></tr>
+        <tr><td><strong>ミラノ公国</strong></td><td>1535〜1713</td><td>スフォルツァ家断絶後に相続</td><td>イタリア北部</td></tr>
+        <tr><td><strong>ポルトガル</strong></td><td>1580〜1640</td><td>婚姻と相続（フィリップ2世）</td><td>ポルトガル</td></tr>
+        <tr><td><strong>フィリピン</strong></td><td>1565〜1898</td><td>スペイン領として統治</td><td>フィリピン</td></tr>
+      </tbody>
+    </table>
+
+    <div class="highlight red">
+      <div class="hl-title">カトリックの守護者として</div>
+      ハプスブルク家は自らを「カトリックの盾」と位置づけた。16世紀のプロテスタント宗教改革（ルター）に対し、
+      カール5世はカトリック側の最高権威として対抗した。この「カトリック対プロテスタント」の対立が
+      <strong>30年戦争（1618〜1648年）</strong>を引き起こし、ドイツの人口の3分の1が失われる惨禍となった。
+      同時に、オスマン帝国のウィーン包囲（1529・1683年）を退けたことで「キリスト教世界の守護者」の地位を確立した。
+    </div>
+  </div>
+
+  <!-- ⑤ 名君列伝 -->
+  <div class="section" id="emperors">
+    <div class="section-header">
+      <div class="section-icon">👑</div>
+      <div class="section-title">
+        <h2>名君・問題君主列伝</h2>
+        <p>645年を動かした主要な人物たち</p>
+      </div>
+    </div>
+
+    <div class="emperor-grid">
+      <div class="emperor-card">
+        <div class="emperor-top">
+          <div class="emperor-icon">⚔️</div>
+          <div class="emperor-name">ルドルフ1世</div>
+          <div class="emperor-reign">在位 1273〜1291</div>
+        </div>
+        <div class="emperor-body">
+          ハプスブルク家の事実上の建国者。神聖ローマ皇帝に選出後、ボヘミア王オタカル2世を破ってオーストリアを獲得。「扱いやすい田舎貴族」のはずが大強者だったため、選帝侯たちは後悔したという。
+        </div>
+      </div>
+
+      <div class="emperor-card">
+        <div class="emperor-top">
+          <div class="emperor-icon">👨‍👩‍👧‍👦</div>
+          <div class="emperor-name">マクシミリアン1世</div>
+          <div class="emperor-reign">在位 1508〜1519</div>
+        </div>
+        <div class="emperor-body">
+          「婚姻外交の天才」。ブルゴーニュ・スペイン・ボヘミアへの婚姻網を構築し、孫のカール5世を世界皇帝に育てる基盤を作った。自分自身も4人の女性と交渉・交渉しながら生涯を戦場と外交場で駆け抜けた。
+        </div>
+      </div>
+
+      <div class="emperor-card">
+        <div class="emperor-top">
+          <div class="emperor-icon">🌍</div>
+          <div class="emperor-name">カール5世（カルロス1世）</div>
+          <div class="emperor-reign">在位 1519〜1556</div>
+        </div>
+        <div class="emperor-body">
+          史上最大の版図を支配した「世界皇帝」。フランス・ オスマン・プロテスタントと同時に戦い続け、晩年は疲弊して自ら退位。帝国を弟フェルディナント（オーストリア系）と息子フィリップ（スペイン系）に分割した。
+        </div>
+      </div>
+
+      <div class="emperor-card">
+        <div class="emperor-top">
+          <div class="emperor-icon">🎓</div>
+          <div class="emperor-name">マリア・テレジア</div>
+          <div class="emperor-reign">在位 1740〜1780</div>
+        </div>
+        <div class="emperor-body">
+          ハプスブルク家唯一の女性君主（「女帝」）。行政・軍・教育の大改革を断行。16人の子を産み、外交婚姻に活用。最有名の子が「断頭台のマリー・アントワネット」。今もウィーン市民に最も愛される歴史的人物。
+        </div>
+      </div>
+
+      <div class="emperor-card">
+        <div class="emperor-top">
+          <div class="emperor-icon">💡</div>
+          <div class="emperor-name">ヨーゼフ2世</div>
+          <div class="emperor-reign">在位 1780〜1790</div>
+        </div>
+        <div class="emperor-body">
+          マリア・テレジアの息子。「啓蒙専制君主」として農奴解放・宗教寛容令・死刑廃止など急進的改革を10年で断行。しかし急ぎすぎて各地で反乱が起き、臨終の際「ここに横たわるのは、何事もうまくいかなかった君主」と墓碑銘に書くよう命じた。
+        </div>
+      </div>
+
+      <div class="emperor-card">
+        <div class="emperor-top">
+          <div class="emperor-icon">🕰</div>
+          <div class="emperor-name">フランツ・ヨーゼフ1世</div>
+          <div class="emperor-reign">在位 1848〜1916（68年間）</div>
+        </div>
+        <div class="emperor-body">
+          在位68年、欧州史上最長クラスの皇帝。リングシュトラーセを整備し近代ウィーンを作り上げた。皇后エリザベート（シシィ）との関係・息子の心中事件・甥の暗殺（第一次世界大戦の引き金）など悲劇が続いた。毎朝4時起きで公務に励んだ真面目な老皇帝。
+        </div>
+      </div>
+    </div>
+
+    <!-- マリア・テレジア詳細 -->
+    <div class="highlight gold" style="margin-top: 20px;">
+      <div class="hl-title">マリア・テレジア — 最も愛される「女帝」</div>
+      ハプスブルク家の継承を認めない男性諸侯との「オーストリア継承戦争（1740〜48年）」を23歳で戦い抜き、
+      在位40年間で<strong>中欧最強の近代国家を築いた</strong>。
+      「子供は政治の道具」と割り切り16人全員に政略結婚を仕込む一方、臣下の暮らしを視察し食料価格を気にかける「母なる女帝」でもあった。
+      ウィーンのシェーンブルン宮殿・美術史博物館・マリア・テレジア広場は彼女の時代の遺産。
+      <strong>カイザーグルフトに眠る棺はハプスブルク家最大の豪奢さ</strong>で、夫フランツ1世との愛情を示している。
+    </div>
+  </div>
+
+  <!-- ⑥ 近親婚と顎 -->
+  <div class="section" id="genetics">
+    <div class="section-header">
+      <div class="section-icon">🧬</div>
+      <div class="section-title">
+        <h2>近親婚と「ハプスブルクの顎」</h2>
+        <p>婚姻外交が招いた遺伝的悲劇</p>
+      </div>
+    </div>
+
+    <div class="chin-box">
+      <h3>🦷 ハプスブルク家の顎（Habsburg Jaw）</h3>
+      <p>下顎が著しく前に突き出た「下顎前突症（prognathism）」は、ハプスブルク家の近親婚を繰り返した結果として世代を追うごとに悪化した遺伝的特徴。「ハプスブルクの顎」として医学史に残る事例で、肖像画を見ると世代とともに悪化していく様子が一目瞭然。</p>
+      <p>2019年の遺伝学研究では、<strong>ハプスブルク家の肖像画を統計分析した結果、近親婚の係数と下顎の変形度に強い相関関係</strong>があることが確認された。特にスペイン系ハプスブルクの最後の王、カルロス2世（在位1665〜1700）は、近親婚係数が<strong>両親が兄妹であるレベル</strong>に達しており、咀嚼すら困難で知的障害もあったとされる。</p>
+      <p>代表的な事例：カルロス2世は35歳で後継者なく死去、スペイン・ハプスブルク系が断絶。フェルディナント1世（オーストリア皇帝）も重度のてんかんと知的障害を持ち、「政務は家臣に任せ自分は皇帝であることに満足した」と記録されている。</p>
+    </div>
+
+    <div class="highlight red" style="margin-top:16px;">
+      <div class="hl-title">近親婚の実態</div>
+      ハプスブルク家では<strong>叔父と姪、従兄妹同士、伯父と姪</strong>の婚姻が繰り返された。
+      例えばカルロス2世の両親であるフィリップ4世とマリアナは伯父と姪の関係。
+      マリア・テレジアは近親婚の危険性を理解しており、自身の子供たちには外部王朝との婚姻を優先させた。
+      彼女の改革がオーストリア系ハプスブルクの遺伝的健全性を一定程度回復させたとも言われる。
+    </div>
+  </div>
+
+  <!-- ⑦ 分裂 -->
+  <div class="section" id="branch">
+    <div class="section-header">
+      <div class="section-icon">⚡</div>
+      <div class="section-title">
+        <h2>分家と分裂</h2>
+        <p>スペイン系 vs オーストリア系 — 同じ血族の対立</p>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-bottom:20px;">
+      1556年、カール5世の退位によりハプスブルク家は2つに分かれた。
+      以後150年間、両系は同盟しながらも独自の政策を持ち、
+      <strong>スペイン継承戦争で決定的に袂を分かつ</strong>ことになる。
+    </div>
+
+    <div class="branch-grid">
+      <div class="branch-card austria">
+        <h3>🇦🇹 オーストリア系ハプスブルク</h3>
+        <ul>
+          <li><span>👑</span>創始者：フェルディナント1世（カール5世の弟）</li>
+          <li><span>🏛</span>拠点：ウィーン（神聖ローマ帝国皇帝）</li>
+          <li><span>🌍</span>支配：オーストリア・ハンガリー・ボヘミア・北イタリア</li>
+          <li><span>⚔️</span>主な脅威：オスマン帝国・プロテスタント諸侯</li>
+          <li><span>🏳️</span>終焉：1918年　第一次世界大戦の敗北で帝国崩壊</li>
+          <li><span>👶</span>現在：カール・フォン・ハプスブルク（当主）が存命</li>
+        </ul>
+      </div>
+      <div class="branch-card spain">
+        <h3>🇪🇸 スペイン系ハプスブルク</h3>
+        <ul>
+          <li><span>👑</span>創始者：フィリップ2世（カール5世の息子）</li>
+          <li><span>🏛</span>拠点：マドリード（スペイン国王）</li>
+          <li><span>🌍</span>支配：スペイン・新大陸・ナポリ・ネーデルラント・フィリピン</li>
+          <li><span>⚔️</span>主な脅威：オランダ独立戦争・イギリス（無敵艦隊の敗北）</li>
+          <li><span>🏳️</span>終焉：1700年　カルロス2世が後継者なく死去し断絶</li>
+          <li><span>🔄</span>後継：スペイン継承戦争を経てブルボン朝に交替</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight blue" style="margin-top:16px;">
+      <div class="hl-title">スペイン継承戦争（1701〜1714年）</div>
+      スペイン系ハプスブルクが断絶すると、後継者を巡って<strong>欧州全土を巻き込む大戦争</strong>が勃発。
+      オーストリア（ハプスブルク家）はスペイン王位も主張したが、
+      フランスのルイ14世の孫フィリップが「フィリップ5世」としてスペイン王に即位。
+      以後スペインはブルボン朝の国となった。
+      この戦争でハプスブルク家はスペイン・南イタリア・ネーデルラントの大半を失い、
+      <strong>「中欧の地域大国」へと縮小</strong>した。ユトレヒト条約（1713年）が戦争を終結させた。
+    </div>
+  </div>
+
+  <!-- ⑧ ウィーン会議 -->
+  <div class="section" id="congress">
+    <div class="section-header">
+      <div class="section-icon">🕊</div>
+      <div class="section-title">
+        <h2>ウィーン会議（1814〜1815年）</h2>
+        <p>「会議は踊る、されど進まず」— 帝国最後の輝き</p>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-bottom:20px;">
+      ナポレオンの敗北後、欧州の新秩序を作るためウィーンに列強の代表が集まった。
+      ハプスブルク家の外相<strong>メッテルニヒ</strong>が主導し、
+      フランス・プロイセン・ロシア・イギリス・オーストリアが交渉した。
+      宴会・舞踏会・狩猟が毎夜繰り広げられ、外交と社交が混然一体となった<strong>史上最大の国際会議</strong>。
+    </div>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <span class="ic-icon">🎭</span>
+        <div class="ic-title">「会議は踊る、されど進まず」</div>
+        <div class="ic-body">
+          ウィーン会議は約9ヶ月かけて行われたが、各国の思惑が複雑に絡み合い交渉は遅々として進まなかった。
+          連日の舞踏会・コンサート・宴会が続くウィーンの様子を評して生まれた言葉。
+          しかし最終的に「ウィーン議定書」でナポレオン以前の国境が大筋回復された。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🧠</span>
+        <div class="ic-title">メッテルニヒの「均衡外交」</div>
+        <div class="ic-body">
+          外相クレメンス・フォン・メッテルニヒは、一国が覇権を持たないよう列強間のバランスを保つ「勢力均衡（Balance of Power）」を基本原則とした。この思想は現代の国際政治にも通じる。彼の主導した「ウィーン体制」は約30年続いた。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🗺</span>
+        <div class="ic-title">会議の主な結果</div>
+        <div class="ic-body">
+          フランスの国境を1792年以前に戻す／ドイツ諸邦を「ドイツ連邦」として緩やかに統合／
+          オランダにベルギーを合併（後に独立）／
+          スイスの永世中立を保証／
+          ポーランドをロシア・プロイセン・オーストリアが分割継続。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight blue" style="margin-top:16px;">
+      <div class="hl-title">なぜウィーンで開催されたのか</div>
+      オーストリア（ハプスブルク家）が欧州の「中心」として認められていたから。
+      しかし真の強国はナポレオン後のロシア・プロイセン・イギリスへと移りつつあり、
+      ウィーン会議はハプスブルク家にとって<strong>「最後の輝き」</strong>でもあった。
+      この会議を仕切ったことがハプスブルク家の政治的頂点であり、
+      以後は民族主義の台頭と帝国解体の圧力に晒される下り坂が始まった。
+    </div>
+  </div>
+
+  <!-- ⑨ 崩壊 -->
+  <div class="section" id="collapse">
+    <div class="section-header">
+      <div class="section-icon">💔</div>
+      <div class="section-title">
+        <h2>帝国の崩壊</h2>
+        <p>民族主義の波に飲み込まれた多民族帝国</p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-era">19世紀前半</span>
+        <div class="tl-title">民族主義の台頭</div>
+        <div class="tl-body">フランス革命・ナポレオン戦争を経て欧州に「民族自決」の思想が広まる。ハプスブルク帝国内のハンガリー人・チェコ人・ポーランド人・クロアチア人らが自治・独立を求めて蜂起。1848年革命では帝国各地で同時多発的な反乱が起き、メッテルニヒ体制が崩壊した。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1866年</span>
+        <div class="tl-title">プロイセン＝オーストリア戦争での敗北</div>
+        <div class="tl-body">ビスマルク率いるプロイセンに7週間で敗北（普墺戦争）。ドイツ統一の主導権をプロイセンに奪われ、「大ドイツ主義」（オーストリア中心のドイツ統一）の夢が終わった。以後ハプスブルク家はドイツよりも東方（バルカン半島）に活路を求め、それがサラエボ事件につながっていく。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1867年</span>
+        <div class="tl-title">オーストリア＝ハンガリー二重帝国の成立</div>
+        <div class="tl-body">プロイセンへの敗北を機に、最大の反乱民族だったハンガリー人と妥協（アウスグライヒ）し、オーストリア皇帝とハンガリー国王を兼任する「二重帝国」を設立。帝国崩壊の先延ばしとも言える苦肉の策だったが、これによってブダペストが発展した。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1914年6月</span>
+        <div class="tl-title">サラエボ事件</div>
+        <div class="tl-body">ボスニアのサラエボでオーストリア皇太子フランツ・フェルディナントがセルビア人青年に暗殺される。オーストリアはセルビアに最後通牒を突きつけ、各国の同盟関係が連鎖して第一次世界大戦が勃発。ハプスブルク家の帝国拡大政策がバルカン半島にまで及んでいたことが引き金を引いた。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1918年11月</span>
+        <div class="tl-title">カール1世の退位と帝国の解体</div>
+        <div class="tl-body">第一次世界大戦の敗北で帝国は崩壊。最後の皇帝カール1世が退位し、645年間続いたハプスブルクの支配が終わった。帝国の版図からオーストリア・ハンガリー・チェコスロバキア・ユーゴスラビア・ポーランドの一部が独立した。人口5,200万を抱えた帝国は一夜にして消えた。</div>
+      </div>
+    </div>
+
+    <div class="highlight red">
+      <div class="hl-title">帝国崩壊後のハプスブルク家</div>
+      1919年、オーストリア共和国はハプスブルク家の全財産を没収し、皇族を国外追放した。
+      カール1世はマデイラ島に亡命し1922年に死去（34歳）。
+      その息子<strong>オットー・フォン・ハプスブルク（1912〜2011）</strong>は欧州統合運動の先駆者として活躍し、
+      欧州議会議員を25年間務めた。2011年に98歳で没。現在の当主は<strong>カール・フォン・ハプスブルク</strong>で、
+      政治家・活動家として活動している。王朝は消えたが、一族は今も存在する。
+    </div>
+  </div>
+
+  <!-- ⑩ 遺産 -->
+  <div class="section" id="legacy">
+    <div class="section-header">
+      <div class="section-icon">🏛</div>
+      <div class="section-title">
+        <h2>ハプスブルク家の遺産</h2>
+        <p>ウィーン観光で出会う「帝国の痕跡」を読む</p>
+      </div>
+    </div>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="t-icon">🏰</div>
+        <div class="t-body">
+          <strong>シェーンブルン宮殿 — マリア・テレジアが作った夏の離宮</strong>
+          1440室を持つバロック建築の傑作。マリア・テレジアが改築し現在の姿に。黄色の外壁は「マリア・テレジア・イエロー」と呼ばれ今もウィーンの公共建築の標準色。庭園の丘の上「グロリエッテ」からウィーン全景を一望できる。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">⛪</div>
+        <div class="t-body">
+          <strong>カイザーグルフト — 149体のハプスブルク家が眠る地下</strong>
+          カプツィーナー教会地下の「皇帝の納骨堂」。マリア・テレジア・ヨーゼフ2世・フランツ・ヨーゼフ1世・エリザベート（シシィ）など歴代皇帝・皇族149体が眠る。マリア・テレジアの棺は巨大で夫への愛情を表す装飾が施されている。観光客が少なく静かに歴史を感じられる。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🏛</div>
+        <div class="t-body">
+          <strong>美術史博物館 — ハプスブルク家の「収集癖」の結晶</strong>
+          ハプスブルク家が600年かけて収集した絵画・工芸・古代美術のコレクション。ブリューゲル・フェルメール・ラファエロ・カラバッジョなど欧州屈指の質と量。建物自体も1891年建造のネオ・バロック様式で必見。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🏛</div>
+        <div class="t-body">
+          <strong>ホーフブルク宮殿 — 650年間の「生きた帝国の中枢」</strong>
+          旧市街の中心に位置する迷宮のような宮殿群。13世紀から増築を重ね、ハプスブルク家が冬の居城として使い続けた。現在は大統領官邸・国立図書館・皇帝の部屋（博物館）・スペイン乗馬学校などが入居する。シシィ博物館も必見。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🍽</div>
+        <div class="t-body">
+          <strong>ハプスブルク帝国の「食文化遺産」</strong>
+          今でも食べられる「ウィーナー・シュニッツェル」「グラーシュ」「ザッハートルテ」「タフェルシュピッツ（フランツ・ヨーゼフ1世の毎日の食事）」はすべてハプスブルク宮廷・帝国文化が起源。チェコのスヴィーチコヴァー、ハンガリーのグヤーシュも帝国共通の食文化。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🎼</div>
+        <div class="t-body">
+          <strong>音楽の都ウィーンはハプスブルク家の「投資」の成果</strong>
+          マリア・テレジアは6歳のモーツァルトを宮廷に招き、ヨーゼフ2世はモーツァルトを宮廷作曲家に任命した。フランツ・ヨーゼフ1世はウィーン国立歌劇場を建設（1869年）。ハプスブルク家の音楽への投資・庇護がなければ「音楽の都ウィーン」は存在しなかった。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-top: 24px;">
+      <div class="hl-title">まとめ ― ハプスブルク家をひとことで言うなら</div>
+      「<strong>戦わずして最大の帝国を作り、近親婚で自らを滅ぼしかけ、啓蒙で復活し、民族主義に敗れた</strong>」王朝。
+      彼らが残したウィーン・プラハ・ブダペストという三都市の建築・音楽・文化は、
+      今日の東中欧旅行の最大の魅力そのもの。
+      旅の途中でひとつでも「これはハプスブルク時代のものだ」と気づければ、街の見え方がまるで変わる。
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <a href="vienna_culture.html">← ウィーン 歴史・文化に戻る</a>　|
+  <a href="index.html">ガイド一覧</a>　|　2026年8月 東欧旅行 個人用ガイド
+</footer>
+
+<script src="nav-menu.js"></script>
+</body>
+</html>

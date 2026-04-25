@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ブダペスト 歴史・文化・生活ガイド</title>
+  <style>
+    :root {
+      --blue:        #1a4a8b;
+      --blue-light:  #eef3fa;
+      --gold:        #b8860b;
+      --gold-light:  #fdf8e8;
+      --red:         #8b1a1a;
+      --red-light:   #fdf0f0;
+      --green:       #1a5c3a;
+      --green-light: #e8f5ee;
+      --bg:    #f7f5f0;
+      --card:  #ffffff;
+      --text:  #2c2c2c;
+      --muted: #666;
+      --border:#e0ddd8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* ─── Header ─────────────────────────────── */
+    header {
+      background: linear-gradient(160deg, #0a1f42 0%, #1a4a8b 55%, #2563c0 100%);
+      color: white;
+      padding: 52px 24px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '🌊';
+      position: absolute;
+      font-size: 14rem;
+      opacity: 0.05;
+      top: -20px; right: -20px;
+      line-height: 1;
+    }
+    header .label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.04em; }
+    header p  { margin-top: 10px; font-size: 0.9rem; opacity: 0.8; }
+
+    /* ─── Nav ────────────────────────────────── */
+    nav {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      display: inline-block;
+      padding: 12px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    nav a:hover { color: var(--blue); border-bottom-color: var(--blue); }
+
+    /* ─── Container ───────────────────────────── */
+    .container { max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+
+    /* ─── Section ─────────────────────────────── */
+    .section { margin-bottom: 56px; scroll-margin-top: 52px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+      padding-bottom: 14px;
+      border-bottom: 3px solid var(--blue);
+    }
+    .section-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .section-title h2 { font-size: 1.15rem; font-weight: 700; }
+    .section-title p  { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Timeline ───────────────────────────── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--blue), #b8d0f0);
+    }
+    .tl-item { position: relative; margin-bottom: 28px; }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--blue);
+    }
+    .tl-era {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.06em;
+      background: var(--blue); color: white;
+      padding: 2px 10px; border-radius: 12px;
+      margin-bottom: 6px;
+    }
+    .tl-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .tl-body  { font-size: 0.83rem; color: #444; }
+
+    /* ─── Cards grid ─────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    .info-card .ic-icon  { font-size: 1.8rem; margin-bottom: 10px; display: block; }
+    .info-card .ic-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 8px; }
+    .info-card .ic-body  { font-size: 0.81rem; color: #444; line-height: 1.7; }
+
+    /* ─── Highlight Box ──────────────────────── */
+    .highlight {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 16px;
+      font-size: 0.84rem;
+      line-height: 1.75;
+    }
+    .highlight.blue   { background: var(--blue-light);  border-left: 4px solid var(--blue); }
+    .highlight.gold   { background: var(--gold-light);  border-left: 4px solid var(--gold); }
+    .highlight.red    { background: var(--red-light);   border-left: 4px solid var(--red); }
+    .highlight.green  { background: var(--green-light); border-left: 4px solid var(--green); }
+    .highlight strong { color: #1a1a1a; }
+    .hl-title {
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 6px; opacity: 0.65;
+    }
+
+    /* ─── Two columns ────────────────────────── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ─── Fact list ──────────────────────────── */
+    .fact-list { list-style: none; }
+    .fact-list li {
+      display: flex; gap: 10px;
+      font-size: 0.83rem;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .fact-list li:last-child { border-bottom: none; }
+    .fact-list .fl-key {
+      width: 100px; flex-shrink: 0;
+      font-weight: 600; font-size: 0.77rem;
+      color: var(--muted);
+    }
+
+    /* ─── Do / Don't ─────────────────────────── */
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .do-dont { grid-template-columns: 1fr; } }
+    .do-card, .dont-card {
+      border-radius: 10px; padding: 16px 18px; font-size: 0.82rem;
+    }
+    .do-card   { background: #eefaf4; border: 1px solid #a3d9b8; }
+    .dont-card { background: #fff0f0; border: 1px solid #f5b8b8; }
+    .do-card h3   { color: #1a5c3a; font-size: 0.85rem; margin-bottom: 10px; }
+    .dont-card h3 { color: var(--red); font-size: 0.85rem; margin-bottom: 10px; }
+    .do-card ul, .dont-card ul { list-style: none; }
+    .do-card li, .dont-card li { padding: 4px 0; display: flex; gap: 7px; align-items: flex-start; }
+    .do-card .d-icon   { color: #1a5c3a; flex-shrink: 0; }
+    .dont-card .d-icon { color: var(--red); flex-shrink: 0; }
+
+    /* ─── Person card ────────────────────────── */
+    .person-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .person-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      text-align: center;
+    }
+    .person-card .p-icon { font-size: 2.2rem; margin-bottom: 8px; }
+    .person-card .p-name { font-size: 0.88rem; font-weight: 700; }
+    .person-card .p-year { font-size: 0.72rem; color: var(--muted); margin: 2px 0 8px; }
+    .person-card .p-desc { font-size: 0.76rem; color: #555; line-height: 1.65; }
+
+    /* ─── Food cards ─────────────────────────── */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .food-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .food-card .f-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; }
+    .food-card .f-kana { font-size: 0.72rem; color: var(--muted); margin-bottom: 8px; }
+    .food-card .f-desc { font-size: 0.78rem; color: #444; line-height: 1.65; }
+    .food-card .f-tag  {
+      display: inline-block; margin-top: 8px;
+      font-size: 0.65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px;
+      background: var(--blue-light); color: var(--blue);
+    }
+
+    /* ─── Bath box ───────────────────────────── */
+    .bath-box {
+      background: linear-gradient(135deg, #eef3fa, #dbeafe);
+      border: 1px solid #93c5fd;
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-top: 16px;
+    }
+    .bath-box h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 10px; color: #1a3a6e; }
+    .bath-box p  { font-size: 0.82rem; color: #444; line-height: 1.75; margin-bottom: 8px; }
+    .bath-box p:last-child { margin-bottom: 0; }
+
+    /* ─── Bath table ─────────────────────────── */
+    .bath-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.82rem; background: var(--card);
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      margin-top: 12px;
+    }
+    .bath-table th {
+      background: var(--blue); color: white;
+      padding: 9px 12px; text-align: left;
+      font-size: 0.77rem; font-weight: 600;
+    }
+    .bath-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); }
+    .bath-table tr:last-child td { border-bottom: none; }
+    .bath-table tr:nth-child(even) td { background: #f8fafc; }
+
+    /* ─── Ruin bar box ───────────────────────── */
+    .ruin-box {
+      background: linear-gradient(135deg, #1a1a2e, #2a1a3e);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-top: 16px;
+      color: #e8e0f0;
+    }
+    .ruin-box h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 10px; color: #c8a8f0; }
+    .ruin-box p  { font-size: 0.82rem; line-height: 1.75; margin-bottom: 8px; color: #c8c0d8; }
+    .ruin-box p:last-child { margin-bottom: 0; }
+    .ruin-box strong { color: #e8d8ff; }
+
+    /* ─── Tip list ───────────────────────────── */
+    .tip-list { display: flex; flex-direction: column; gap: 10px; }
+    .tip-item {
+      display: flex; gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.82rem;
+      align-items: flex-start;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .tip-item .t-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
+    .tip-item .t-body strong { display: block; font-size: 0.85rem; margin-bottom: 3px; }
+    .tip-item .t-body { color: #444; line-height: 1.65; }
+
+    /* ─── Buda / Pest split ──────────────────── */
+    .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 580px) { .split-grid { grid-template-columns: 1fr; } }
+    .split-card {
+      border-radius: 12px; padding: 18px 18px;
+    }
+    .split-card.buda { background: #f0f4ff; border: 1px solid #93b4f0; }
+    .split-card.pest { background: #fff8f0; border: 1px solid #f0c480; }
+    .split-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; }
+    .split-card.buda h3 { color: var(--blue); }
+    .split-card.pest h3 { color: #8b5a00; }
+    .split-card ul { list-style: none; font-size: 0.81rem; color: #444; }
+    .split-card li { padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; gap: 7px; }
+    .split-card li:last-child { border-bottom: none; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.75rem;
+      color: #aaa;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: #888; text-decoration: none; }
+    footer a:hover { color: var(--blue); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="label">Budapest — History &amp; Culture</div>
+  <h1>🌊 ブダペスト 歴史・文化・生活ガイド</h1>
+  <p>旅をより深く楽しむための背景知識</p>
+</header>
+
+<nav>
+  <a href="#budapest">ブダとペスト</a>
+  <a href="#history">歴史</a>
+  <a href="#architecture">建築</a>
+  <a href="#culture">文化</a>
+  <a href="#people">著名人</a>
+  <a href="#food">食・温泉</a>
+  <a href="#life">生活・習慣</a>
+  <a href="#tips">旅のヒント</a>
+</nav>
+
+<div class="container">
+
+  <!-- ① ブダとペスト -->
+  <div class="section" id="budapest">
+    <div class="section-header">
+      <div class="section-icon">🌉</div>
+      <div class="section-title">
+        <h2>「ブダ」と「ペスト」の街</h2>
+        <p>2つの全く異なる個性がドナウ川を挟んで向き合う</p>
+      </div>
+    </div>
+
+    <div class="highlight blue" style="margin-bottom:20px;">
+      ブダペストは1873年に「ブダ」「オーブダ（旧ブダ）」「ペスト」の3地区が合併して生まれた都市。
+      <strong>ドナウ川を挟んで東西で街の性格がまったく異なり</strong>、その対比を楽しむことがブダペスト観光の醍醐味のひとつ。
+    </div>
+
+    <div class="split-grid">
+      <div class="split-card buda">
+        <h3>🏰 ブダ（西岸・丘の上）</h3>
+        <ul>
+          <li><span>🏰</span>ブダ城・マーチャーシュ教会・漁夫の砦</li>
+          <li><span>🌿</span>緑が多く静かな住宅地・旧市街</li>
+          <li><span>🏛</span>中世〜バロックの歴史的建造物</li>
+          <li><span>♨️</span>ゲッレールト温泉・ルダシュ温泉</li>
+          <li><span>🌄</span>丘の上からペストの夜景が望める</li>
+          <li><span>💰</span>落ち着いた富裕層エリア</li>
+        </ul>
+      </div>
+      <div class="split-card pest">
+        <h3>🏙 ペスト（東岸・平地）</h3>
+        <ul>
+          <li><span>🏛</span>国会議事堂・聖イシュトヴァーン大聖堂</li>
+          <li><span>🛍</span>ヴァーツィ通り・大市場・ショッピング</li>
+          <li><span>🍺</span>ルインバー・ナイトライフ・レストラン</li>
+          <li><span>♨️</span>セーチェーニ温泉（欧州最大級）</li>
+          <li><span>🎭</span>オペラ座・ユダヤ人地区</li>
+          <li><span>🌆</span>活気ある現代的な商業・観光エリア</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-top:16px;">
+      <div class="hl-title">ドナウの真珠</div>
+      ブダペストは「ドナウの真珠」「ドナウの薔薇」と呼ばれる。
+      両岸とドナウ川の橋群・ブダ城丘が織りなす<strong>ブダペストのドナウ川沿い景観はユネスコ世界遺産</strong>に登録されており、
+      夜のライトアップは欧州でも屈指の美しさ。
+    </div>
+  </div>
+
+  <!-- ② 歴史 -->
+  <div class="section" id="history">
+    <div class="section-header">
+      <div class="section-icon">📜</div>
+      <div class="section-title">
+        <h2>ブダペストの歴史</h2>
+        <p>征服と占領の繰り返しが刻んだ複雑な歴史</p>
+      </div>
+    </div>
+
+    <div class="highlight blue" style="margin-bottom:24px;">
+      ブダペストはローマ・マジャール・オスマン・ハプスブルク・ソ連と、
+      <strong>2000年の間に5つの異なる勢力に支配された</strong>都市。
+      その重層的な歴史が街の建築・温泉・料理・メンタリティにすべて刻まれている。
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-era">1〜4世紀</span>
+        <div class="tl-title">ローマ帝国の軍事都市「アクインクム」</div>
+        <div class="tl-body">現在のオーブダ（旧ブダ）にあたる地域に、ローマ帝国の主要都市「アクインクム（Aquincum）」が置かれた。当時から温泉が利用されており、遺跡は今も現存する。ローマ時代の円形競技場跡や博物館が残り、温泉文化の源流もここにある。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">895年</span>
+        <div class="tl-title">マジャール人の定住と建国</div>
+        <div class="tl-body">アジア系遊牧民族・マジャール人がアールパード公に率いられカルパティア盆地に定住。1000年にイシュトヴァーン1世がキリスト教を受け入れてハンガリー王国を建国し、ローマ教皇から王冠を受けた。この「聖イシュトヴァーンの王冠」は今も国会議事堂に安置されている。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1241〜42年</span>
+        <div class="tl-title">モンゴル軍の侵攻と壊滅</div>
+        <div class="tl-body">バトゥ率いるモンゴル帝国がハンガリーを席巻し、人口の約半数が失われたともいわれる壊滅的被害を受けた。この後、ベーラ4世がブダ丘の上に石造りの要塞を建設。これがブダ城の起源となった。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">15世紀</span>
+        <div class="tl-title">マーチャーシュ王の黄金時代</div>
+        <div class="tl-body">マーチャーシュ1世（在位1458〜1490）の治世にハンガリーは文芸復興の最盛期を迎えた。ブダは当時の中欧で最もルネサンス文化が栄えた都市のひとつとなり、ヨーロッパ各地から芸術家・学者が集まった。彼の名を冠したマーチャーシュ教会は今もブダ城丘に立つ。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1526〜1686年</span>
+        <div class="tl-title">オスマン帝国の150年支配</div>
+        <div class="tl-body">モハーチの戦い（1526年）でスレイマン1世率いるオスマン軍がハンガリーを撃破し、その後ブダは約150年間オスマン帝国の支配下に置かれた。キリスト教の教会はモスクに改築され、ローマ時代からの温泉インフラがさらに拡充された。現在のブダペストの温泉文化はこのオスマン時代が大きく花開かせた。1686年、ハプスブルク帝国の奪還作戦で解放されたが、都市の大半は廃墟となった。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1867年</span>
+        <div class="tl-title">アウスグライヒ（オーストリア＝ハンガリー二重帝国）</div>
+        <div class="tl-body">ハプスブルク帝国との妥協によりオーストリア＝ハンガリー二重帝国が成立し、ブダペストはウィーンと並ぶ帝国の二大首都となった。この合意の立役者は政治家フェレンツ・デアーク。以後の約50年間、ブダペストは急速な近代化・建設ラッシュを迎え、国会議事堂・オペラ座・セーチェーニ温泉・大市場などが一気に建設された。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1873年</span>
+        <div class="tl-title">ブダ・オーブダ・ペストの合併</div>
+        <div class="tl-body">ドナウ川西岸のブダ・オーブダと東岸のペストが合併し「ブダペスト」が誕生。翌1874年に欧州大陸初の地下鉄（現M1線）の建設が開始され、1896年のハンガリー建国千年祭に合わせて開通した。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1944〜45年</span>
+        <div class="tl-title">第二次世界大戦とドナウの橋の爆破</div>
+        <div class="tl-body">ナチスドイツ占領下でブダペストのユダヤ人コミュニティは壊滅的被害を受けた。1944〜45年の「ブダペスト包囲戦」でドナウ川の全橋梁がドイツ軍によって爆破され、ブダ城を含む多くの建物が破壊された。戦後、橋はすべて再建されたが、その記憶はドナウ川沿いの「靴のモニュメント」（後述）として刻まれている。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1956年</span>
+        <div class="tl-title">ハンガリー動乱</div>
+        <div class="tl-body">ソ連型共産主義体制に対する民衆蜂起がブダペストで勃発。一時は自由化が実現するかに見えたが、ソ連軍が戦車で介入し約2500人が死亡、20万人が国外に脱出した。英雄広場近くの「1956年記念館（テロの家）」はその歴史を詳細に伝える。</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-era">1989年〜</span>
+        <div class="tl-title">民主化と「鉄のカーテン」の終わり</div>
+        <div class="tl-body">ハンガリーは東欧の中でいち早く共産主義体制を平和的に解体した国のひとつ。1989年5月にオーストリアとの国境フェンスを撤去し、これが東ドイツ市民の脱出を可能にして「ベルリンの壁崩壊」の引き金のひとつとなった。翌1990年に自由選挙が実施された。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 建築 -->
+  <div class="section" id="architecture">
+    <div class="section-header">
+      <div class="section-icon">🏛</div>
+      <div class="section-title">
+        <h2>ブダペストの建築を読む</h2>
+        <p>二重帝国の栄華と「ハンガリー様式」の独自性</p>
+      </div>
+    </div>
+
+    <div class="highlight blue" style="margin-bottom:20px;">
+      1867〜1914年の「二重帝国時代」に建てられた建築物がブダペストの顔をつくっている。
+      この時期に建国千年祭（1896年）を意識した<strong>巨大建築が集中して建設された</strong>。
+      特筆すべきは、ハンガリーの建築家たちが西欧の様式を輸入するだけでなく、
+      民族的モチーフを融合した独自の「ハンガリー・アール・ヌーヴォー」を生み出したこと。
+    </div>
+
+    <div class="card-grid">
+      <div class="info-card">
+        <span class="ic-icon">🏛</span>
+        <div class="ic-title">国会議事堂</div>
+        <div class="ic-body">
+          ネオ・ゴシック様式（1904年完成）。全長268m、ドナウ川に映える白亜の宮殿。地下に「聖イシュトヴァーンの王冠」が安置されており見学可能。内部ツアーは事前予約推奨。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🏰</span>
+        <div class="ic-title">ブダ城</div>
+        <div class="ic-body">
+          13世紀建設・数度の再建。現在の姿はハプスブルク時代のバロック様式。内部はブダペスト歴史博物館とハンガリー国立美術館。丘の上からペスト側のパノラマが最高。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">⛪</span>
+        <div class="ic-title">マーチャーシュ教会</div>
+        <div class="ic-body">
+          14世紀建設のゴシック様式。オスマン時代にモスクに改築され、後にネオ・ゴシックに再建。内部のフレスコ画・カラータイルが圧巻。歴代ハンガリー王の戴冠式が行われた。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🐟</span>
+        <div class="ic-title">漁夫の砦</div>
+        <div class="ic-body">
+          1902年建造のネオ・ロマネスク様式。「漁夫の砦」という名はかつてここを守備した漁師組合に由来する。7つの塔は7つのマジャール部族を象徴。ブダペストで最も人気の撮影スポット。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🎭</span>
+        <div class="ic-title">ハンガリー国立オペラ座</div>
+        <div class="ic-body">
+          ネオ・ルネサンス様式（1884年）。建築家イブル・ミクローシュの傑作。皇帝フランツ・ヨーゼフがウィーンの歌劇場より豪華にならないよう注文したという逸話が残る。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">🌿</span>
+        <div class="ic-title">ハンガリー・アール・ヌーヴォー</div>
+        <div class="ic-body">
+          建築家レヒネル・エデンが確立した、マジャール民族の刺繍・陶器のモチーフを西欧アール・ヌーヴォーに融合した独自様式。<br>📍 応用美術館・郵便貯金局（現OTP本社）が代表作。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight gold" style="margin-top:16px;">
+      <div class="hl-title">ジョルナイタイルとは</div>
+      ブダペストの屋根に輝くカラフルな幾何学模様のタイルは「ジョルナイ（Zsolnay）タイル」。
+      南部ペーチの陶磁器メーカーが開発した<strong>凍結・汚染に強い特殊釉薬タイル</strong>で、
+      マーチャーシュ教会・応用美術館・国会議事堂の屋根に使われている。光の角度で発色が変わる美しさに注目。
+    </div>
+  </div>
+
+  <!-- ④ 文化 -->
+  <div class="section" id="culture">
+    <div class="section-header">
+      <div class="section-icon">🎭</div>
+      <div class="section-title">
+        <h2>音楽・芸術・ルインバー</h2>
+        <p>東欧有数の文化都市と独自のサブカルチャー</p>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom:20px;">
+      <div class="info-card">
+        <span class="ic-icon">🎹</span>
+        <div class="ic-title">クラシック音楽の伝統</div>
+        <div class="ic-body">
+          ハンガリーはリスト・バルトーク・コダーイを生んだ音楽大国。特に<strong>バルトーク・ベーラ</strong>はハンガリー・ルーマニアの農村を回り民謡を採集して近代音楽に昇華させた。
+          ブダペストには高水準の音楽ホールが多く、手頃な価格でコンサートを楽しめる。
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="ic-icon">✡️</span>
+        <div class="ic-title">ユダヤ人文化と歴史</div>
+        <div class="ic-body">
+          19世紀末のブダペストには20万人以上のユダヤ人が住み、文化・経済を支えた。ヨーロッパ最大級のシナゴーグ「大シナゴーグ（ドハーニ街シナゴーグ）」は今も現役。
+          ホロコーストで約56万人のハンガリー系ユダヤ人が犠牲となった歴史も持つ。
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight blue">
+      <div class="hl-title">ジプシー音楽（ロマ音楽）とハンガリー</div>
+      ハンガリーの伝統音楽とロマ（ジプシー）の演奏スタイルは深く結びついている。
+      レストランでバイオリンを弾くロマの楽団は19世紀から続く慣習で、
+      リスト・ブラームスもその影響を受けた。「チャールダーシュ」と呼ばれる民族舞曲は、
+      遅い哀愁のある序奏から激しいテンポへと転じる<strong>ハンガリー独特の音楽形式。</strong>
+    </div>
+
+    <div class="ruin-box">
+      <h3>🍺 ルインバー（Romkocsma）文化</h3>
+      <p>ルインバーは2000年代初頭にブダペストで生まれた<strong>廃墟（ruin）を改装したバー</strong>の文化。第二次世界大戦や共産主義時代に放棄された建物・中庭をそのまま活用し、ミスマッチな家具・アート・ネオンで満たした独特の空間が特徴。</p>
+      <p>発祥は2001年開業の<strong>「シンプラ・ケルト（Szimpla Kert）」</strong>。7区のユダヤ人地区（ジドネーギェド）を中心に広がり、今では世界中から旅行者が訪れる。日曜朝はファーマーズマーケットとして地元民も利用する二面性が面白い。</p>
+      <p>雰囲気は各店で全く異なる。<strong>夜10時以降が本番</strong>で、明け方まで賑わうことも。観光客が多いシンプラ以外にも「フォガス・ハーズ」「Instant」など個性的な店が多い。</p>
+    </div>
+  </div>
+
+  <!-- ⑤ 著名人 -->
+  <div class="section" id="people">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div class="section-title">
+        <h2>ブダペストゆかりの著名人</h2>
+        <p>この街が生んだ天才たち</p>
+      </div>
+    </div>
+
+    <div class="highlight blue" style="margin-bottom:20px;">
+      <div class="hl-title">ハンガリー人はなぜ優秀なのか？</div>
+      ノーベル賞受賞者数は人口比で世界トップクラス。原子爆弾計画のマンハッタン計画に参加した物理学者・数学者にハンガリー出身者が集中したことから「マジャール（ハンガリー）の奇跡」と呼ばれる。フォン・ノイマン（コンピュータの父）・エドワード・テラー・ジョン・ヴォン・ノイマンなど、<strong>20世紀の科学革命を担った天才の多くがブダペスト出身。</strong>
+    </div>
+
+    <div class="person-grid">
+      <div class="person-card">
+        <div class="p-icon">🎹</div>
+        <div class="p-name">フランツ・リスト</div>
+        <div class="p-year">1811–1886（ハンガリー生）</div>
+        <div class="p-desc">ピアノの魔術師。ピアノリサイタルという形式を発明。「ハンガリー狂詩曲」でハンガリー民族音楽を世界に広めた。晩年にブダペスト音楽院を設立。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🎵</div>
+        <div class="p-name">バルトーク・ベーラ</div>
+        <div class="p-year">1881–1945（ハンガリー生）</div>
+        <div class="p-desc">東欧・北アフリカの民謡を採集し近代音楽に昇華。「管弦楽のための協奏曲」が代表作。ナチス台頭後にアメリカへ亡命。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🔮</div>
+        <div class="p-name">フーディーニ（エリク・ヴァイス）</div>
+        <div class="p-year">1874–1926（ブダペスト生）</div>
+        <div class="p-desc">世界最高の脱出奇術師。ブダペスト生まれでアメリカで活躍。「ハリー・フーディーニ」として知られる。錠前・手錠・水中脱出を驚異的に演じた。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">💡</div>
+        <div class="p-name">フォン・ノイマン</div>
+        <div class="p-year">1903–1957（ブダペスト生）</div>
+        <div class="p-desc">コンピュータのアーキテクチャを設計した数学者・物理学者。「ノイマン型コンピュータ」の基礎を作りスマートフォンに至るすべてのコンピュータに影響。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">🎮</div>
+        <div class="p-name">ルービック・エルネー</div>
+        <div class="p-year">1944–（ブダペスト生）</div>
+        <div class="p-desc">ルービックキューブの発明者。1974年、建築学教授として教材のために作った。世界で最も売れたパズル玩具（累計4億個超）として知られる。</div>
+      </div>
+      <div class="person-card">
+        <div class="p-icon">📸</div>
+        <div class="p-name">ロバート・キャパ</div>
+        <div class="p-year">1913–1954（ブダペスト生）</div>
+        <div class="p-desc">20世紀最高の戦場写真家。スペイン内戦・ノルマンディー上陸などを撮影。「カメラと兵士」と呼ばれた。「もし写真がよくなければ、近づきすぎていないのだ」の言葉が有名。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ 食・温泉 -->
+  <div class="section" id="food">
+    <div class="section-header">
+      <div class="section-icon">🍲</div>
+      <div class="section-title">
+        <h2>食文化・温泉・ワイン</h2>
+        <p>パプリカの国の食と、世界一の温泉都市</p>
+      </div>
+    </div>
+
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="f-name">グヤーシュ</div>
+        <div class="f-kana">Gulyás</div>
+        <div class="f-desc">牛肉・野菜・パプリカのスープ。ハンガリーの国民食。もともと牧童（グヤーシュ）が食べていた料理で、スープとシチューの中間のような食感。</div>
+        <span class="f-tag">国民食</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">ラーンゴシュ</div>
+        <div class="f-kana">Lángos</div>
+        <div class="f-desc">揚げパンにサワークリームとチーズを乗せたストリートフード。市場や観光地で売っている。ニンニク風味が定番で、揚げたての熱々が最高。</div>
+        <span class="f-tag">ストリートフード</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">ハラースレー</div>
+        <div class="f-kana">Halászlé</div>
+        <div class="f-desc">ドナウ川やバラトン湖の川魚をパプリカで煮込んだ真っ赤な魚スープ。ハンガリー南部の伝統料理で、辛みが強く鮮烈な味わい。</div>
+        <span class="f-tag">伝統料理</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">トゥルテシュ・カポスタ</div>
+        <div class="f-kana">Töltött káposzta</div>
+        <div class="f-desc">ザワークラウトの葉で豚ひき肉と米を包んで煮込んだ料理。サワークリームをかけて食べる。祝日や家庭料理の定番で、冬に特に人気。</div>
+        <span class="f-tag">家庭料理</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">パーリンカ</div>
+        <div class="f-kana">Pálinka</div>
+        <div class="f-desc">果物（プラム・アプリコット・梨など）を原料とした蒸留酒。度数40〜70度。食前・食後酒として地元民に愛され、市場や土産物店で手に入る。</div>
+        <span class="f-tag">蒸留酒</span>
+      </div>
+      <div class="food-card">
+        <div class="f-name">トカイワイン</div>
+        <div class="f-kana">Tokaji</div>
+        <div class="f-desc">貴腐ワインの最高峰のひとつ。ルイ14世が「ワインの王、王のワイン」と称えたほど。濃厚な甘さと酸味のバランスが独特。ブダペストのレストランで必ず試したい。</div>
+        <span class="f-tag">世界遺産ワイン</span>
+      </div>
+    </div>
+
+    <div class="bath-box">
+      <h3>♨️ 温泉都市ブダペスト — 知っておくべきこと</h3>
+      <p>ブダペストには123箇所の温泉源があり、毎日7000万リットルの温泉が湧出している。<strong>温泉（Fürdő / Gyógyfürdő）はローマ時代から続く生活文化</strong>で、地元民が週に何度も通う健康・社交の場。観光客向けの「インスタ映え」だけでなく、本来の「生活の温泉」を体験するのがブダペスト旅の醍醐味。</p>
+      <table class="bath-table">
+        <thead>
+          <tr><th>名前</th><th>特徴</th><th>おすすめポイント</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>セーチェーニ温泉</strong></td>
+            <td>欧州最大級。屋外＋屋内プール。1913年建設のネオバロック宮殿</td>
+            <td>チェスをしながら浸かる地元老人の光景が名物。日中に訪問推奨</td>
+          </tr>
+          <tr>
+            <td><strong>ゲッレールト温泉</strong></td>
+            <td>アール・ヌーヴォーの豪華な内装。ブダ側の丘の麓</td>
+            <td>建物自体が芸術品。波のプールが有名。観光客向けで混む</td>
+          </tr>
+          <tr>
+            <td><strong>ルダシュ温泉</strong></td>
+            <td>オスマン時代1566年建造。ドーム型の浴場が現存</td>
+            <td>最もオスマン時代の雰囲気が残る。金土はパーティー開催日</td>
+          </tr>
+          <tr>
+            <td><strong>キラーイ温泉</strong></td>
+            <td>オスマン時代の温泉で最も原型を保つ（1565年）</td>
+            <td>地元民比率が高い穴場。改装後も歴史的雰囲気を保持</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;"><strong>入浴マナー：</strong>水着着用が基本（混浴・男女別で異なる）。水着を持参するかレンタル可。タオルは持参推奨（有料レンタルあり）。シャワーしてから入浴するのがルール。脱衣所のロッカーは貴重品管理に注意。</p>
+    </div>
+  </div>
+
+  <!-- ⑦ 生活・習慣 -->
+  <div class="section" id="life">
+    <div class="section-header">
+      <div class="section-icon">🏘</div>
+      <div class="section-title">
+        <h2>生活・習慣・マナー</h2>
+        <p>ブダペストの人々のリアルを知る</p>
+      </div>
+    </div>
+
+    <ul class="fact-list" style="background:white;border-radius:12px;padding:4px 16px;border:1px solid var(--border);margin-bottom:20px;">
+      <li>
+        <span class="fl-key">言語</span>
+        <span>公用語はハンガリー語（マジャール語）。インド・ヨーロッパ語族ではなくフィン・ウゴル語族に属する孤立した言語で、日本語話者にとっても習得が難しい。観光地では英語が通じる。「Köszönöm（ケーセーネム）= ありがとう」だけでも喜ばれる。</span>
+      </li>
+      <li>
+        <span class="fl-key">姓名の順</span>
+        <span>ハンガリー人は<strong>姓→名の順（日本と同じ）</strong>で名前を読む。バルトーク・ベーラ、フォン・ノイマン・ヤーノシュのように、日本と同じく家名が先。欧米式表記と逆なので混乱しないよう注意。</span>
+      </li>
+      <li>
+        <span class="fl-key">挨拶</span>
+        <span>「Szia（スィア）= やあ／バイバイ」はカジュアルな万能挨拶。「Jó napot（ヨー・ナポット）= こんにちは」がフォーマル。ハンガリー人は最初は無愛想に見えることがあるが、打ち解けると非常に温かい。</span>
+      </li>
+      <li>
+        <span class="fl-key">チップ</span>
+        <span>10〜15%が一般的。「Köszönöm（ありがとう）」と言いながら渡すのが自然。<strong>カードで支払う場合もチップは現金で別途渡す</strong>のがマナー。</span>
+      </li>
+      <li>
+        <span class="fl-key">乾杯マナー</span>
+        <span><strong>ビールでの乾杯はNG</strong>とされてきた。1848〜49年のハンガリー革命が鎮圧された際、オーストリア軍がビールで乾杯したことへの抗議として生まれた慣習。現代の若者には薄れてきているが、地元の人と飲む際は意識するとよい。</span>
+      </li>
+      <li>
+        <span class="fl-key">物価感覚</span>
+        <span>ウィーンよりかなり安い。生ビール0.5Lが700〜1,000 HUF（約270〜390円）。レストランのメイン料理が2,500〜4,000 HUF（約970〜1,550円）程度。ルインバーでのカクテルは1,500〜2,500 HUF。</span>
+      </li>
+      <li>
+        <span class="fl-key">治安</span>
+        <span>全体的に安全だが、スリと観光客狙いのぼったくりに注意。特にヴァーツィ通り周辺・ナイトクラブ前。<strong>知らない人に誘われてついていくのは厳禁</strong>（強引な飲み屋への誘导があることも）。Boltアプリのタクシーを使えばぼったくりはほぼ防げる。</span>
+      </li>
+      <li>
+        <span class="fl-key">通貨</span>
+        <span>独自通貨HUF（フォリント）。EUに加盟しているがユーロ未導入。市内中心部では一部でユーロも使えるが、レートが不利なことが多いのでHUFに両替推奨。現地ATMが最もレートが良い。</span>
+      </li>
+    </ul>
+
+    <div class="do-dont">
+      <div class="do-card">
+        <h3>✅ やっておくと良いこと</h3>
+        <ul>
+          <li><span class="d-icon">✓</span>温泉に地元民と一緒に入る</li>
+          <li><span class="d-icon">✓</span>朝の大中央市場（ナジ・ヴァーシャルチャルノク）を歩く</li>
+          <li><span class="d-icon">✓</span>ドナウ川沿いの夜景をフリーダム橋の上から見る</li>
+          <li><span class="d-icon">✓</span>シンプラ・ケルトに日曜朝のマーケットで行く</li>
+          <li><span class="d-icon">✓</span>地下鉄M1線（黄色・世界遺産）に乗る</li>
+          <li><span class="d-icon">✓</span>「Köszönöm」とありがとうを言ってみる</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <h3>⛔ 避けるべきこと</h3>
+        <ul>
+          <li><span class="d-icon">✗</span>地元の人とビールで乾杯する（文化的背景を理解した上で）</li>
+          <li><span class="d-icon">✗</span>ヴァーツィ通りの観光客向けレストランに飛び込む</li>
+          <li><span class="d-icon">✗</span>夜に知らない人について行く</li>
+          <li><span class="d-icon">✗</span>観光地の両替所での両替（ATMの方がレートが良い）</li>
+          <li><span class="d-icon">✗</span>「ハンガリーはチェコのそばでしょ」という発言</li>
+          <li><span class="d-icon">✗</span>温泉でのシャワー前入浴・マナー違反</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑧ 旅のヒント -->
+  <div class="section" id="tips">
+    <div class="section-header">
+      <div class="section-icon">💡</div>
+      <div class="section-title">
+        <h2>旅をより深く楽しむヒント</h2>
+        <p>知っていると一段と面白くなる視点</p>
+      </div>
+    </div>
+
+    <div class="tip-list">
+      <div class="tip-item">
+        <div class="t-icon">👟</div>
+        <div class="t-body">
+          <strong>ドナウ川沿いの「靴のモニュメント」を見る</strong>
+          ペスト側のドナウ川岸に、60足の古びた鉄製の靴が並んでいる。1944〜45年、ブダペストのユダヤ人をナチス側の「矢十字党」が川岸に連れてきて靴を脱がせ射殺した事件を追悼するモニュメント。靴の中に花や石を置いていく人が絶えない。国会議事堂の南側にあり、観光途中に立ち寄れる。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🌉</div>
+        <div class="t-body">
+          <strong>橋ごとに異なる表情がある</strong>
+          ブダペストのドナウ川には9本の橋が架かっており、それぞれに個性がある。<strong>鎖橋（セーチェーニ橋）</strong>は1849年完成・ハンガリー近代化の象徴。<strong>フリーダム橋（自由橋）</strong>はアール・ヌーヴォーの緑色の橋で歩いて渡るのが気持ちよい。橋の上から両岸を見渡す景色は、ブダペスト観光の中でも特別な体験。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🚇</div>
+        <div class="t-body">
+          <strong>地下鉄M1線はそれ自体が世界遺産</strong>
+          黄色い「千年線」と呼ばれるM1線は1896年開通の欧州大陸最古の地下鉄（ロンドンに次ぐ世界2番目）。車両もホームも19世紀の雰囲気を残しており、それ自体がユネスコ世界遺産の一部。ヴァーツィ通りからオペラ座・英雄広場を結んでいる。1回乗るだけで価値あり。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🌅</div>
+        <div class="t-body">
+          <strong>漁夫の砦は早朝が最高</strong>
+          漁夫の砦は9:00〜11:00の間は入場料（無料時間帯）が適用される場合があるが、それ以前の朝6〜8時は観光客がほとんどいない。朝日の中でドナウ川とペスト側のパノラマを独占できる。朝食前の散歩コースとして最適。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🎭</div>
+        <div class="t-body">
+          <strong>ハンガリー国立オペラ座のツアーが格安で充実</strong>
+          ハンガリー国立オペラ座は公演チケットの他に、昼間の建物見学ツアーを格安で提供している。金箔や絵画で飾られた豪華な内装をガイド付きで見学でき、コスパ最高の体験のひとつ。英語ツアーあり。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">🏰</div>
+        <div class="t-body">
+          <strong>「テロの家」博物館で20世紀の歴史を深く知る</strong>
+          アンドラーシ通りにある「テロの家（Terror Háza）」博物館は、ナチスとソ連双方の秘密警察本部として使われた建物を改装した歴史博物館。ハンガリー動乱・共産主義弾圧の実態を強烈なインパクトで伝える。地下の独房展示は圧巻。観光地として明るくなりがちな旅に深みを与えてくれる。
+        </div>
+      </div>
+      <div class="tip-item">
+        <div class="t-icon">📖</div>
+        <div class="t-body">
+          <strong>旅の前に触れておくと深まる作品</strong>
+          映画「ブダペスト大作戦」（1967）／映画「グランド・ブダペスト・ホテル」（雰囲気だけ／架空の国が舞台）／小説「ハンガリー動乱」関連のドキュメンタリー ／ バルトークの「管弦楽のための協奏曲」を旅前に聴いておくと楽しさが倍増する
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <a href="index.html">← ガイド一覧に戻る</a>　|　2026年8月 東欧旅行 個人用ガイド
+</footer>
+
+<script src="nav-menu.js"></script>
+</body>
+</html>

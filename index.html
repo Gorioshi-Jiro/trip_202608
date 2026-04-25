@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>東欧3都市旅行ガイド 2026年8月</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', 'Hiragino Sans', 'Meiryo', sans-serif;
+      background: #f0ece4;
+      color: #2c2c2c;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 100%);
+      color: white;
+      text-align: center;
+      padding: 52px 24px 44px;
+    }
+    header .subtitle {
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      opacity: 0.75;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+    }
+    header .dates {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      opacity: 0.8;
+      letter-spacing: 0.06em;
+    }
+    .cities-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+    .city-chip {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+    .city-arrow {
+      font-size: 0.75rem;
+      opacity: 0.5;
+      margin: 0 8px;
+    }
+
+    main {
+      flex: 1;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 48px 20px 64px;
+      width: 100%;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 16px;
+    }
+
+    /* ─── Card Grid ─────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      display: block;
+      text-decoration: none;
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.13);
+    }
+    .card:active { transform: translateY(-1px); }
+
+    .card-color {
+      height: 6px;
+    }
+    .card-body {
+      padding: 22px 20px 20px;
+    }
+    .card-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+    .card-desc {
+      font-size: 0.78rem;
+      color: #888;
+      line-height: 1.55;
+    }
+    .card-tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: #f0ece4;
+      color: #666;
+      letter-spacing: 0.03em;
+    }
+
+    /* Color accents per page */
+    .c-prague    { background: #1a6e4a; }
+    .c-vienna    { background: #8b1a1a; }
+    .c-budapest  { background: #1a4a8b; }
+    .c-transport { background: #2d6a9f; }
+    .c-hotel     { background: #6a4a1a; }
+    .c-culture   { background: #5a3e8a; }
+    .c-vculture  { background: #7a1010; }
+    .c-bculture  { background: #0f3068; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="subtitle">Travel Guide 2026</div>
+  <h1>東欧3都市 旅行ガイド</h1>
+  <div class="dates">2026年 8月23日（日）〜 8月28日（金）</div>
+  <div class="cities-row">
+    <span class="city-chip">🇨🇿 プラハ</span>
+    <span class="city-arrow">▶</span>
+    <span class="city-chip">🇦🇹 ウィーン</span>
+    <span class="city-arrow">▶</span>
+    <span class="city-chip">🇭🇺 ブダペスト</span>
+  </div>
+</header>
+
+<main>
+  <div class="section-label">ガイドを選択</div>
+  <div class="cards">
+
+    <a class="card" href="tours_guide.html">
+      <div class="card-color" style="background:linear-gradient(90deg,#1a6e4a 0%,#1a4a8b 100%)"></div>
+      <div class="card-body">
+        <span class="card-icon">🗺</span>
+        <div class="card-title">おすすめツアーガイド 30選</div>
+        <div class="card-desc">値段・予約方法・楽しみ方まで完全網羅。各都市10ツアー</div>
+        <span class="card-tag" style="background:#1a1a18;color:#f8f7f4">NEW</span>
+      </div>
+    </a>
+
+    <a class="card" href="transportation_guide.html">
+      <div class="card-color c-transport"></div>
+      <div class="card-body">
+        <span class="card-icon">🚃</span>
+        <div class="card-title">交通手段ガイド</div>
+        <div class="card-desc">空港アクセス・都市間移動・ルート比較・チェックリスト</div>
+        <span class="card-tag">全都市共通</span>
+      </div>
+    </a>
+
+    <a class="card" href="hotel_guide.html">
+      <div class="card-color c-hotel"></div>
+      <div class="card-body">
+        <span class="card-icon">🏨</span>
+        <div class="card-title">ホテルガイド</div>
+        <div class="card-desc">各都市のおすすめホテル・立地・料金・予約のポイント</div>
+        <span class="card-tag">全都市共通</span>
+      </div>
+    </a>
+
+    <a class="card" href="prague_100_spots.html">
+      <div class="card-color c-prague"></div>
+      <div class="card-body">
+        <span class="card-icon">🇨🇿</span>
+        <div class="card-title">プラハ スポット</div>
+        <div class="card-desc">観光・グルメ・ショッピングなど厳選スポット一覧</div>
+        <span class="card-tag">プラハ</span>
+      </div>
+    </a>
+
+    <a class="card" href="vienna_100_spots.html">
+      <div class="card-color c-vienna"></div>
+      <div class="card-body">
+        <span class="card-icon">🇦🇹</span>
+        <div class="card-title">ウィーン スポット</div>
+        <div class="card-desc">観光・グルメ・ショッピングなど厳選スポット一覧</div>
+        <span class="card-tag">ウィーン</span>
+      </div>
+    </a>
+
+    <a class="card" href="budapest_100_spots.html">
+      <div class="card-color c-budapest"></div>
+      <div class="card-body">
+        <span class="card-icon">🇭🇺</span>
+        <div class="card-title">ブダペスト スポット</div>
+        <div class="card-desc">観光・グルメ・ショッピングなど厳選スポット一覧</div>
+        <span class="card-tag">ブダペスト</span>
+      </div>
+    </a>
+
+    <a class="card" href="prague_culture.html">
+      <div class="card-color c-culture"></div>
+      <div class="card-body">
+        <span class="card-icon">🏰</span>
+        <div class="card-title">プラハ 歴史・文化・生活</div>
+        <div class="card-desc">歴史・建築様式・音楽・文学・食文化・マナーなど旅を深める背景知識</div>
+        <span class="card-tag">プラハ</span>
+      </div>
+    </a>
+
+    <a class="card" href="vienna_culture.html">
+      <div class="card-color c-vculture"></div>
+      <div class="card-body">
+        <span class="card-icon">🏛</span>
+        <div class="card-title">ウィーン 歴史・文化・生活</div>
+        <div class="card-desc">ハプスブルク帝国・音楽の都・世紀末芸術・カフェハウス文化・マナーなど</div>
+        <span class="card-tag">ウィーン</span>
+      </div>
+    </a>
+
+    <a class="card" href="budapest_culture.html">
+      <div class="card-color c-bculture"></div>
+      <div class="card-body">
+        <span class="card-icon">🌊</span>
+        <div class="card-title">ブダペスト 歴史・文化・生活</div>
+        <div class="card-desc">オスマン・ハプスブルク・ソ連支配の歴史・温泉文化・ルインバー・マナーなど</div>
+        <span class="card-tag">ブダペスト</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>2026年8月 東欧旅行 個人用ガイド</footer>
+
+</body>
+</html>

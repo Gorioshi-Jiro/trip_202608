@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>おすすめ観光ツアーガイド 30選｜プラハ・ウィーン・ブダペスト</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== Tours Guide 専用スタイル ===== */
+
+/* ---- シティフィルター ---- */
+.city-filter {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 1.2rem 1.5rem;
+  background: #fff;
+  border-bottom: 1px solid #e5e3dc;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.city-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  cursor: pointer;
+  background: #fff;
+  color: #5f5e5a;
+  font-weight: 500;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.city-btn.active { background: #1a1a18; color: #fff; border-color: #1a1a18; }
+.city-btn:hover:not(.active) { background: #f0ede8; }
+
+/* ---- ツアーセクション ---- */
+.tours-section { display: none; padding: 1.5rem; }
+.tours-section.active { display: block; }
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.4rem;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #1a1a18;
+}
+.section-heading .s-label { font-size: 20px; font-weight: 500; }
+.section-heading .s-count {
+  font-size: 12px; color: #5f5e5a;
+  background: #e5e3dc; padding: 2px 10px; border-radius: 10px;
+}
+
+/* ---- ツアーカード ---- */
+.tour-cards { display: flex; flex-direction: column; gap: 16px; }
+
+.tour-card {
+  background: #fff;
+  border: 1px solid #e5e3dc;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow .2s;
+}
+.tour-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.09); }
+
+.tour-card-accent { height: 5px; }
+.acc-prague  { background: #1a6e4a; }
+.acc-vienna  { background: #8b1a1a; }
+.acc-budapest { background: #1a4a8b; }
+
+.tour-card-body { padding: 1.2rem 1.4rem; }
+
+.tour-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.tour-num-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #888780;
+  background: #f0ede8;
+  padding: 2px 9px;
+  border-radius: 8px;
+}
+.tour-type-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: #e5e3dc;
+  color: #5f5e5a;
+}
+.tour-dur-badge {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 10px;
+  background: #E6F1FB;
+  color: #0C447C;
+}
+
+.tour-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a18;
+  margin-bottom: 8px;
+  line-height: 1.35;
+}
+
+/* ---- 詳細グリッド ---- */
+.tour-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+.detail-block {
+  background: #f8f7f4;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.detail-block-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: #888780;
+  margin-bottom: 6px;
+}
+.detail-block p {
+  font-size: 12.5px;
+  color: #3a3a38;
+  line-height: 1.65;
+  margin: 0;
+}
+.detail-block.price-block { background: #EAF3DE; }
+.detail-block.price-block .detail-block-label { color: #27500A; }
+.detail-block.price-block p { color: #27500A; font-weight: 500; }
+
+.detail-block.book-block { background: #E6F1FB; }
+.detail-block.book-block .detail-block-label { color: #0C447C; }
+.detail-block.book-block p { color: #0C447C; }
+
+.detail-block.enjoy-block { background: #FAEEDA; }
+.detail-block.enjoy-block .detail-block-label { color: #633806; }
+.detail-block.enjoy-block p { color: #633806; }
+
+.detail-block.tip-block { background: #fff; border: 1px solid #e5e3dc; }
+.detail-block.tip-block .detail-block-label { color: #5f5e5a; }
+.detail-block.tip-block p { color: #5f5e5a; }
+
+/* ---- ページ上部バナー ---- */
+.page-banner {
+  background: #1a1a18;
+  color: #f8f7f4;
+  padding: 2rem 1.5rem 1.6rem;
+  text-align: center;
+}
+.page-banner h1 { font-size: 24px; font-weight: 500; margin-bottom: 6px; }
+.page-banner p { font-size: 13px; opacity: .6; }
+.city-chips {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+.city-chip {
+  background: rgba(255,255,255,.13);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 12px;
+}
+
+/* ---- トップに戻るボタン ---- */
+.back-top {
+  display: block;
+  text-align: center;
+  padding: 1rem;
+  font-size: 12px;
+  color: #888780;
+}
+
+@media (max-width: 600px) {
+  .tour-detail-grid { grid-template-columns: 1fr; }
+  .tour-name { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+<script>fetch('nav-menu.html').then(r=>r.text()).then(h=>{var d=document.createElement('div');d.innerHTML=h;document.body.prepend(d);});</script>
+
+<div class="page-banner">
+  <h1>🗺 おすすめ観光ツアー 30選</h1>
+  <p>値段・予約方法・楽しみ方まで完全ガイド</p>
+  <div class="city-chips">
+    <span class="city-chip">🇨🇿 プラハ 10選</span>
+    <span class="city-chip">🇦🇹 ウィーン 10選</span>
+    <span class="city-chip">🇭🇺 ブダペスト 10選</span>
+  </div>
+</div>
+
+<!-- ===== シティフィルター ===== -->
+<div class="city-filter">
+  <button class="city-btn active" onclick="showCity('prague',this)">🇨🇿 プラハ</button>
+  <button class="city-btn" onclick="showCity('vienna',this)">🇦🇹 ウィーン</button>
+  <button class="city-btn" onclick="showCity('budapest',this)">🇭🇺 ブダペスト</button>
+</div>
+
+
+<!-- ========================================================
+     🇨🇿 プラハ 10ツアー
+     ======================================================== -->
+<section class="tours-section active" id="prague">
+<div class="section-heading">
+  <span class="s-label">🇨🇿 プラハ おすすめツアー</span>
+  <span class="s-count">10ツアー</span>
+</div>
+<div class="tour-cards">
+
+<!-- P-1 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-01</span>
+      <span class="tour-type-badge">ウォーキング</span>
+      <span class="tour-dur-badge">半日〜1日</span>
+    </div>
+    <div class="tour-name">プラハ城・旧市街 王道ウォーキングツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>日本語ガイド付き半日：約€40〜60（約6,500〜10,000円）<br>1日コース：約€70〜100<br>フリーウォーキングツアー（英語）：無料＋チップ€5〜10</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅう・HIS・VELTRAなど日本の旅行サイトで事前予約がおすすめ。フリーツアーはTrip.comまたは現地集合で当日参加可。プラハ城入場チケット（約CZK250〜）は別途必要。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>午前スタートでプラハ城→黄金小路→カレル橋→旧市街広場→天文時計の順が最効率。石畳が多いので履きなれたスニーカー必須。天文時計の「からくり時計」は毎正時に動くので時刻を合わせて待機しよう。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>プラハ城は朝9時オープン前に到着すると行列を避けられる。カレル橋は早朝6時台が人が少なくフォトチャンス大。旧市街広場の天文時計は観光客が集中するので荷物管理に注意。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-2 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-02</span>
+      <span class="tour-type-badge">日帰り遠足</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">チェスキー・クルムロフ 日帰りツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>日本語ガイド付き専用車：約€100〜150/人（約16,000〜25,000円）<br>路線バス利用の格安プラン：約€40〜60<br>プラハ発バスのみ：片道CZK250〜（約1,500円）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅう・VELTRAで日本語ツアーを事前予約が安心。路線バスはFlixBusまたは地元バス会社で当日購入可。城内見学はオンライン事前予約が混雑時期は必須（観光シーズンの8月は特に）。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>旧市街は川が三方を囲む地形で迷子になりにくい。城塔からの赤い屋根パノラマは必見。城の庭園は無料開放されており散策がおすすめ。カフェ・センターで名物ツルンタラー（スパイスケーキ）も忘れずに。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>8月は超混雑するため開門直後の午前9時台に到着が理想。日帰りなら10〜11時にプラハを出発し17時に戻る行程が現実的。帰りのバスチケットは事前購入必須（売り切れる）。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-3 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-03</span>
+      <span class="tour-type-badge">ナイトツアー</span>
+      <span class="tour-dur-badge">2〜3時間</span>
+    </div>
+    <div class="tour-name">夜のプラハ幽霊・伝説・中世地下牢ツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>英語ガイド：約€15〜25（約2,500〜4,000円）<br>日本語対応プラン：約€30〜40<br>地下牢入場を含むコース：約€20〜35</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>GetYourGuide・Viator・Trip.comでオンライン予約。英語ツアーは当日飛び込みも可能だが、日本語対応は要事前予約。旧市街広場または特定の集合場所から出発。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>日没後20時〜スタートのツアーが雰囲気最高。中世の路地を松明やランタンの光で歩く体験はプラハならでは。ユダヤ人地区のゴーレム伝説・カレル橋の聖人処刑話など語り口抜群のガイドと歩くと2倍楽しい。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>夏でも夜のプラハは涼しく（15〜20℃程度）、薄手の上着必須。閉所が苦手な人は地下牢コースを避けてオープンエアのウォーキングのみのプランを選ぼう。写真は三脚なしでもカメラを高感度に設定すれば撮れる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-4 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-04</span>
+      <span class="tour-type-badge">歴史</span>
+      <span class="tour-dur-badge">2〜3時間</span>
+    </div>
+    <div class="tour-name">共産主義の歴史・核シェルター見学ツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>英語ガイド：約€20〜30（約3,200〜5,000円）<br>日本語対応オプション：約€35〜50<br>Trip.com掲載の人気プランは約¥2,790〜（参考）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・GetYourGuide・Viatorで予約。口コミ4.8・1,400件超の超人気ツアーのため、8月の旅行なら最低2週間前に予約推奨。旧市街集合が多い。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>ソ連時代の核シェルターは1960年代そのままの状態で保存されており「タイムスリップ感」が圧倒的。共産主義プロパガンダポスター・秘密警察の資料なども展示。現地ガイドがユーモアを交えながら重い歴史を語る語り口が絶品。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>地下シェルターは年間通じて寒い（約12℃前後）のでジャケット必携。英語ツアーでも内容は非常にわかりやすい。テレジン強制収容所ツアーと合わせて「チェコの20世紀史ツアー」として2日に分けて体験するのがおすすめ。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-5 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-05</span>
+      <span class="tour-type-badge">音楽・文化</span>
+      <span class="tour-dur-badge">1〜2時間</span>
+    </div>
+    <div class="tour-name">聖ニコラス教会クラシックコンサート</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>一般席：約€20〜35（約3,200〜5,700円）<br>VIP前方席：約€45〜60<br>ディナー付きセットプラン：約€70〜90</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・公式サイト（聖ニコラス教会公式）・Viatorで事前購入。8月は満席になることが多いため1〜2週間前に予約必須。当日券は開演30分前に入口で販売されることも。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>バロック様式の天井フレスコが圧巻で、音楽だけでなく「教会という空間そのもの」を楽しめるのがポイント。プログラムはモーツァルト・ヴィヴァルディ・バッハが定番。10〜15分前に着席して内部の装飾をじっくり鑑賞する時間を設けよう。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>教会は石造りで夏でもひんやりしているのでストールがあると快適。写真撮影は演奏中は禁止（開演前はOK）。コンサート後にカレル橋を夜散歩するコースが最高の夜の締めくくりになる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-6 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-06</span>
+      <span class="tour-type-badge">グルメ体験</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">ピルゼン ビール工場見学ツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>みゅう日本語専用車ツアー：約€80〜120/人<br>工場見学のみ（現地払い）：約CZK350（約2,000円）<br>交通費（電車片道）：約CZK100〜（約600円）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅう・VELTRAで日本語ツアー予約（推奨）。または個人でプラハ中央駅から列車でピルゼン駅（約1時間30分）へ行き、ピルスナー・ウルケル醸造所の公式サイトで見学を予約。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>工場ツアーではろ過前の「タンクビール」試飲が最大の目玉。暗い地下セラーで飲む一杯は格別の美味しさ。ミュージアムショップでピルスナー・ウルケルグッズ（グラス・Tシャツ）はお土産に最適。見学後は旧市街の広場でランチを楽しもう。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>工場ツアーは英語・ドイツ語が主体で日本語解説はない。ただし飲んでわかるのがビールの良さ。ピルゼン市内もガラスのオブジェが点在する美しい旧市街があるので1〜2時間の散策を組み込もう。空腹で参加するのがおすすめ（試飲後のつまみが美味しい）。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-7 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-07</span>
+      <span class="tour-type-badge">アクティブ</span>
+      <span class="tour-dur-badge">半日</span>
+    </div>
+    <div class="tour-name">eバイクでプラハ7つの絶景スポットツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>eバイクツアー（ガイド付き）：約€30〜50（約5,000〜8,000円）<br>レンタルのみ（自由走行）：約€15〜25/半日<br>Trip.com掲載プランは約¥4,000〜</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・GetYourGuideでオンライン予約。当日参加可能なツアーも多いが、8月は事前予約が安心。レンタルは旧市街や川沿いに複数のショップあり（Rekola・Bolt・Praha Bike等）。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>電動アシストなので坂道が多いプラハでも疲れにくい。ヴィシェフラド城・レトナー公園・ストラホフ修道院など徒歩では遠い絶景スポットを2〜3時間でコンパクトに制覇できる。川沿いのプロムナードも気持ちいい。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>プラハの石畳は自転車走行に向かない箇所もあるため、ガイド付きツアーで安全なルートを走るのが賢明。ヘルメット着用必須（貸し出しあり）。午前中スタートで風が弱い時間帯が快適。カメラはウエストポーチに入れて走ろう。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-8 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-08</span>
+      <span class="tour-type-badge">早朝ツアー</span>
+      <span class="tour-dur-badge">3〜4時間</span>
+    </div>
+    <div class="tour-name">サンライズ早朝ツアー＆朝食</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>朝食込みガイドツアー：約€35〜55（約5,700〜9,000円）<br>フリーウォーキングの早朝版：無料＋チップ<br>個人で早朝散策すれば交通費のみ（地下鉄24時間券CZK120）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・GetYourGuideで「Prague Sunrise Tour」で検索・予約。集合は旧市街広場またはカレル橋東側が多い。自分で早起きして個人散策する場合は特に予約不要。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>8月の日の出は約5時30分頃。6時前後にカレル橋に立てば無人の橋を独占できる奇跡の時間が体験できる。朝霧がかかることも多く「幽玄なプラハ」の雰囲気を独り占め。その後ホスポダ（チェコ居酒屋）の朝食タイムへ。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>プラハの朝は涼しいので薄手のジャケット必須。カメラはできれば三脚かゴリラポッドを持参すると夜明けの光をきれいに捉えられる。早朝はカフェがほぼ閉まっているのでコンビニや持参のドリンクで体を温めよう。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-9 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-09</span>
+      <span class="tour-type-badge">歴史・追悼</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">テレジン強制収容所 ガイドツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>バス送迎＋英語ガイド：約€30〜45（約5,000〜7,000円）<br>日本語解説付き：約€50〜70<br>個人（プラハから直通バス）：片道約CZK60〜80（約400円）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・GetYourGuide・みゅうで予約。プラハ発着のバスツアーが便利。個人の場合はプラハ フロレンツバスターミナルから直通バス（約1時間）。テレジン記念館の入場チケット（約CZK200〜250）は現地購入可。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>「楽しむ」というより「深く理解する」体験。囚人が描いた絵や子供の詩の展示がとりわけ心に刺さる。小要塞（刑務所跡）と大要塞（ゲットー博物館）の両方を見学すると歴史の全体像が把握できる。所要3〜4時間は確保したい。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>精神的にかなり重い体験。訪問後は消化できるよう翌日に軽い観光を入れる余裕のあるスケジュールを。館内は撮影可だが展示物は節度を持って。ガイドブックや音声ガイドは英語のみが多いが、内容は視覚で伝わる展示が多い。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- P-10 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-prague"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">P-10</span>
+      <span class="tour-type-badge">日帰り遠足</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">クトナー・ホラ（人骨教会）＆スメタナの街 専用車ツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>日本語専用車ツアー：約€90〜130/人<br>英語バスツアー：約€40〜60<br>電車で個人：往復CZK200〜（約1,200円）＋入場料CZK160〜</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅう・VELTRAで日本語ツアー予約。個人の場合はプラハ中央駅から電車でクトナー・ホラ本駅（約1時間、乗り換え1回）。人骨教会（セドレツ納骨堂）は予約不要で現地払い。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>セドレツ納骨堂は4万体以上の人骨で作られたシャンデリアや紋章が圧倒的インパクト。怖いというより「中世の死生観」を体感するアート体験と捉えると深まる。クトナー・ホラの旧市街（聖バルバラ教会）も世界遺産で見応えあり。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>人骨教会は非常に小さく30分ほどで見学終了。駅からも距離があるので自転車レンタル（現地€5〜）が便利。夏の8月は観光客が殺到するため開門直後の9時台に訪問を。スメタナ生誕の地リトミシュルと組み合わせるツアーもある。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tour-cards prague -->
+</section>
+
+
+<!-- ========================================================
+     🇦🇹 ウィーン 10ツアー
+     ======================================================== -->
+<section class="tours-section" id="vienna">
+<div class="section-heading">
+  <span class="s-label">🇦🇹 ウィーン おすすめツアー</span>
+  <span class="s-count">10ツアー</span>
+</div>
+<div class="tour-cards">
+
+<!-- V-1 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-01</span>
+      <span class="tour-type-badge">宮殿・歴史</span>
+      <span class="tour-dur-badge">半日</span>
+    </div>
+    <div class="tour-name">シェーンブルン宮殿 日本語ガイドツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>HIS日本語ガイド半日ツアー：約€60〜90/人<br>入場料のみ（グランドツアー40室）：€26〜30<br>インペリアルツアー（22室）：€16〜20<br>庭園のみ：無料</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>HIS・みゅう・VELTRAで日本語ツアーを事前予約。入場券のみは公式サイト（schoenbrunn.at）で事前購入すると列をスキップできる。8月は大混雑するため最低2週間前の予約を推奨。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>若きモーツァルトが演奏した「鏡の間」、ウィーン会議で使われた「グローセ ギャラリー」は必見。宮殿後は丘の上のグロリエッテ（凱旋門型展望台）からウィーン市街を一望するのが最高の締めくくり。迷路庭園も子供連れに人気。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>内部はオーディオガイド（日本語あり）が充実しているため個人でも十分楽しめる。ただし初ウィーンなら日本語ガイドとトラム乗車体験を組み合わせたHISのプランが歴史背景も理解できて深い。宮殿内のカフェ「レストランリヒテンシュタイン」は落ち着いた雰囲気でおすすめ。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-2 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-02</span>
+      <span class="tour-type-badge">音楽・宮廷体験</span>
+      <span class="tour-dur-badge">2〜3時間</span>
+    </div>
+    <div class="tour-name">ウィーン・モーツァルト・オーケストラ コンサート</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>通常席：約€65〜85（約10,500〜14,000円）<br>VIPパッケージ（4コースディナー＋馬車移動）：約€180〜220<br>シェーンブルン宮殿オランジェリーコンサート：約€55〜75</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>公式サイト（mozart.at）またはViator・Trip.com・HISで予約。8月は毎晩公演あり満席になりやすいため1〜2週間前に予約。ホテルのコンシェルジュに頼むとよい席が取れることも。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>楽友協会（ムジークフェライン）での公演が最も格式高い。18世紀衣装の奏者が演奏するモーツァルト・シュトラウスは観光客でも確実に感動できる。VIPプランは「馬車でコンサートホールへ移動」という体験がウィーンらしさ全開で一生の思い出に。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>コンサートはスマートカジュアル（ジャケット推奨、ジーンズでも可）。写真撮影は開演前のみ。楽友協会の建物自体が美しく、開場直後の入場で内装を鑑賞する時間を設けよう。終演後のウィーン夜景散歩がセットになる夜を計画しよう。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-3 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-03</span>
+      <span class="tour-type-badge">ウォーキング</span>
+      <span class="tour-dur-badge">半日</span>
+    </div>
+    <div class="tour-name">旧市街ウォーキングツアー（シュテファン寺院・王宮・宝物館）</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>日本語ガイド半日：約€50〜80/人<br>英語フリーウォーキング：無料＋チップ€5〜10<br>王宮宝物館入場料のみ：€16（単独入場）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅう・HISで日本語ツアーを事前予約。英語フリーウォーキングはGetYourGuide等で検索。旧市街内のホテルが集合場所になることが多い。王宮宝物館は公式サイトで事前チケット購入可。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>宝物館の目玉はハプスブルク家の「神聖ローマ帝国王冠」と幼きモーツァルトも見たとされる「ユニコーンの角（クジラの角）」。シュテファン寺院は内部より南塔からの市街眺望が穴場。グラーベン通りのペスト記念碑も17世紀の歴史が刻まれた見どころ。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>宝物館は所要1.5〜2時間。午前中の比較的空いている時間帯に訪問を。ケルントナー通りは高級ブランド街なので観光後のウィンドウショッピングも楽しい。ザッハーホテルのカフェでザッハトルテを食べてツアーを締めくくると完璧。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-4 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-04</span>
+      <span class="tour-type-badge">日帰り遠足</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">ハルシュタット＆ザルツカンマーグート 日帰りツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>英語バスツアー：約€80〜110（約13,000〜18,000円）<br>日本語みゅうプライベートツアー：約€200〜250/人<br>鉄道個人（バート・イシュル経由）：往復€50〜60＋現地交通費</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>VELTRA・みゅう・HIS・Viatorで予約。英語バスツアーはGetYourGuide掲載多数。8月は最人気シーズンで2週間前でも満席になることがあるため早めの予約が重要。鉄道個人はOBBアプリで検索・購入。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>ハルシュタットは「湖に映る教会」の撮影スポットが世界的に有名（SNS映えの名所）。早朝の光で湖が鏡のようになる時間帯が最も美しい。展望台ファイブフィンガーズ（ケーブルカー）からの絶景も圧巻。ボートで湖を渡るルートがロマンチック。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>ハルシュタットは8月が最混雑（SNS映えで全世界から観光客集中）。バスツアーなら朝一番の9〜10時に到着できるプランを選ぼう。街は非常に小さい（徒歩15分圏内）ため自由時間1〜2時間あれば十分散策できる。ヴァレンシュタットの塩鉱山ツアーも組み合わせると歴史が深まる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-5 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-05</span>
+      <span class="tour-type-badge">美術・文化</span>
+      <span class="tour-dur-badge">半日</span>
+    </div>
+    <div class="tour-name">美術史博物館 プライベートガイドツアー＋カフェ</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>みゅう日本語プライベートツアー（入場＋カフェ）：約€80〜120/人<br>入場料のみ：€21（一般）<br>館内カフェのケーキ＆コーヒー：約€12〜18</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅうで日本語ガイド付きプランを予約。入場のみはKHM公式サイト（khm.at）またはViatorで優先入場チケット購入可。8月は列が長くなるため事前チケット必須。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>建物自体が芸術品で天井のクリムト壁画が必見（若き頃の作品）。絵画ではフェルメール「画家のアトリエ」・ブリューゲル「バベルの塔」・ラファエロなど全部見ようとすると半日必要。お目当てを絞って深く見る鑑賞スタイルが充実感大。館内カフェは大理石の壮麗な空間。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>毎週火曜が定休日なので注意。午前10時の開館直後が最も空いている穴場タイム。カフェのザッハートルテとメランジェ（ウィーン風コーヒー）は質が高く値段も観光地価格ではないので安心して楽しめる。ミュージアムショップのクリムトグッズはお土産に最適。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-6 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-06</span>
+      <span class="tour-type-badge">クルーズ・遠足</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">ヴァッハウ渓谷＆メルク修道院 ドナウ川クルーズツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>英語バスツアー：約€75〜100（約12,000〜16,000円）<br>ドナウ川クルーズのみ（DDSG社）：往復約€35〜50<br>VELTRA日本語ツアー：約€120〜180/人</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Viator・GetYourGuide・VELTRAでウィーン発着バスツアーとして予約。クルーズのみはDDSG Blue Danube社（ddsg-blue-danube.at）で公式予約。8月の週末はクルーズが満船になるため早めに。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>ヴァッハウ渓谷は「ドナウのライン川」と称される絶景エリア。ブドウ畑・中世の城跡・修道院が両岸に連なる景観は船から眺めるのが最上。メルク修道院は内部の豪華な図書室と礼拝堂が圧巻。途中のデュルンシュタイン村でワイン試飲も。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>バスでウィーンから上流へ行き、帰りは船でウィーンに戻るコースが最も効率的。船の座席は上甲板（屋外）が景色を楽しめるが日差しが強い8月は帽子・日焼け止め必須。昼食は現地レストランで白ワイン（グリューナー・ヴェルトリーナー）と一緒に地元料理を。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-7 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-07</span>
+      <span class="tour-type-badge">美術・優先入場</span>
+      <span class="tour-dur-badge">2〜3時間</span>
+    </div>
+    <div class="tour-name">ベルヴェデーレ宮殿 優先入場＆公式ガイドツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>優先入場＋ガイドツアー：約€40〜60（約6,500〜10,000円）<br>入場料のみ（上ベルヴェデーレ）：€16〜18<br>コンビチケット（上下両館）：€27〜30</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・Viator・公式サイト（belvedere.at）で優先入場チケット購入。8月はクリムト「接吻」目当ての観光客が殺到し行列が1〜2時間になることも。事前チケットで大幅時間節約。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>クリムト「接吻」はポストカードで見るより実物が圧倒的に迫力がある（金箔の輝きは写真では伝わらない）。エゴン・シーレの作品もあわせて鑑賞すると世紀末ウィーンの芸術潮流がわかる。下ベルヴェデーレ（バロック庭園）も無料で散策でき美しい。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>「接吻」の部屋は入館者が殺到するため午前中の開館直後か夕方17時以降に行くと比較的空いている。ベルヴェデーレ庭園からはシュテファン寺院の尖塔が遠くに見える絶好のフォトスポットあり。インスタ映えポイントは館内1階の黄金の間。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-8 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-08</span>
+      <span class="tour-type-badge">夜間特別</span>
+      <span class="tour-dur-badge">夕〜夜</span>
+    </div>
+    <div class="tour-name">シェーンブルン宮殿 夜間特別鑑賞＋ディナー＋コンサート</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>3点セット（宮殿＋ディナー＋コンサート）：約€110〜150（約18,000〜25,000円）<br>宮殿夜間オーディオガイドのみ：€28〜35<br>オランジェリーコンサートのみ：€55〜75</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Viator・公式サイト（schoenbrunn.at）でセットプランを購入。セットプランは数量限定のため8月の旅行では1ヶ月以上前の予約推奨。HISやVELTRAでも取り扱いあり。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>昼間とは全く異なる、燭台の光に包まれた夜の宮殿は別世界の美しさ。ディナーはウィーン料理のフルコースで正装に近い服装が場の雰囲気に合う。コンサートのオランジェリーはガラス天井の温室会場で、音響が独特の響きを持つ。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>ウィーン滞在で「一番特別な夜」にしたい場合のベスト選択。パートナーや大切な人との記念日にも最適。スマートフォンカメラは夜の宮殿を美しく撮るのが難しいため、腕の良いカメラ（またはiPhone Pro以上）持参を。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-9 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-09</span>
+      <span class="tour-type-badge">グルメ体験</span>
+      <span class="tour-dur-badge">半日〜終日</span>
+    </div>
+    <div class="tour-name">ウィーン郊外ワインテイスティングツアー（グリンツィング）</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>ガイド付きワインツアー：約€50〜80（約8,000〜13,000円）<br>個人でホイリゲ訪問：ワイン1/4L約€3〜5＋食事€10〜20<br>プライベートワイナリーツアー：約€100〜150/人</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・Viatorで「Vienna Wine Tasting Tour」で検索・予約。個人でのホイリゲ訪問はトラム38番（グリンツィング行き）終点下車・徒歩で到達可。予約なし飛び込みOKのホイリゲが多い。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>ホイリゲとは「今年の新酒」という意味のワインと居酒屋を指すウィーン独自の文化。青松が入口に掛かっている店が現在営業中のサイン。グリューナー・ヴェルトリーナー（白）とツヴァイゲルト（赤）が定番ぶどう品種。ウィーンの市民の週末のリアルな姿が見られる。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>ホイリゲは「持ち込み食べ物OK」の店も多く、デリカテッセンでチーズやハムを買って持ち込む地元スタイルが楽しい。昼より夕方〜夜が賑わう。グリンツィングはウィーン市内からトラムで30分ほどで行けるアクセス良好の立地。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- V-10 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-vienna"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">V-10</span>
+      <span class="tour-type-badge">日帰り遠足</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">ザルツブルク鉄道日帰りツアー（サウンド・オブ・ミュージック）</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>みゅう日本語ガイド昼食付き：約€90〜130/人<br>英語バスツアー：約€60〜80<br>高速鉄道個人（レイルジェット片道）：約€25〜50（約2時間30分）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅう・VELTRA・HISで日本語ツアーを予約。鉄道個人はÖBB公式サイトまたはアプリで予約（スパーシェーネ早割で格安になることあり）。サウンド・オブ・ミュージックツアーはViatorでも多数あり。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>ミラベル宮殿庭園（映画のサウンド・オブ・ミュージックのロケ地）・モーツァルトの生家・ゲトライデガッセの街並みが三大見どころ。ザルツブルクは旧市街が非常にコンパクトなので徒歩で効率よく回れる。城の丘（ホーエンザルツブルク城）からの眺望は必見。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>ウィーンから鉄道で2時間30分は日帰りとしてやや遠め。8時台の早い電車で出発し、夕方18〜19時に戻るスケジュールが理想。ザルツブルガー・ノッケル（地元のスイーツ）は一度食べてほしい名物。ツアーバスは渋滞リスクがあるため鉄道利用がおすすめ。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tour-cards vienna -->
+</section>
+
+
+<!-- ========================================================
+     🇭🇺 ブダペスト 10ツアー
+     ======================================================== -->
+<section class="tours-section" id="budapest">
+<div class="section-heading">
+  <span class="s-label">🇭🇺 ブダペスト おすすめツアー</span>
+  <span class="s-count">10ツアー</span>
+</div>
+<div class="tour-cards">
+
+<!-- B-1 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-01</span>
+      <span class="tour-type-badge">クルーズ</span>
+      <span class="tour-dur-badge">1時間〜</span>
+    </div>
+    <div class="tour-name">ドナウ川ナイトクルーズ（ライトアップ鑑賞）</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>基本クルーズ（約1時間）：約€15〜25（約2,500〜4,000円）<br>ディナー付きクルーズ：約€50〜80<br>シャンパン付きプレミアム：約€35〜50<br>日本語オーディオガイド付き：約€20〜30</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・Viator・GetYourGuideでオンライン予約。または桟橋（ヴィガドー広場）で当日チケット購入可能（混雑時は行列あり）。出航時刻は19〜22時台が人気。8月は事前予約が安心。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>ライトアップは日没後の20〜21時台が最も美しい。船の前方甲板（デッキ）に立つと国会議事堂・ブダ城・鎖橋が正面から見え写真映え最高。音声ガイドで流れる解説を聞きながら両岸の建物の歴史を学ぶと見え方が変わる。ワインやシャンパンを飲みながら流れる川の上で過ごす時間はブダペスト最高の体験のひとつ。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>座席は屋根なし前方デッキを選ぶのがおすすめ（8月は気温も快適）。カメラはISO感度を高めに設定し手持ちで撮影可能（手ぶれ補正があると◎）。クルーズ後に鎖橋を渡って夜のブダ城・漁夫の砦まで歩くナイトウォークがセットになると完璧な夜になる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-2 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-02</span>
+      <span class="tour-type-badge">歴史・建築</span>
+      <span class="tour-dur-badge">2時間</span>
+    </div>
+    <div class="tour-name">国会議事堂内部見学 日本語ガイドツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>日本語ガイド付きVELTRAツアー：約€35〜55（約5,700〜9,000円）<br>英語ガイド公式ツアー（EU圏外）：約HUF8,000〜12,000（約3,200〜4,800円）<br>事前予約なし（EU市民）：無料</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>VELTRA・HISで日本語ツアーを事前予約（強く推奨）。英語ツアーは公式サイト（parlament.hu）で日付・時刻指定で予約。8月は週末を中心に数週間待ちになることがあるため早期予約必須。当日チケットは入手困難。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>約45分のツアーでハンガリー王冠（900年以上の歴史を持つ実物）を間近で見られるのが最大の感動ポイント。金と深紅のゴシック建築の内部は写真では伝わらない迫力がある。ガイドが語るハンガリーの複雑な歴史（ハプスブルク・ソ連・民主化）を聞くと旅の見え方が変わる。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>見学は手荷物検査あり（空港並み）。大きなバッグはロッカーへ（有料）。見学後は対岸（ブダ側バッチャーニ広場）から国会議事堂を正面撮影するのが最高のアングル。日本語ガイドツアーは個人での予約困難な席も取れるため旅行会社ツアー利用が賢い。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-3 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-03</span>
+      <span class="tour-type-badge">ウォーキング</span>
+      <span class="tour-dur-badge">半日</span>
+    </div>
+    <div class="tour-name">王宮の丘ウォーキングツアー（漁夫の砦・ブダ城）</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>みゅう日本語ウォーキングツアー：約€35〜55/人<br>英語フリーウォーキングツアー：無料＋チップ€5〜10<br>漁夫の砦上部テラス入場料：約HUF3,000（約1,200円）、下部は無料</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>みゅう・VELTRAで日本語ツアーを事前予約。英語フリーツアーはGetYourGuideまたはTop Budapest Tours公式サイトで予約（無料）。集合は漁夫の砦・三位一体広場が多い。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>早朝6〜8時の漁夫の砦はほぼ無人で撮影し放題の黄金タイム。日中は観光客が殺到するため写真を撮りたいなら断然早朝が正解。マーチャーシュ教会の彩色タイル屋根はブダペスト最高の建築美。ブダ城内の国立美術館は行列なしで入れる穴場。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>丘への登りはケーブルカー（片道HUF1,500）または徒歩（20分）。足腰が不安な場合は迷わずケーブルカーを。ブダ城の城壁沿いのテラスからドナウ川と国会議事堂のパノラマが360度広がる無料の展望スポットあり。帰りは徒歩で鎖橋を渡ってペスト側へ戻るルートが最も景色がよい。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-4 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-04</span>
+      <span class="tour-type-badge">温泉・観光</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">セーチェーニ温泉 入場＋英雄広場・市内観光セットツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>セーチェーニ温泉入場料：約HUF12,000〜15,000（約4,800〜6,000円）<br>VELTRA日本語半日観光ツアー（温泉別）：約€40〜60/人<br>英雄広場・ヴァイダフニャド城は入場無料</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>温泉入場は公式サイト（szechenyibath.hu）でオンライン予約がおすすめ（特定日時指定）。観光ツアーはVELTRA・HISで予約。組み合わせプランはViatorにも掲載あり。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>セーチェーニ温泉の屋外プールでチェスを指すおじさんたちの光景はブダペスト名物。水着は持参推奨（レンタルは割高）。温泉は複数のプール（屋内・屋外・温度別）があるので2〜3時間かけてのんびり巡る。英雄広場は朝の光が美しいため温泉前の午前中に先に訪問するのがよい。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>温泉の更衣室には貴重品ロッカーあり（コインor ICチップ式）。タオルは必ず持参（レンタルあるが数に限りあり）。ハンガリー温泉は日本より低温（36〜38℃）が多いのでのぼせにくく長時間楽しめる。温泉後はシェーチェーニ温泉隣のビールスパ体験もあり。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-5 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-05</span>
+      <span class="tour-type-badge">日帰り遠足</span>
+      <span class="tour-dur-badge">終日</span>
+    </div>
+    <div class="tour-name">ドナウベント（エステルゴム・ヴィシェグラード・センテンドレ）日帰りツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>日本語プレミアムツアー（VELTRA）：約€80〜130/人<br>英語バスツアー：約€45〜65<br>個人（電車＋船）：往復HUF3,000〜5,000（約1,200〜2,000円）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>VELTRA・HISで日本語ツアー予約。Trip.comにも掲載。個人の場合はブダペスト西駅から電車でエステルゴムへ（約1.5時間）またはドナウ川の定期船（MAHART社）を利用。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>エステルゴム大聖堂はハンガリー最大の教会で内部のパジマーニーチャペルが圧巻（ルネサンス美術の至宝）。ヴィシェグラードの丘の城跡からドナウ川が直角に曲がる絶景（ドナウベント）を見渡せる。センテンドレはセルビア正教の教会が点在する色彩豊かな芸術家の町。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>3つの町を1日で回るためツアーバス利用が最も効率的。センテンドレのマジパン博物館（チョコレート・マジパン細工の展示）は子供にも大人にも面白い穴場。ランチはエステルゴムかセンテンドレのレストランでハンガリー料理を食べよう。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-6 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-06</span>
+      <span class="tour-type-badge">ナイトライフ</span>
+      <span class="tour-dur-badge">夜3〜4時間</span>
+    </div>
+    <div class="tour-name">ルインバー（廃墟バー）ナイトツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>ガイド付きバーホッピングツアー：約€30〜50（約5,000〜8,000円）<br>飲み放題プラン込み：約€50〜70<br>個人で各バー訪問：ビール1杯HUF1,000〜1,500（約400〜600円）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>GetYourGuide・Viator・Trip.comで「Budapest Ruin Bar Tour」で検索予約。シンプラ・ケルト（Szimpla Kert）への個人訪問は予約不要で飛び込みOK。ナイトツアーは22時出発が多い。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>シンプラ→Ruin Bars Budapest→Mazel Tov（イスラエル料理＋バー）→Dobozの順がおすすめコース。各バーで1〜2杯ずつ飲みながらガイドの解説を聞くとルインバー文化（2001年に廃墟アパートから始まった歴史）への理解が深まる。夜中に広がるユダヤ人地区の路地歩きも雰囲気抜群。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>シンプラは金土は22時以降に行列ができるため、20〜21時の早めの時間帯が穴場。ドリンクはハンガリークラフトビール（Dreher・SorOlyan等）かパーリンカ（果実酒）をぜひ試して。大きな荷物は持ち込まずスリや置き引きには注意。帰りのタクシーはBolt（ウーバー類似）がお得。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-7 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-07</span>
+      <span class="tour-type-badge">歴史・文化</span>
+      <span class="tour-dur-badge">1〜2時間</span>
+    </div>
+    <div class="tour-name">大シナゴーグ（ドハーニ通り）ガイドツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>入場＋公式ガイドツアー：約HUF7,000〜10,000（約2,800〜4,000円）<br>Trip.com優先入場チケット：約¥3,500〜<br>日本語ガイド付き観光ツアーの一部として含まれることも多い</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com・公式サイト（dohanystreetsynagogue.hu）で事前チケット購入推奨。8月は観光客が殺到するため当日券は行列必至。優先入場チケットで時間を節約しよう。日〜木は10〜18時、金は10〜16時、土は休館。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>3,000人収容のムーア様式の豪壮な内部はまず「大きさ」に圧倒される。庭園の「生命の木」（ホロコースト犠牲者の名が刻まれた金属製の柳の木）の前では多くの人が長く立ち止まる。隣接するユダヤ人博物館では第二次世界大戦中のブダペスト・ユダヤ人の生の歴史が学べる。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>男性は入場時に小さなキッパ（頭に乗せる帽子）を貸し出しされる（返却必須）。写真撮影は内部でも可。見学後はユダヤ人地区（7区）のゴズドゥ中庭でランチを取ってルインバー地区と合わせて半日コースにするのがおすすめ。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-8 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-08</span>
+      <span class="tour-type-badge">グルメ体験</span>
+      <span class="tour-dur-badge">2〜3時間</span>
+    </div>
+    <div class="tour-name">ハンガリー料理＋トカイワイン テイスティングツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>ガイド付き試飲ツアー：約€40〜65（約6,500〜10,500円）<br>ワインセラーでのランチ付き：約€60〜90<br>個人でトカイワイン購入：HUF3,000〜（約1,200円〜、中央市場やワインバーで）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>VELTRA・GetYourGuideで「Budapest Wine Tour」「Tokaj Wine Tasting」で検索・予約。個人でトカイワインを楽しむなら中央市場2階のワイン売り場または市内のワインバー（DiVino等）へ。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>トカイ・アスー（貴腐ワイン）は糖度が高いため少量でも十分満足できる。プットニョシュ（甘さのランク）が5〜6の最上級を試してほしい。パーリンカ（ハンガリーの果実蒸留酒）の飲み比べは5〜6種類が一般的。グヤーシュやチキンパプリカーシュとの相性が抜群。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>空腹で参加すると酔いが回りやすいため事前に軽食を。トカイワインは「王のワイン」として知られル・イ14世も愛飲したことで有名。ミニボトル（0.375L）がお土産に最適（スーツケースで持ち帰れるサイズ）。DiVino Wine Bar（聖イシュトヴァーン大聖堂前）は立ち寄りやすく品揃えも充実。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-9 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-09</span>
+      <span class="tour-type-badge">日帰り遠足</span>
+      <span class="tour-dur-badge">半日〜終日</span>
+    </div>
+    <div class="tour-name">ゴドルー王宮（エリザベート皇后の別荘） 日帰りツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目安</div>
+        <p>日本語専用車ツアー（VELTRA）：約€60〜90/人<br>英語バスツアー：約€35〜50<br>個人（近郊鉄道HÉV）：往復HUF1,500〜（約600円）＋入場HUF4,000〜</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>VELTRA・Trip.comで「Gödöllő Royal Palace Tour」で予約。個人の場合はケレティ駅からHÉV鉄道H8系統でゴドルーへ（約40分）。宮殿入場は現地チケット購入可。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>エリザベート皇后（シシィ）ゆかりの品（ドレス・肖像画・乗馬道具）が豊富で「シシィファン」には感涙もの。ネオバロック様式の宮殿は中欧最大級の王宮のひとつ。庭園も広大で無料散策可能。ブダペストから40分で来られるにもかかわらず日本人観光客が少なく穴場感がある。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>HÉV鉄道はブダペスト市内交通との共通カードが使えないため別途切符が必要（注意）。宮殿は撮影制限がある部屋があるので案内に従って。個人訪問なら午前中に宮殿見学→午後はゴドルー市内散策でゆっくり過ごせる。ハプスブルク家ガイドを事前に読んでから来ると理解が深まる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- B-10 -->
+<div class="tour-card">
+  <div class="tour-card-accent acc-budapest"></div>
+  <div class="tour-card-body">
+    <div class="tour-meta-row">
+      <span class="tour-num-badge">B-10</span>
+      <span class="tour-type-badge">アクティブ</span>
+      <span class="tour-dur-badge">2〜3時間</span>
+    </div>
+    <div class="tour-name">電動スクーター（モンスターローラー）ナイトツアー</div>
+    <div class="tour-detail-grid">
+      <div class="detail-block price-block">
+        <div class="detail-block-label">💴 値段の目안</div>
+        <p>電動スクーターナイトツアー：約€35〜55（約5,700〜9,000円）<br>昼間の市内スクーターツアー：約€25〜40<br>Lime・Bolt等レンタル電動スクーターのみ：HUF300〜/15分（約120円）</p>
+      </div>
+      <div class="detail-block book-block">
+        <div class="detail-block-label">📋 予約方法</div>
+        <p>Trip.com（モンスターローラー検索）・GetYourGuideで「Budapest Segway/Scooter Night Tour」で予約。個人でLime・Bolt等のシェアスクーターは専用アプリでQRコード読み取り後すぐ利用開始可能。</p>
+      </div>
+      <div class="detail-block enjoy-block">
+        <div class="detail-block-label">🎯 楽しみ方のコツ</div>
+        <p>ライトアップされた国会議事堂・鎖橋・ブダ城を電動スクーターで疾走する体験はブダペストならでは。ガイドが先導するためルートに迷う心配なし。夜風を切って走りながら見る夜景は徒歩とは全く異なる爽快感がある。ナイトツアーは21時スタートが多く、クルーズと組み合わせれば完璧な夜になる。</p>
+      </div>
+      <div class="detail-block tip-block">
+        <div class="detail-block-label">💡 プロのヒント</div>
+        <p>ヘルメット着用必須（貸し出しあり）。石畳エリアはゆっくり走ること。スカートや巻き込まれやすい服装は避けてパンツスタイルで。カメラはスマホをポケットやウエストポーチに入れて走行中は撮影せず、ガイドが停車した際に撮影しよう。初めてでも15分練習すれば普通に乗れる。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tour-cards budapest -->
+</section>
+
+<a class="back-top" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">▲ ページトップへ</a>
+
+<footer>
+  <p>おすすめ観光ツアーガイド 30選｜2026年8月 東欧旅行 個人用ガイド</p>
+  <p style="margin-top:6px">料金・時刻は変動することがあります。予約時に最新情報をご確認ください。</p>
+</footer>
+
+<script>
+function showCity(id, el) {
+  document.querySelectorAll('.tours-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.city-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
